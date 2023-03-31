@@ -1,5 +1,17 @@
 # Ignore all .exe files
 *.exe
 
-# Ignore .vscode
+# Ignore .vscode for Visual Studio Code
 .vscode/
+
+# Ignore .idea for Jetbrains IDEs
+.idea/
+
+# Ignore .DS_Store for macOS
+.DS_Store
+
+# Ignore .o
+*.o
+
+# Ignore all test files
+test*
