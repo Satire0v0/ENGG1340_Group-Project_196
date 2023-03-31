@@ -1,46 +1,4 @@
-#include <iostream>
-#include <cmath>
-#include "map.h"
-using namespace std;
-
-
-int random(int min, int max){
-    return rand() % (max - min + 1) + min;
-}
-
-
-pair<int, int> findFactors(int num){
-    // Find two factors of num with smallest difference
-    int smallDiff = num-1, diff;
-    int factors[2]={1, num};
-    pair<int, int> result; // return 2 values
-
-    for (int factor=2; factor<pow(num, 0.5); factor++){
-        if (num%factor==0){
-            diff = abs(num/factor - factor);
-
-            /*
-            cout << "factor: " << factor << endl;
-            cout << "num/factor: " << num/factor << endl;
-            */
-            
-            if (diff < smallDiff){
-                smallDiff = diff;
-                factors[0] = factor;
-                factors[1] = num/factor;
-            }
-        }
-    }
-
-    /*
-    cout << "factors[0]: " << factors[0] << endl;
-    cout << "factors[1]: " << factors[1] << endl;
-    */
-
-    result = make_pair(factors[0], factors[1]);
-
-    return result;
-}
+#include "map.h";
 
 
 void Map::initialize(){
@@ -53,6 +11,75 @@ void Map::initialize(){
 }
 
 
+void Map::print_map(){
+    for (int y = 0; y < MAP_HEIGHT; y++) {
+        for (int x = 0; x < MAP_WIDTH; x++) {
+            cout << map[y][x];
+        }
+        cout << endl;
+    }
+}
+
+
+void Map::update_whole(char new_map[200][200]){
+    for (int y = 0; y < MAP_HEIGHT; y++) {
+        for (int x = 0; x < MAP_WIDTH; x++) {
+            map[y][x] = new_map[y][x];
+        }
+    }
+}
+
+
+void Map::read_map(){
+    // Read the map from "map.txt"
+    int y=0;
+    string line;
+    ifstream mapFile;
+
+    mapFile.open("map.txt");
+
+    if (mapFile.fail()){
+        cout << "Error opening file" << endl;
+        exit(0);
+    }
+    else{
+        // Read the line from the map
+        // As there is space, it has better to use getline(mapFile, line);
+        getline(mapFile, line);
+        
+        while (line != "END") {
+            // Write into the map
+            for (int x=0; x<MAP_WIDTH; x++) {
+                map[y][x] = line[x];
+            }
+            getline(mapFile, line);
+            y++;
+        }
+    }
+}
+
+
+string Map::check_block(location loc, location player_loc){
+    int row = loc.row+player_loc.row;
+    int col = loc.col+player_loc.col;
+
+    if (row <= 0 || row >= MAP_HEIGHT-1 || col <= 0 || col >= MAP_WIDTH-1) {
+        return "wall";
+    }
+    else if (map[row][col] == WALL) {
+        return "wall";
+    }
+    else if (map[row][col] == MONSTER) {
+        return "monster";
+    }
+    else if (map[row][col] == DRUG) {
+        return "drug";
+    }
+    else{
+        return "error";
+    }
+}
+/*
 void Map::getRoomLoc(){
     // map will equally divided into ROOM_NUM regions
     // therefore even ROOM_NUM is better
@@ -81,19 +108,4 @@ void Map::getRoomLoc(){
 
     // Generate Location of each room
 }
-
-
-// Test function
-int main(){
-    // Test findFactors()
-    pair<int, int> result;
-    int num;
-
-    cin >> num;
-    result = findFactors(num);
-
-    cout << "The power of num: " << pow(num, 0.5) << endl;
-    cout << result.first << ' ' << result.second << endl;
-
-    return 0;
-}
+*/

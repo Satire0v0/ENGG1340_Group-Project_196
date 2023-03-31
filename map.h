@@ -1,39 +1,36 @@
-#include <string>
+#ifndef MAP_H
+#define MAP_H
+
+#include <iostream>
+#include <fstream>
+
+#include "global.h"
+
 using namespace std;
-
-struct size{
-    int width;
-    int height;
-};
-
-struct loc{
-    int x;
-    int y;
-};
-
-struct room
-{
-    size Size;
-    loc Loc;
-};
-
-
-const int MAP_WIDTH = 80;
-const int MAP_HEIGHT = 25;
-const int ROOM_NUM = 8;
-const char WALL = '%';
-const char ROOM = '#';
-const char CONNECTOR = '_';
-const size ROOM_MIN_SIZE = {4, 3};
 
 
 class Map{
-    public:
-        char map[MAP_HEIGHT][MAP_WIDTH];
-        room rooms[ROOM_NUM];
+    private:
+        int MAP_WIDTH = 60;
+        int MAP_HEIGHT = 25;
+        int ROOM_NUM = 8;
+        size ROOM_MIN_SIZE = {4,3};
 
+        char WALL = '%';
+        char ROOM = '#';
+        char CONNECTOR = '_';
+        char MONSTER = 'M';
+        char DRUG = 'D';
+
+        char map[200][200];
+    
+    public:
         void initialize();
-        void getRoomLoc();
-        void MapRoom();
-        void printMap();
+        void print_map();
+        void update_whole(char new_map[200][200]);
+        void read_map();
+        void update_block(int x, int y, char new_block);
+        string check_block(location loc, location player_loc);
 };
+
+#endif
