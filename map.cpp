@@ -1,4 +1,4 @@
-#include "map.h";
+#include "map.h"
 
 
 void Map::initialize(){
@@ -59,9 +59,9 @@ void Map::read_map(){
 }
 
 
-string Map::check_block(location loc, location player_loc){
-    int row = loc.row+player_loc.row;
-    int col = loc.col+player_loc.col;
+string Map::check_block(location move_loc, location player_loc){
+    int row = move_loc.row+player_loc.row;
+    int col = move_loc.col+player_loc.col;
 
     if (row <= 0 || row >= MAP_HEIGHT-1 || col <= 0 || col >= MAP_WIDTH-1) {
         return "wall";
@@ -76,9 +76,16 @@ string Map::check_block(location loc, location player_loc){
         return "drug";
     }
     else{
-        return "error";
+        return "true";
     }
 }
+
+
+void update_block(location loc, char new_block){
+
+}
+
+
 /*
 void Map::getRoomLoc(){
     // map will equally divided into ROOM_NUM regions
