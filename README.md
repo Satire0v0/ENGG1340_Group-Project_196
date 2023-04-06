@@ -1,9 +1,19 @@
-## ENGG1340_Group-Project_196
+## Attention !
 
-## Attention ！！！
 
-Hello guys!
 
-Please remember when you commit the modified files, you should write detailed message about what you have modified (and what is the purpose for this modification).
+### Naming requirements
+function name / parameter name : make use of "_" or  capital words.
+```
+string Map::check_block(location move_loc, location player_loc);
 
-Otherwise, it is hard for others to trace back what changes have been done.
+string Map::checkBlock(location moveLoc, location playerLoc);
+```
+
+
+### Functions
+Otherwise it is necessary, do not easily change the types, values and number of parameters.  
+
+
+### Comments
+Make explicit and short comments for each function, even a file.
