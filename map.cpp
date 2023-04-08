@@ -2,12 +2,9 @@
 
 
 void Map::initialize(){
-    // Initialize the map with walls
-    for (int y = 0; y < MAP_HEIGHT; y++) {
-        for (int x = 0; x < MAP_WIDTH; x++) {
-            map[y][x] = WALL;
-        }
-    }
+    Map::read_map();
+    MAP_HEIGHT = Map::count_height();
+    MAP_WIDTH = Map::count_width();
 }
 
 
@@ -59,6 +56,7 @@ void Map::read_map(){
 }
 
 
+// check the block before the player moves on it
 string Map::check_block(location move_loc, location player_loc){
     int row = move_loc.row+player_loc.row;
     int col = move_loc.col+player_loc.col;
@@ -69,11 +67,8 @@ string Map::check_block(location move_loc, location player_loc){
     else if (map[row][col] == WALL) {
         return "wall";
     }
-    else if (map[row][col] == MONSTER) {
-        return "monster";
-    }
-    else if (map[row][col] == DRUG) {
-        return "drug";
+    else if (map[row][col] == EMPTY){
+        return "empty";
     }
     else{
         return "true";
@@ -81,38 +76,48 @@ string Map::check_block(location move_loc, location player_loc){
 }
 
 
-void update_block(location loc, char new_block){
-
-}
-
-
-/*
-void Map::getRoomLoc(){
-    // map will equally divided into ROOM_NUM regions
-    // therefore even ROOM_NUM is better
-    // The function will first determine the exact location of the rooms without determing the sizes of the rooms
-    // the loc of each room should be close to the upper left of its own region
-
-    pair<int, int> factors = findFactors(ROOM_NUM);
-    int ROW_NUM, COL_NUM;
+// Update the specific block of map
+void Map::update_block(location loc, char block){
+    location new_loc;
     
-    size regionSize;
-
-    int x_range[2], y_range[2];
-
-
-    ROW_NUM = factors.first;
-    COL_NUM = factors.second;
-
-    regionSize.width = MAP_WIDTH/COL_NUM;
-    regionSize.height = MAP_HEIGHT/ROW_NUM;
-
-    // Keep the room size without touch the margin of the region
-    x_range[0] = 1;
-    x_range[1] = regionSize.width - ROOM_MIN_SIZE.width - 1 - 1;
-    y_range[0] = 1;
-    y_range[1] = regionSize.height - ROOM_MIN_SIZE.height - 1 - 1;
-
-    // Generate Location of each room
+    // clear the player's current location
+    map[loc.row][loc.col] = block;
 }
-*/
+
+
+void Map::generate_player(location player_loc){
+    map[player_loc.row][player_loc.col] = PLAYER;
+}
+
+
+// get the number of rows of the map
+int Map::count_height(){
+    int col=0;
+    int count=0;
+
+    for (int row=0; row<200; row++){
+        if (map[row][col] != WALL){
+            return count;
+        }
+        else{
+            count++;
+        }
+    }
+    return count;
+}
+
+
+int Map::count_width(){
+    int row=0;
+    int count=0;
+
+    for (int col=0; col<200; col++){
+        if (map[row][col] != WALL){
+            return count;
+        }
+        else{
+            count++;
+        }
+    }
+    return count;
+}
