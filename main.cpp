@@ -37,9 +37,9 @@ int main(){
         moving_result = map.check_block(move_loc, player.get_loc());
 
         if (moving_result == "empty"){
-            map.update_block(player.get_loc(), block);
-            player.update_loc(move_loc);
-            map.generate_player(player.get_loc());
+            map.update_block(player.get_loc(), block); // change the block at player_loc
+            player.update_loc(move_loc); // player moves forward
+            map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
         }
     }
     return 0;
