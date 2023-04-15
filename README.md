@@ -12,7 +12,7 @@ string Map::checkBlock(location moveLoc, location playerLoc);
 
 
 ### Functions
-Otherwise it is necessary, do not easily change the types, values and number of parameters.  
+Unless it is necessary, do not easily change the types, values and number of parameters.  
 
 
 ### Comments
