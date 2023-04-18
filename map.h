@@ -19,7 +19,27 @@ class Map{
         char WALL = '%';
         char EMPTY = ' ';
         char PLAYER = 'O';
-
+        char BIGMONSTER = 'm';
+        char SMALLMONSTER = 'M';
+        char BOX = '$';
+        char HIDDENBOX = '*'; // invisible
+        char HIDDENMONSTER = '@'; // invisible
+        char WINDOW = 'W';
+        char HIDDENDOOR = '#'; // invisible
+        char END = 'E';
+        // room number
+        char ONE = '1';
+        char TWO = '2';
+        char THREE = '3';
+        char FOUR = '4';    
+        char FIVE = '5';
+        char SIX = '6';    
+        char SEVEN = '7';    
+        char EIGHT = '8';
+        char NINE = '9';
+        char TEN = 'A';
+        char ELEVEN = 'B';
+    
         char UNUSED = '?';
 
         char map[200][200]; // set a maximum map initially
