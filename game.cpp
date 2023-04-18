@@ -130,11 +130,12 @@ int getch() {
     return ch;
 }
 bool keyboard(int player.talent.mult,int difficulty=60){
+    gamestatus kb;
     int multiple = player.talent.mult;
     int count = 0;
     time_t start = time(0);
 
-    cout << "Press f as many times as you can in 10 seconds!" << endl;
+    cout << "Press f as many times as you can in 5 seconds! You need to press "<<difficulty<<"times to win!" << endl;
 
     while (true) {
         char ch = getch();
@@ -143,15 +144,17 @@ bool keyboard(int player.talent.mult,int difficulty=60){
             cout << count << endl;
         }
 
-        if (time(0) - start >= 10) {
+        if (time(0) - start >= 5) {
             break;
         }
     }
 
     if (count > difficulty) {
         cout << "You win!" << endl;
+        kb.win=true;
     } else {
         cout << "You lose!" << endl;
+        kb.win=false;
     }
-
+    return kb
 }
