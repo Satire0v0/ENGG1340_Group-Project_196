@@ -4,7 +4,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <string>
-#include <conio.h>
+#include <termios.h>
+#include <unistd.h>
 #include "game.h"
 
 
@@ -117,21 +118,29 @@ bool number_guess(){
     return numberbomb.win;
 }
 
-
-bool keyboard(int player.talent.keyboard,int difficulty=60){
-    int multiple=player.talent.keyboard;
+int getch() {
+    struct termios oldt, newt;
+    int ch;
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    ch = getchar();
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    return ch;
+}
+bool keyboard(int player.talent.mult,int difficulty=60){
+    int multiple = player.talent.mult;
     int count = 0;
     time_t start = time(0);
 
     cout << "Press f as many times as you can in 10 seconds!" << endl;
 
     while (true) {
-        if (kbhit()) {
-            char ch = getch();
-            if (ch == 'f') {
-                count += multiple;
-                cout << count << endl;
-            }
+        char ch = getch();
+        if (ch == 'f') {
+            count += multiple;
+            cout << count << endl;
         }
 
         if (time(0) - start >= 10) {

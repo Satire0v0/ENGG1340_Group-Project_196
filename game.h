@@ -8,5 +8,5 @@ using namespace std;
 bool rpsgame();
 bool guess_die();
 bool number_guess();
-int keyboard(int player.talent.keyboard,int difficulty);
+int keyboard(int player.talent.mult,int difficulty);
 #endif
