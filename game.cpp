@@ -81,13 +81,13 @@ bool number_guess(){
     
     bomb = rand() % 100 + 1;
 
-    cout << "number bomb！" << std::endl;
+    cout << "number bomb!" << std::endl;
 
     while (!game_over) {
-        cout << "please guess a number within the range（" << lower << " --- " << upper << "）：";
+        cout << "please guess a number within the range (" << lower << " --- " << upper << "): ";
         cin >> player_guess;
         while (player_guess <lower | player_guess > upper){
-            cout << "please guess a number within the range（" << lower << " --- " << upper << "）：";
+            cout << "please guess a number within the range (" << lower << " --- " << upper << "): ";
         }
         if (player_guess == bomb) {
             cout << "You found the bomb! Game OVER. You Lose!" << std::endl;
@@ -102,7 +102,7 @@ bool number_guess(){
 
         if (!game_over) {
             computer_guess = rand() % (upper - lower + 1) + lower;
-            cout << "THE COMPUTER GUESSES：" << computer_guess << std::endl;
+            cout << "THE COMPUTER GUESSES: " << computer_guess << std::endl;
 
             if (computer_guess == bomb) {
                 cout << "The computer found the bomb! game over, you win" << std::endl;
