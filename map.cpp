@@ -1,7 +1,17 @@
 #include "map.h"
 
 
+void Map::generate_empty_map(){
+    for (int i=0; i<200; i++){
+        for (int j=0; j<200; j++){
+            map[i][j] = UNUSED;
+        }
+    }
+}
+
+
 void Map::initialize(){
+    Map::generate_empty_map();
     Map::read_map();
     MAP_HEIGHT = Map::count_height();
     MAP_WIDTH = Map::count_width();
@@ -43,8 +53,10 @@ void Map::read_map(){
         // Read the line from the map
         // As there is space, it has better to use getline(mapFile, line);
         getline(mapFile, line);
+        cout << line << endl;
         
-        while (line != "END") {
+        while (y<MAP_HEIGHT) {
+            cout << line << endl;
             // Write into the map
             for (int x=0; x<MAP_WIDTH; x++) {
                 map[y][x] = line[x];
@@ -96,7 +108,7 @@ int Map::count_height(){
     int count=0;
 
     for (int row=0; row<200; row++){
-        if (map[row][col] != WALL){
+        if (map[row][col] == UNUSED){
             return count;
         }
         else{
@@ -112,7 +124,7 @@ int Map::count_width(){
     int count=0;
 
     for (int col=0; col<200; col++){
-        if (map[row][col] != WALL){
+        if (map[row][col] == UNUSED){
             return count;
         }
         else{

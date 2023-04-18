@@ -21,6 +21,7 @@
 %%%%                      *   %%%%%%%%%    *  M           E%
 %%%%mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 END
+END
 // maze
 #######
 #     # 

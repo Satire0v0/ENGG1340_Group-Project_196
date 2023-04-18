@@ -20,9 +20,12 @@ class Map{
         char EMPTY = ' ';
         char PLAYER = 'O';
 
+        char UNUSED = '?';
+
         char map[200][200]; // set a maximum map initially
     
     public:
+        void generate_empty_map();
         void initialize();
         void print_map();
         void update_whole(char new_map[200][200]);
