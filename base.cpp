@@ -190,3 +190,10 @@ location explain_input(char word){
 
     return loc;
 }
+
+Player treasure_box(Player player){
+
+    
+
+    return player;
+}

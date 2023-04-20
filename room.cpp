@@ -7,7 +7,7 @@ int protectivetalisman = 0;
 int gun = 0;
 
 // room2 中的其他天赋；
-void train1(){
+Player train1(Player player){
     string storytrain1a = "Now it is 22:15 in a snowy and shivering night, you stand on a railway platform, waiting for the last train of the day to go home after a big day. Your home is 100 miles away from where you work. Suddenly, a gust of wind comes and you hear the sound of the train. At the same time, the station broadcasting says the train will arrive after 15 minutes. “It is quite strange” you whisper quietly.";
     string storytrain1b = "What is your choice?   A.Get in  B. Wait for the next train";
     cout << storytrain1a <<endl;
@@ -15,14 +15,15 @@ void train1(){
     string choice;
     cin >> choice;
     if(choice == "A"){
-        train2();
+        return train2(player);
     }
     else{
-        cout << "“What’s going on?” you begin shouting. A invisible, strange force push you into the train harshly." << endl;
-        train2();
+        cout << "“What’s going on?” you begin shouting. An invisible, strange force push you into the train harshly." << endl;
+        return train2(player);
     }
+    return player;
 }
-void train2(){
+Player train2(Player player){
     string storytrain2a = "The door close as soon as you enter the train.";
     string storytrain2b = "After a while, an old granny appear in your eyesight. You saw she is close to you, walk in a very difficult way.";
     string storytrain2c = "What is your choice  A.Give your seat to her  B. pretend as you haven’t see her";
@@ -42,12 +43,12 @@ void train2(){
             string grannysaid3 = "“Trust me then you will definitely be fine. Remember, take every chance you have” said the granny. Then she take 2 protective talisman and tell you “This is for you.”";
             cout << grannysaid3 << endl;
             string train22 = "What is your choice? A: take the 2 protective talisman   B. refuse and go away";
-            //天赋加一个护身符
+            protectivetalisman = 1;
             cout << train22 << endl;
             string choice2b;
             cin >> choice2b;
             if(choice2b == "A"){
-                train3();
+                return train3(player);
                 protectivetalisman = 1;
             }
             else{
@@ -65,13 +66,13 @@ void train2(){
                     cout << beggarsaid << endl;
                 }
                 else{
-                    train3();
+                    treturn train3(player);
                 }
             }
         }       
     }
 }
-void train3(){
+Player train3(Player player){
     string storytrain3a = "Suddenly, you believe the feel in your mind: the train is weird because of the things happen and the people you meet on the train, it just like the horror movies you watched before. Then, you begin to suffer in extreme fear and worrying whether can go back home safely, lie in your bed tonight.";
     string storytrain3b = "However, the things happen minutes ago are not the last and are not the worst. Soon you saw the railway platform but the train does not seems to stop.";
     string option3a = "What is your option?   A: break the window and escape  B: Stay in the train  C:Discuss the situation with people nearby";
@@ -85,21 +86,23 @@ void train3(){
     cin >> choice3a;
     if(choice3a == "A"){
         cout << "However, the train travels too fast, you got seriously injured after escape" << endl;
-        //生命值减半
+        // player.update(-1*(player.get_HP()/2), 0, 0); // halve the life
     }
     else if(choice3a == "B"){
-        train4();
+        return train4(player);
     }
     else if(choice3a == "C"){
         cout << "You begin talking with other passengers and know more about the strange things happen tonight. A few minutes later, one of the passengers give you necklace and according to him, the necklace can bring luck to its hosts. You take it and use it as a weapon against fear.'" << endl;
         attractevilspirit = 1;
+        return train4(player);
     }
     else{
         cout << "'Don't go!', the passenger shout at you. Then he tells you the reasons for those weird things happen: " << endl;
         cout << "From the other passengers, you know there is a strange virus spread accross the city. The people who are infected will lose awareness and become another creature --- zombie" << endl;
+        return train4(player);
     }
 }
-void train4(){
+Player train4(Player player){
     string storytrain4a = "After a very long time, the train stop at a strange place, there is a disgusting smell in the air and there is dust everywhere, just like no one had been here for many years.";
     string option4a = "What option you will choose?   A.Get off the car with nothing  B. Get off the car with the a fire hammer  C. stay in the train";
     cout << storytrain4a << endl;
@@ -107,17 +110,18 @@ void train4(){
     string choice4a;
     cin >> choice4a;
     if(choice4a == "A" || choice4a == "B"){
-        train5();
+        return train5(player);
     }
     else if(choice4a == "B"){
-        int hammer = 1;
+        int hammer = 1; // add talent
+        return train2(player);
     }
     else{
-        // 生命值降到0
+        // player.update(-1*(player.get_HP(),0,0)); // die
         cout << "You are killed by the zombie driver - the driver of the train" << endl;
     }
 }
-void train5(){
+Player train5(Player player){
     int input1;
     int input2;
     int input3;
@@ -157,26 +161,27 @@ void train5(){
                             string choice5a;
                             cin >> choice5a;
                             if(choice5a == "A"){
-                                room1();
-                                // 要减生命值
+
+                                return room1(player);
+                                // player.update_HP(-0.1*(player.get_HP())); // lose 10% life
                             }
                             else if(choice5a == "B"){
-                                // 生命值降为0
+                                // player.update_HP(-1*(player.get_HP())); // die
                                 cout << "You are using all the energy left inside your body and ran as quickly as possible. In your memory, you had never ran so fast. Unfortunately, the zombies have no feelings so they are much faster than you, you hear the voice of zombies from far to near, from drained to exciting. You still cannot face the truth which you may not survive, you tried to ran faster and faster. Suddenly, you lose your balance, the zombies pounced on your, you lose your feeling and mind gradually in pain." << endl;
                             }
                             else{
-                                room1();
+                                return room1(player);
                             }
                 }
             }
         }
     }
 }
-void room1(){
+Player room1(Player player){
     // readme
-    room2();
+    return room2(player);
 }
-void room2(){
+Player room2(Player player){
     string storyroom2a = "In this room, there is a treasure box, you can take everything you need but the maximum number of equips you can take is 3, use your chance wisely”";
     string optionroom2a = "A.Medicine1 B.Medicine2 C.Medicine3 D.armour1 E.armour2 F.armour3 G.torch H.handgun I.Rifle J:night vision goggles";
     cout << storyroom2a << endl;
@@ -189,14 +194,16 @@ void room2(){
     cin >> choiceroom2a3;
     if(choiceroom2a1 == "J" || choiceroom2a2 == "J" || choiceroom2a3 == "J"){
         nightvision = 1;
+        player.talent.vision = true;
     }
     if(choiceroom2a1 == "H" || choiceroom2a2 == "H" || choiceroom2a3 == "H" || choiceroom2a1 == "I" || choiceroom2a2 == "I" || choiceroom2a3 == "I"){
         gun = 1;
+        player.update_weapon("gun");
     }
     //加天赋
-
+    return room3(player);
 }
-void room3(){
+Player room3(Player player){
     string storyroom3 = "“Help! Help! Is there someone who can save me? Help! Help!” you hear the grieved roar behind a door. “It’s definitely not produced by zombies.” whisper by you.";
     string optionroom3a = "What will you do next?  A.Open the door to save the victim  B. Do nothing and continue the game";
     cout << storyroom3 << endl;
@@ -206,12 +213,19 @@ void room3(){
     if(choiceroom3a == "A"){
         cout << "That was said by a group of zombies, they just pretend to be human." << endl;
         //减少生命值， 除非在room2选了枪
+        if(gun == 1){
+            return room4(player);
+        }
+        else{
+             // player.update_HP(-0.1*(player.get_HP())); // lose 10% life
+        }
     }
     else{
-        room4();
+        return room4(player);
     }
+    return player;
 }
-void room4(){
+Player room4(Player player){
     string storyroom4 = "The terrifying sound pronounced by the zombies appear again from the corridor, there are 5 guns in the room and you can tell they are capable for war. What is more, there is huge probability that you can win more equips if you win.";
     string optionroom4a = "What is your choice?  A.Using the equips to fight against zombies  B. go forward to the next room.";
     cout << storyroom4 << endl;
@@ -219,13 +233,15 @@ void room4(){
     string choiceroom4a;
     cin >> choiceroom4a;
     if(choiceroom4a == "A"){
+         // player.update_HP(-0.1*(player.get_HP())); // lose 10% life
+         gun = 0;
         //损失生命值和所有枪
     }
     else{
-        room5();
+        return room5(player);
     }
 }
-void room5(){
+Player room5(Player player){
     if(nightvision == 1){
         string strroom5a = "The wall of this room is made of thick cement, the door you pass through is so similar to those in military bases, so substantial, even an atomic bomb cannot break it. It is the first time you are able to relax a little bit after boarding the train. Suddenly, you found that your feet kick to something then you bend down to see what is that. The environment is too dark so you took long time to adapt to the darkness.";
         string strroom5b = "After a while, you see there is a a skeleton on the ground. “Aaaaaaaaaaaaaaaaaaa!” you shouted with great fear. At that moment, you decide to escape to outside nut the sound of hungry zombies stop you. Soon you realized a stationary skeleton is far less threatening than moving zombies. Then, you saw a piece of paper next to the skeleton and you start reading it.";
@@ -242,15 +258,15 @@ void room5(){
             string strroom5c = "However, there becomes silent after the fall of the wall. After making sure there is no threatening object inside your eyesight, you walk forward to enter the next room.";
             cout << strroom5b << endl;
             cout << strroom5c << endl;
-            room7();
+            return room7(player);
         }
         else{
             cout <<"The wall cracks then you enter the next room. You find the room is empty. "<< endl;
-            room6();
+            return room6(player);
         } 
     }
 }
-void room6(){
+Player room6(Player player){
     string storyroom6a = "The letter’s writer is right, there is three “6” painted on the wall with bright red. Maybe too much paint was used so the excess paint flow downward in a winding route, just like the words are bleeding. You haven’t know the format of the room tell you all about tour future. Suddenly,";
     string storyroom6b = "you feel much lighter because you lose all your equips. “Hahahahahahahahahahahahahahaha” a voice come out with unbridled style. According to the voice, you found 4 cards on the table and you are forced to choose one card “If you refuse to choose a card, you will be surrounded by the zombies! Hahahahahahahaha” said the ownerless voice.";
     string option6a = "What is your choice?  A.Card A   B. Card B   C. Card C   D. card D";
@@ -262,12 +278,13 @@ void room6(){
     if(protectivetalisman == 0){
         //玩家死了
         cout << "“Hahahahahahahahahahahahahahha” The voice becomes more aggressive, you feel the environment is so gruesome and frightening. Suddenly, there is ghost come out from every side, corner of the room. You lose consciousness gradually. " << endl;
+        // player.update_HP(-1*(player.get_HP())); // die
     }
     else{
-        room7();
+        return room7(player);
     }
 }
-void room7(){
+Player room7(Player player){
     cout << " You keep walking and looking for way to go out at the same time. In a twinkling, you saw a flash of reflected light, it is so dazzling that you close your eyes at once by instinct." << endl;
     cout << "You look around to find the light source, then you find there is a window on the wall. At the same time, you observe a secret door on the wall. " << endl;
     string option7a = "What is your choice?  A.Climb the window to go out B.Keep walking in the room C.Walk into the secret door D. start to run";
@@ -275,16 +292,16 @@ void room7(){
     string choice7a;
     cin >> option7a;
     if(choice7a == "A"){
-        room3();
+       return room3(player);
     }
     else if(choice7a == "B"){
-        room11();
+        return room11(player);
     }
     else{
-        room8();
+        return room8(player);
     }
 }
-void room8(){
+Player room8(Player player){
     cout << "Congratulation to you to be still alive in the game. This room is very large, you plan to walk around the 4 walls to find useful information or way to outside." << endl;
     cout << "On the way, you saw 2 people lie prone on the ground, devour on tumble of raw, putrefy meat like a wolf. “Why do they eat these? Where does the meat come from?” you whisper quietly." << endl;
     string option8a = "What is your choice?  A. Walk close to them to see who and how are they B. Walk to the other end of the room";
@@ -296,38 +313,41 @@ void room8(){
             //player is dead here
             cout << "The two 'people' realized you are close to them so they stand up and try to catch you. " << endl;
             cout << "You used the gun to kill the 2 zombies at once. However, the zombies have very strong hearing, more and more zombies are attracted by the sound of firing. Soon, you ran out of bullets and become unable to fight against the zombies. You are killed by the zombies at last. " << endl;
+            // player.update_HP(-1*(player.get_HP())); // die
         }
         else{
             cout << "“Aaaaaaaaa” you are scared by the zombies, you started escaping. Luckily, there is a door so you enter the next room. " << endl; 
-            room9();
+            return room9(player);
         }
     }
     else{
-        room11();
+        return room11(player);
     }
 }
-void room9(){
+Player room9(Player player){
     cout << "Luckily, this room is safe without zombies. Now there are 2 ways in front of you." << endl;
     cout << "What is your choice?  A: the way in the left  B: the way in the right" << endl;
     string choiceroom9;
     cin >> choiceroom9;
     if(choiceroom9 == "A"){
-        room10();
+        return room10(player);
     }
     else{
-        room11();
+        return room11(player);
     }
 }
-void room10(){
-    room4();
+Player room10(Player player){
+    return room4(player);
 }
-void room11(){
+Player room11(Player player){
     cout << "In this room, there are 3 treasure chest and you can take every thing from them. Then you will go forward" << endl;
     //The player will get 25 energy sugar, 3 medicine and 1 armour.
+    return room13(player);
 }
-void room13(){
+Player room13(Player player){
     cout << "This room’s ground is made of transparent glass. You can see the lower room is full of zombies, you cannot tell how many of them but you are sure you can’t survive even though use up your equips if enter there." << endl;
     cout << "Now there are 2 ways in front of you. What is your choice?  A: the way in the left  B: the way in the right" << endl;
     string choiceroom13;
     cin >> choiceroom13;
+    return player;
 }

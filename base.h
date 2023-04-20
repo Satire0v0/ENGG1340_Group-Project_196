@@ -29,4 +29,6 @@ char keyboard();
 
 location explain_input(char word);
 
+Player treasure_box(Player player);
+
 #endif
