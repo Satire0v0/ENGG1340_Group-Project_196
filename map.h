@@ -3,30 +3,46 @@
 
 #include <iostream>
 #include <fstream>
-
+#include <sstream>
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
+#include <ctime>
 #include "global.h"
 
 using namespace std;
 
-
+string reward1='|||    Treat your injury, HP+100     |||';
+string reward2='|||             ATTACK+10            |||';
+string reward3='||| Increase your accuracy, Prob+0.05 |||';
+string reward4='||| Raise your maximum health by 50 points, maxHP+50 |||';
+string reward5='|||   Increase your defence, DEF+10  |||';
+string vision= '(Get a night vision device and you can always see hidden objects around you within a 3*3 range)';
+string multiple="(The number of the count will be increased by 1 when you press the 'F' button once )";
+string maxhp='Your maxHP will be doubled';
+string doubleatk='Your ATK will be doubled';
+string doubledef='Your DEF will be doubled';
+string accurate='(Accurate attack)Your prob will always be 1';
+string supernightvision= '(Supernightvision) You can see all the hidden objects in the map.';
 class Map{
     private:
-        int MAP_WIDTH = 60;
-        int MAP_HEIGHT = 22;
+        int MAP_WIDTH;
+        int MAP_HEIGHT;
         int ROOM_NUM = 8;
         size ROOM_MIN_SIZE = {4,3};
 
         char WALL = '%';
         char EMPTY = ' ';
         char PLAYER = 'O';
-        char BIGMONSTER = 'm';
-        char SMALLMONSTER = 'M';
+        char BIG_MONSTER = 'm';
+        char SMALL_MONSTER = 'M';
         char BOX = '$';
-        char HIDDENBOX = '*'; // invisible
-        char HIDDENMONSTER = '@'; // invisible
+        char HIDDEN_BOX = '*'; // invisible
+        char HIDDEN_MONSTER = '@'; // invisible
         char WINDOW = 'W';
-        char HIDDENDOOR = '#'; // invisible
+        char HIDDEN_DOOR = '#'; // invisible
         char END = 'E';
+
         // room number
         char ONE = '1';
         char TWO = '2';
@@ -42,21 +58,36 @@ class Map{
     
         char UNUSED = '?';
 
-        char map[200][200]; // set a maximum map initially
+        // 2-dimensional dynamic array
+        char** map;
     
     public:
-        void generate_empty_map();
+
+        player box(player player);
+        player hiddenbox(player player);
         void initialize();
-        void print_map();
-        void update_whole(char new_map[200][200]);
+        void print_map(player player);
         void read_map();
         void update_block(location loc, char block);
         void generate_player(location player_loc);
         string check_block(location move_loc, location player_loc);
-        int count_height();
-        int count_width();
-        void map_saving();
+        vector<string> selectRewards(vector<string> rewards);
+        player hiddenbox(player player);
+        player box(player player);
+        //*****addition*****
+        size count_size();
+        //*****addition*****
+        
         void map_reading();
+        //*****delete*****
+        void generate_empty_map();
+        //void update_whole(char new_map[200][200]);
+        //int count_height();
+        //int count_width();
+        //*****delete*****
+
+
+        
 };
 
 #endif

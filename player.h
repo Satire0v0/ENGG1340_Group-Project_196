@@ -11,6 +11,8 @@ struct Talent{
     protected:
         int mult;
         bool vision;
+      //maxHP,DEF,翻倍的实现形式:player.atk*=2
+    
 };
 
 class Player: public Talent
