@@ -133,3 +133,51 @@ int Map::count_width(){
     }
     return count;
 }
+
+void Map::map_saving(){
+    ofstream saveMap;
+    saveMap.open("savedMap.txt");
+    if (saveMap.fail()){
+        cout << "Error opening savedMap.txt \n";
+        exit(0);
+    }
+    else{
+        for (int y = 0; y < MAP_HEIGHT; y++) {
+        for (int x = 0; x < MAP_WIDTH; x++) {
+            if (map[y][x] == 'O')
+            {
+                saveMap << ' ';
+            }
+            else{
+                saveMap << map[y][x];
+            }
+        }
+        saveMap << endl;
+        }
+        saveMap << "END";
+    }
+    
+}
+void Map::map_reading(){
+    ifstream readMap;
+    string line;
+    int y=0;
+    readMap.open("savedMap.txt");
+    if (readMap.fail()){
+        cout << "Error opening savedMap.txt \n";
+        exit(0);
+    }
+    else{
+        // Read the line from the map
+        // As there is space, it has better to use getline(mapFile, line);
+        getline(readMap, line);
+        while (line != "END") {
+            // Write into the map
+            for (int x=0; x<MAP_WIDTH; x++) {
+                map[y][x] = line[x];
+            }
+            getline(readMap, line);
+            y++;
+        }
+    }
+}
