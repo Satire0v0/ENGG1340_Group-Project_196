@@ -5,9 +5,9 @@
 #include <iostream>
 using namespace std;
 
-struct Talent{
-    int mult;
-    bool vision;
+struct Talent{       //maxHP,DEF,翻倍的实现形式:player.atk*=2
+    int mult=1;
+    bool vision=false;
 };
 
 class Player{
