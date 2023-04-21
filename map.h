@@ -4,12 +4,26 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
+#include <ctime>
 #include "global.h"
 
 using namespace std;
 
-
+string reward1='|||    Treat your injury, HP+100     |||';
+string reward2='|||             ATTACK+10            |||';
+string reward3='||| Increase your accuracy, Prob+0.05 |||';
+string reward4='||| Raise your maximum health by 50 points, maxHP+50 |||';
+string reward5='|||   Increase your defence, DEF+10  |||';
+string vision= '(Get a night vision device and you can always see hidden objects around you within a 3*3 range)';
+string multiple="(The number of the count will be increased by 1 when you press the 'F' button once )";
+string maxhp='Your maxHP will be doubled';
+string doubleatk='Your ATK will be doubled';
+string doubledef='Your DEF will be doubled';
+string accurate='(Accurate attack)Your prob will always be 1';
+string supernightvision= '(Supernightvision) You can see all the hidden objects in the map.';
 class Map{
     private:
         int MAP_WIDTH;
@@ -48,13 +62,18 @@ class Map{
         char** map;
     
     public:
+
+        player box(player player);
+        player hiddenbox(player player);
         void initialize();
         void print_map(player player);
         void read_map();
         void update_block(location loc, char block);
         void generate_player(location player_loc);
         string check_block(location move_loc, location player_loc);
-        
+        vector<string> selectRewards(vector<string> rewards);
+        player hiddenbox(player player);
+        player box(player player);
         //*****addition*****
         size count_size();
         //*****addition*****
