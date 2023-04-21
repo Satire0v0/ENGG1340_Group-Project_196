@@ -13,6 +13,11 @@ This file contains the functions that all the other files need to use.
 #include <termio.h>
 #include <stdio.h>
 #include "global.h"
+/*
+hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+*/
+#include "saving.h"
+#include <cstdlib>
 
 using namespace std;
 
@@ -27,6 +32,10 @@ void print_hint();
 
 char keyboard();
 
-location explain_input(char word);
+location explain_input(char word, Player &player, Map &map);
+
+double getProbability();
+
+int random_num();
 
 #endif
