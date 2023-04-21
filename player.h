@@ -8,6 +8,7 @@ using namespace std;
 struct Talent{       //maxHP,DEF,翻倍的实现形式:player.atk*=2
     int mult=1;
     bool vision=false;
+    bool supernightvision=false;
 };
 
 class Player{
