@@ -55,6 +55,8 @@ class Map{
         string check_block(location move_loc, location player_loc);
         int count_height();
         int count_width();
+        void map_saving();
+        void map_reading();
 };
 
 #endif
