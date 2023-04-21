@@ -127,6 +127,12 @@ char keyboard(){
     else if (word == 'e' || word == 'E'){
         result = 'e';
     }
+    /*
+    jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+    */
+    else if (word == 'q' || word == 'E'){
+        result = 'q';
+    }
     else{
         result = ' ';
     }
@@ -136,7 +142,7 @@ char keyboard(){
 
 
 // specific keys have specific functions
-location explain_input(char word){
+location explain_input(char word, Player &player, Map &map){
     location loc;
     string result;
     bool hintLeave=false;
@@ -172,7 +178,7 @@ location explain_input(char word){
         cout << endl;
         cout << "Want to continue?" << endl;
         cout << "Press 'Enter' to continue, or enter 'Exit' to leave:" << endl;
-
+        
         result = get_word();
 
         if (result == "exit" || result == "Exit"){
@@ -183,10 +189,49 @@ location explain_input(char word){
             loc.col = 0;
         }
     }
+    /*
+    jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+    */
+    else if (word == 'q'){
+        /*
+        location a;
+        Player player;
+        a = player.get_loc();
+        cout << endl;
+        cout << "Want to save current process?" << endl;
+        cout << "Press '1', '2' or '3' to choose the archive you wish to save: " << endl;
+        cout << a.row << " " << a.col << " a row col " << endl;
+        */
+        string choice;
+        cout << endl;
+        cout << "Enter 'save' to save archive\n";
+        cin >> choice;
+        if (choice == "save")
+        {
+            save_data(player, map);
+            loc.row = 0;
+            loc.col = 0;
+            exit(0);
+        }
+        else if (choice == "read")
+        {
+            loc = export_data(map);
+            //cout << loc.row << " " << loc.col << " loc row col after export data\n";
+            //sleep(2);
+        }
+    }
     else{
         loc.row = 0;
         loc.col = 0;
     }
 
     return loc;
+}
+int random_num(int lower_bound, int upper_bound){
+    return (rand() % (upper_bound - lower_bound + 1)) + lower_bound;
+}
+
+
+double getProbability(){
+    return random_num(0, 100) / 100.0; // integer divide integer is integer, therefore 100.0 is here
 }
