@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 #include "global.h"
 
@@ -11,22 +12,23 @@ using namespace std;
 
 class Map{
     private:
-        int MAP_WIDTH = 60;
-        int MAP_HEIGHT = 22;
+        int MAP_WIDTH;
+        int MAP_HEIGHT;
         int ROOM_NUM = 8;
         size ROOM_MIN_SIZE = {4,3};
 
         char WALL = '%';
         char EMPTY = ' ';
         char PLAYER = 'O';
-        char BIGMONSTER = 'm';
-        char SMALLMONSTER = 'M';
+        char BIG_MONSTER = 'm';
+        char SMALL_MONSTER = 'M';
         char BOX = '$';
-        char HIDDENBOX = '*'; // invisible
-        char HIDDENMONSTER = '@'; // invisible
+        char HIDDEN_BOX = '*'; // invisible
+        char HIDDEN_MONSTER = '@'; // invisible
         char WINDOW = 'W';
-        char HIDDENDOOR = '#'; // invisible
+        char HIDDEN_DOOR = '#'; // invisible
         char END = 'E';
+
         // room number
         char ONE = '1';
         char TWO = '2';
@@ -42,21 +44,31 @@ class Map{
     
         char UNUSED = '?';
 
-        char map[200][200]; // set a maximum map initially
+        // 2-dimensional dynamic array
+        char** map;
     
     public:
-        void generate_empty_map();
         void initialize();
-        void print_map();
-        void update_whole(char new_map[200][200]);
+        void print_map(player player);
         void read_map();
         void update_block(location loc, char block);
         void generate_player(location player_loc);
         string check_block(location move_loc, location player_loc);
-        int count_height();
-        int count_width();
-        void map_saving();
+        
+        //*****addition*****
+        size count_size();
+        //*****addition*****
+        
         void map_reading();
+        //*****delete*****
+        void generate_empty_map();
+        //void update_whole(char new_map[200][200]);
+        //int count_height();
+        //int count_width();
+        //*****delete*****
+
+
+        
 };
 
 #endif

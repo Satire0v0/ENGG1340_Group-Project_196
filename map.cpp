@@ -1,41 +1,82 @@
 #include "map.h"
 
 
-void Map::generate_empty_map(){
-    for (int i=0; i<200; i++){
-        for (int j=0; j<200; j++){
-            map[i][j] = UNUSED;
+void Map::initialize(){
+    size map_size;
+    map_size = Map::count_size();
+
+    // Count the map size
+    MAP_HEIGHT = map_size.height;
+    MAP_WIDTH = map_size.width;
+
+    // 2-dimensional dynamic array
+    map = new char* [MAP_HEIGHT];
+    for (int row=0; row < MAP_HEIGHT; row++){
+        map[row] = new char[MAP_WIDTH];
+        for (int col=0; col<MAP_WIDTH; col++){
+            map[row][col] = ' ';
         }
     }
-}
 
-
-void Map::initialize(){
-    Map::generate_empty_map();
+    // Map::generate_empty_map();
     Map::read_map();
-    MAP_HEIGHT = Map::count_height();
-    MAP_WIDTH = Map::count_width();
 }
 
 
-void Map::print_map(){
+void Map::print_map(player player){
+    int row, col;
+    row=player.getloc().row;
+    col=player.getloc().col;
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
-            cout << map[y][x];
+            if (player.talent.vision===true){  //this is for the nightvision talent
+                if (((y==row-1)&&(x==col-1))||((y==row-1)&&(x==col))||((y==row-1)&&(x==col+1))||((y==row)&&(x==col-1))||((y==row)&&(x==col+1))||((y==row+1)&&(x==col-1))||((y==row+1)&&(x==col))||((y==row+1)&&(x==col+1))){
+                    cout << map[y][x];
+                }else{
+                    cout << ' ';
+                }
+            }else{if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_DOOR || map[y][x] == HIDDEN_MONSTER){
+                cout << ' ';
+            }
+            /*
+            // room number
+            else if(ONE <= map[y][x] && map[y][x] <= NINE || TEN <= map[y][x] && map[y][x] <= ELEVEN){
+                cout << ' ';
+            }
+            */
+            else{
+                cout << map[y][x];
+            }
         }
         cout << endl;
-    }
-}
-
-
-void Map::update_whole(char new_map[200][200]){
-    for (int y = 0; y < MAP_HEIGHT; y++) {
-        for (int x = 0; x < MAP_WIDTH; x++) {
-            map[y][x] = new_map[y][x];
         }
     }
 }
 
+void Map::map_saving(){
+    ofstream saveMap;
+    saveMap.open("savedMap.txt");
+    if (saveMap.fail()){
+        cout << "Error opening savedMap.txt \n";
+        exit(0);
+    }
+    else{
+        for (int y = 0; y < MAP_HEIGHT; y++) {
+        for (int x = 0; x < MAP_WIDTH; x++) {
+            if (map[y][x] == 'O')
+            {
+                saveMap << ' ';
+            }
+            else{
+                saveMap << map[y][x];
+            }
+        }
+        saveMap << endl;
+        }
+        saveMap << "END";
+    }
+    
+}
 
 void Map::read_map(){
     // Read the map from "map.txt"
@@ -82,8 +123,12 @@ string Map::check_block(location move_loc, location player_loc){
     else if (map[row][col] == EMPTY){
         return "empty";
     }
+    else if (ONE <= map[row][col] && map[row][col] <= NINE){
+        string room_num (1, map[row][col]);
+        return room_num;
+    }
     else{
-        return "true";
+        return "no_update";
     }
 }
 
@@ -101,83 +146,27 @@ void Map::generate_player(location player_loc){
     map[player_loc.row][player_loc.col] = PLAYER;
 }
 
-
-// get the number of rows of the map
-int Map::count_height(){
-    int col=0;
-    int count=0;
-
-    for (int row=0; row<200; row++){
-        if (map[row][col] == UNUSED){
-            return count;
-        }
-        else{
-            count++;
-        }
-    }
-    return count;
-}
-
-
-int Map::count_width(){
-    int row=0;
-    int count=0;
-
-    for (int col=0; col<200; col++){
-        if (map[row][col] == UNUSED){
-            return count;
-        }
-        else{
-            count++;
-        }
-    }
-    return count;
-}
-
-void Map::map_saving(){
-    ofstream saveMap;
-    saveMap.open("savedMap.txt");
-    if (saveMap.fail()){
-        cout << "Error opening savedMap.txt \n";
-        exit(0);
-    }
-    else{
-        for (int y = 0; y < MAP_HEIGHT; y++) {
-        for (int x = 0; x < MAP_WIDTH; x++) {
-            if (map[y][x] == 'O')
-            {
-                saveMap << ' ';
-            }
-            else{
-                saveMap << map[y][x];
-            }
-        }
-        saveMap << endl;
-        }
-        saveMap << "END";
-    }
-    
-}
-void Map::map_reading(){
-    ifstream readMap;
+//*****addition*****
+size Map::count_size(){
+    ifstream map_file;
+    size map_size;
     string line;
-    int y=0;
-    readMap.open("savedMap.txt");
-    if (readMap.fail()){
-        cout << "Error opening savedMap.txt \n";
-        exit(0);
+    int count = 0;
+
+    map_file.open("map.txt");
+
+    getline(map_file, line);
+    map_size.width = line.length();
+    
+    while(line.substr(0,3) != "END"){
+        count++;
+        getline(map_file, line);
     }
-    else{
-        // Read the line from the map
-        // As there is space, it has better to use getline(mapFile, line);
-        getline(readMap, line);
-        while (line != "END") {
-            // Write into the map
-            for (int x=0; x<MAP_WIDTH; x++) {
-                map[y][x] = line[x];
-            }
-            getline(readMap, line);
-            y++;
-        }
-    }
+    map_size.height = count;
+
+    map_file.close();
+
+    return map_size;
 }
+
+//*****addition*****
