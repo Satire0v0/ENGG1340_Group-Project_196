@@ -29,7 +29,7 @@ int main(){
     cin >> choice;
     if (choice == "read")
     {
-        export_data(map);
+        export_data(player, map);
     }
     else if (choice == "new")
     {
