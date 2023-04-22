@@ -3,6 +3,9 @@
 #include <unistd.h>
 #include "map.h"
 #include "player.h"
+#include "saving.h"
+#include "monster.h"
+#include "game.h"
 
 using namespace std;
 
@@ -11,6 +14,7 @@ int main(){
     // class declaration
     Map map;
     Player player;
+    Monster monster;
 
     // Variable declaration
     string moving_result; // used for monitoring the special char encountered by player
@@ -39,7 +43,7 @@ int main(){
         clear_screen(); 
         cout << endl;
 
-        map.print_map();
+        map.print_map(player);
 
         cout << "******  press 'h' to see the hint | 'e' to stop the game | 'q' to save archive ******" << endl;
 
@@ -58,6 +62,10 @@ int main(){
             map.update_block(player.get_loc(), block); // change the block at player_loc
             player.update_loc(move_loc); // player moves forward
             map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
+        }
+        else if (moving_result == "attack")
+        {
+            player = attack(player, monster);
         }
     }
     return 0;
