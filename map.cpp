@@ -25,8 +25,8 @@ void Map::initialize(){
 
 void Map::print_map(Player player){
     int row, col;
-    row=player.get_loc().row;
-    col=player.get_loc().col;
+    row=player.getloc().row;
+    col=player.getloc().col;
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
             if (player.talent.vision==true){  //this is for the nightvision talent
@@ -183,27 +183,16 @@ Player box(Player player){
     }
     cin >> choice;
     cout << endl ;
-    switch(result[choice-1]){
-        case reward1:{
-            player.HP+=100;
-            break;
-        }
-        case reward2:{
-            player.ATK+=10;
-            break;
-        }
-        case reward3:{
-            player.Prob+=0.05;
-            break;
-        }
-        case reward4:{
-            player.maxHP+=50;
-            break;
-        }
-        case reward5:{
-            player.DEF+=10;
-            break;
-        }
+    if (result[choice-1]==reward1){
+        player.HP+=100;
+    }else if (result[choice-1]==reward2){
+        player.ATK+=10;
+    }else if (result[choice-1]==reward3){
+        player.Prob+=0.05;
+    }else if (result[choice-1]==reward4){
+        player.maxHP+=50;
+    }else if (result[choice-1]=r=eward5){
+        player.DEF+=10
     }
     cout <<"--------------------------"<<endl;
     cout << "Good LUCK!!!"<<endl;
@@ -235,35 +224,20 @@ Player hiddenbox(Player player){
     }
     cin >> choice;
     cout << endl ;
-    switch(result[choice-1]){
-        case multiple:{
-            player.talent.mult+=1;
-            break;
-        }
-        case maxhp:{
-            player.maxHP*=2;
-            break;
-        }
-        case accurate:{
-            player.Prob=1;
-            break;
-        }
-        case doubleatk:{
-            player.ATK*=2;
-            break;
-        }
-        case doubledef:{
-            player.DEF*=2;
-            break;
-        }
-        case vision:{
-            player.talent.vision=true;
-            break;
-        }
-        case vision:{
-            player.talent.supernightvision=true;
-            break;
-        }
+    if (result[choice-1]==multiple){
+        player.talent.mult+=1;
+    }else if (result[choice-1]==maxhp){
+        player.maxHP*=2;
+    }else if (result[choice-1]==accurate){
+        player.Prob=1;
+    }else if (result[choice-1]==doubleatk){
+        player.ATK*=2;
+    }else if (result[choice-1]==doubledef){
+        player.DEF*=2;
+    }else if (result[choice-1]==vision){
+        player.talent.vision=true;
+    }else if (result[choice-1]==supernightvision){
+        player.talent.supernightvision=true;
     }
     cout <<"--------------------------"<<endl;
     cout << "Good LUCK!!!"<<endl;
