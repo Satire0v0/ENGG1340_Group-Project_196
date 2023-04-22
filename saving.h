@@ -18,6 +18,9 @@ struct saved_data
 
 };
 
+class Player;
+class Map;
+
 void save_data(Player &player, Map &map);
 
 location export_data(Map &map);

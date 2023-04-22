@@ -17,10 +17,13 @@ base.o: base.cpp base.h
 saving.o: saving.cpp saving.h
 	g++ $(FLAGS) -c $<
 
+game.o: game.cpp game.h
+	g++ $(FLAGS) -c $<
+
 main.o: main.cpp map.h
 	g++ $(FLAGS) -c $<
 
-main: main.o map.o base.o player.o saving.o
+main: main.o map.o base.o player.o saving.o game.o
 	g++ $(FLAGS) $^ -o $@
 
 clean:
