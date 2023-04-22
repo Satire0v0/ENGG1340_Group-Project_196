@@ -18,15 +18,16 @@ void save_data(Player &player, Map &map)
     else
     {
         location loc = player.get_loc();
-        double HP = 0, Attack = 0;
         //cout << " this is the saving cpp \n";
         //row和col在同一行，用空格隔开
         //HP等具体变量
         //Attack等具体变量
         //cout << loc.row << " " << loc.col << " loc row col \n";
         //sleep(1);
-        saveFile << loc.row << " " << loc.col << endl << HP << endl;
-        saveFile << Attack << endl;
+        saveFile << loc.row << " " << loc.col << endl;
+        saveFile << player.get_HP() << " " << player.get_ATK() << " " << player.get_maxHP() << " " << player.get_prob() << " ";
+        saveFile << player.get_weapon() << " " << player.talent.mult << " " << player.talent.vision << " " << player.talent.supernightvision;
+        saveFile << endl;
         map.map_saving();
     } 
 }
