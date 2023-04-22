@@ -73,8 +73,6 @@ class Map{
         void generate_player(location player_loc);
         string check_block(location move_loc, location player_loc);
         vector<string> selectRewards(vector<string> rewards);
-        Player hiddenbox(Player player);
-        Player box(Player player);
         size count_size();
         void map_reading();
         void generate_empty_map();
