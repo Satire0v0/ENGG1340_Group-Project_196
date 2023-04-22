@@ -25,8 +25,8 @@ void Map::initialize(){
 
 void Map::print_map(Player player){
     int row, col;
-    row=player.getloc().row;
-    col=player.getloc().col;
+    row=player.get_loc().row;
+    col=player.get_loc().col;
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
             if (player.talent.vision==true){  //this is for the nightvision talent
@@ -168,7 +168,11 @@ size Map::count_size(){
     return map_size;
 }
 
-//*****addition*****
+vector<string> selectRewards(vector<string> rewards) {
+    srand(time(nullptr));
+    random_shuffle(rewards.begin(), rewards.end());
+    return vector<string>(rewards.begin(), rewards.begin() + 3);
+}
 
 Player box(Player player){
 
@@ -188,7 +192,7 @@ Player box(Player player){
     }else if (result[choice-1]==reward2){
         player.update_ATK(10);
     }else if (result[choice-1]==reward3){
-        player.Prob+=0.05;
+        player.set_prob(player.get_prob() + 0.05);
     }else if (result[choice-1]==reward4){
         player.update_maxHP(50);
     }else if (result[choice-1]==reward5){
@@ -197,12 +201,6 @@ Player box(Player player){
     cout <<"--------------------------"<<endl;
     cout << "Good LUCK!!!"<<endl;
     return player;
-}
-
-vector<string> selectRewards(vector<string> rewards) {
-    srand(time(nullptr));
-    random_shuffle(rewards.begin(), rewards.end());
-    return vector<string>(rewards.begin(), rewards.begin() + 3);
 }
 
 Player hiddenbox(Player player){
