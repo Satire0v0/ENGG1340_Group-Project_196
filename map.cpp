@@ -227,13 +227,13 @@ Player hiddenbox(Player player){
     if (result[choice-1]==multiple){
         player.talent.mult+=1;
     }else if (result[choice-1]==maxhp){
-        player.maxHP*=2;
+        player.set_maxHP(player.get_maxHP() * 2);
     }else if (result[choice-1]==accurate){
-        player.Prob=1;
+        player.set_prob(1);
     }else if (result[choice-1]==doubleatk){
-        player.ATK*=2;
+        player.set_ATK(player.get_ATK() * 2);
     }else if (result[choice-1]==doubledef){
-        player.DEF*=2;
+        player.set_DEF(player.get_DEF() * 2);
     }else if (result[choice-1]==vision){
         player.talent.vision=true;
     }else if (result[choice-1]==supernightvision){
