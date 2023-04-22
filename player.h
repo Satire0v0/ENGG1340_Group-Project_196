@@ -7,7 +7,7 @@
 using namespace std;
 
 struct Talent{
-        void set(int mult_val, bool vision_val);
+        void set(int mult_val, bool vision_val, bool supernightvision_val);
         int mult;
         bool vision;
         bool supernightvision;

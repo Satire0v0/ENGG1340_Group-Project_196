@@ -19,9 +19,10 @@ string Player::get_weapon(){
     return weapon;
 }
 
-void Talent::set(int mult_val, bool vision_val){
+void Talent::set(int mult_val, bool vision_val, bool supernightvision_val){
     mult = mult_val;
     vision = vision_val;
+    supernightvision = supernightvision_val;
 }
 int Player::get_HP(){
     return HP;
