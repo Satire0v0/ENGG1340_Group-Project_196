@@ -20,6 +20,8 @@ This file contains the functions that all the other files need to use.
 
 using namespace std;
 
+class Player;
+class Map;
 
 void clear_screen();
 
