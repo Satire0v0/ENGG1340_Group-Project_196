@@ -25,7 +25,7 @@ void save_data(Player &player, Map &map)
         //Attack等具体变量
         //cout << loc.row << " " << loc.col << " loc row col \n";
         //sleep(1);
-        saveFile << loc.row << " " << loc.col << endl << map.count_height() << endl << map.count_width() << endl << HP << endl;
+        saveFile << loc.row << " " << loc.col << endl << HP << endl;
         saveFile << Attack << endl;
         map.map_saving();
     } 
