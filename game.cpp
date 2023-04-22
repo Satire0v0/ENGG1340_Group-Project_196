@@ -122,7 +122,7 @@ int getch() {
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
     return ch;
 }
-bool keyboard_game(int talent_mult,int difficulty=60){
+bool keyboard_game(int talent_mult,int difficulty=30){
     gamestatus kb;
     int multiple = talent_mult;
     int count = 0;
@@ -220,3 +220,22 @@ void countdown() {
         cout << "Good luck!!!"<<endl;
     }
 }
+void randomFunction() {
+    srand(time(0));
+    int randomNum = rand() % 4 + 1;
+    switch(randomNum) {
+        case 1:
+            number_guess();
+            break;
+        case 2:
+            guess_dice();
+            break;
+        case 3:
+            rpsgame;
+            break;
+        case 4:
+            keyboard_game();
+            break;
+    }
+}
+
