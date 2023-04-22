@@ -61,12 +61,13 @@ Player train2(Player player){
                 if(choice2c == "A" || choice2c == "B"){
                     if(protectivetalisman == 0){
                         protectivetalisman = 1;
+                        return train3(player);
                     }
                     string beggarsaid = "'Thank you very much and you are so kind!' said the beggar. Then he give you a piece of paper in return, you keep the paper and put it in the pocket";
                     cout << beggarsaid << endl;
                 }
                 else{
-                    treturn train3(player);
+                    return train3(player);
                 }
             }
         }       
@@ -87,6 +88,7 @@ Player train3(Player player){
     if(choice3a == "A"){
         cout << "However, the train travels too fast, you got seriously injured after escape" << endl;
         // player.update(-1*(player.get_HP()/2), 0, 0); // halve the life
+        return train4(player);
     }
     else if(choice3a == "B"){
         return train4(player);
@@ -118,6 +120,7 @@ Player train4(Player player){
     }
     else{
         // player.update(-1*(player.get_HP(),0,0)); // die
+        return player;
         cout << "You are killed by the zombie driver - the driver of the train" << endl;
     }
 }
@@ -168,6 +171,7 @@ Player train5(Player player){
                             else if(choice5a == "B"){
                                 // player.update_HP(-1*(player.get_HP())); // die
                                 cout << "You are using all the energy left inside your body and ran as quickly as possible. In your memory, you had never ran so fast. Unfortunately, the zombies have no feelings so they are much faster than you, you hear the voice of zombies from far to near, from drained to exciting. You still cannot face the truth which you may not survive, you tried to ran faster and faster. Suddenly, you lose your balance, the zombies pounced on your, you lose your feeling and mind gradually in pain." << endl;
+                                return player;
                             }
                             else{
                                 return room1(player);
@@ -235,6 +239,7 @@ Player room4(Player player){
     if(choiceroom4a == "A"){
          // player.update_HP(-0.1*(player.get_HP())); // lose 10% life
          gun = 0;
+         return room5(player);
         //损失生命值和所有枪
     }
     else{
@@ -260,11 +265,11 @@ Player room5(Player player){
             cout << strroom5c << endl;
             return room7(player);
         }
-        else{
+    }
+    else{
             cout <<"The wall cracks then you enter the next room. You find the room is empty. "<< endl;
             return room6(player);
-        } 
-    }
+    } 
 }
 Player room6(Player player){
     string storyroom6a = "The letter’s writer is right, there is three “6” painted on the wall with bright red. Maybe too much paint was used so the excess paint flow downward in a winding route, just like the words are bleeding. You haven’t know the format of the room tell you all about tour future. Suddenly,";
@@ -278,6 +283,7 @@ Player room6(Player player){
     if(protectivetalisman == 0){
         //玩家死了
         cout << "“Hahahahahahahahahahahahahahha” The voice becomes more aggressive, you feel the environment is so gruesome and frightening. Suddenly, there is ghost come out from every side, corner of the room. You lose consciousness gradually. " << endl;
+        return player;
         // player.update_HP(-1*(player.get_HP())); // die
     }
     else{
@@ -314,6 +320,7 @@ Player room8(Player player){
             cout << "The two 'people' realized you are close to them so they stand up and try to catch you. " << endl;
             cout << "You used the gun to kill the 2 zombies at once. However, the zombies have very strong hearing, more and more zombies are attracted by the sound of firing. Soon, you ran out of bullets and become unable to fight against the zombies. You are killed by the zombies at last. " << endl;
             // player.update_HP(-1*(player.get_HP())); // die
+            return player;
         }
         else{
             cout << "“Aaaaaaaaa” you are scared by the zombies, you started escaping. Luckily, there is a door so you enter the next room. " << endl; 
@@ -350,4 +357,9 @@ Player room13(Player player){
     string choiceroom13;
     cin >> choiceroom13;
     return player;
+}
+
+int main(){
+    Player player;
+    room13(player);
 }
