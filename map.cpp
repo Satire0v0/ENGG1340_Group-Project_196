@@ -127,6 +127,12 @@ string Map::check_block(location move_loc, location player_loc){
         string room_num (1, map[row][col]);
         return room_num;
     }
+    else if (map[row][col] == SMALL_MONSTER){
+        return "small_monster";
+    }
+    else if (map[row][col] == BIG_MONSTER){
+        return "big_monster";
+    }
     else{
         return "no_update";
     }

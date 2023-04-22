@@ -18,7 +18,7 @@ void Monster::show_info(){
 } 
 
 
-void Monster::set(int new_HP, int new_ATK, int new_maxHP, int new_prob){
+void Monster::set(int new_HP, int new_maxHP, int new_ATK, double new_prob){
     HP = new_HP;
     ATK = new_ATK;
     maxHP = new_maxHP;

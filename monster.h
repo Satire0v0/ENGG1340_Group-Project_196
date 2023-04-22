@@ -22,7 +22,7 @@ class Monster{
         int attack();
 
         void show_info();
-        void set(int new_HP, int new_ATK, int new_maxHP, int new_prob);
+        void set(int new_HP, int new_maxHP, int new_ATK, double new_prob);
 };
 
 #endif

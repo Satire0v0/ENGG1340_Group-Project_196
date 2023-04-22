@@ -14,7 +14,6 @@ int main(){
     // class declaration
     Map map;
     Player player;
-    Monster monster;
 
     // Variable declaration
     string moving_result; // used for monitoring the special char encountered by player
@@ -63,9 +62,16 @@ int main(){
             player.update_loc(move_loc); // player moves forward
             map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
         }
-        else if (moving_result == "attack")
-        {
-            player = attack(player, monster);
+        else if (moving_result == "small_monster")
+        { 
+            Monster small_monster;
+            player = attack(player, small_monster);
+        }
+        else if (moving_result == "big_monster"){
+            Monster big_monster;
+            // HP, maxHP, ATK, prob
+            big_monster.set(200, 200, 10, 0.5);
+            player = attack(player, big_monster);
         }
     }
     return 0;
