@@ -19,6 +19,8 @@ class Monster{
     public:
         int get_HP();
         int get_ATK();
+        int get_maxHP();
+        int get_prob();
         int attack();
 
         void show_info();

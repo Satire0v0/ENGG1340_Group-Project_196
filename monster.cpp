@@ -10,6 +10,13 @@ int Monster::get_ATK(){
     return ATK;
 }
 
+int Monster::get_maxHP(){
+    return maxHP;
+}
+
+int Monster::get_prob(){
+    return prob;
+}
 
 void Monster::show_info(){
     cout << "Monster -> ";
