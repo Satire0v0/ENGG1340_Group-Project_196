@@ -23,7 +23,7 @@ void Map::initialize(){
 }
 
 
-void Map::print_map(player player){
+void Map::print_map(Player player){
     int row, col;
     row=player.getloc().row;
     col=player.getloc().col;
@@ -170,7 +170,7 @@ size Map::count_size(){
 
 //*****addition*****
 
-player box(player player){
+Player box(Player player){
 
     int choice, r=1;
     cout << "--------------------------"<<endl;
@@ -216,7 +216,7 @@ vector<string> selectRewards(vector<string> rewards) {
     return vector<string>(rewards.begin(), rewards.begin() + 3);
 }
 
-player hiddenbox(player player){
+Player hiddenbox(Player player){
 
     int choice, r=1;
     cout << "--------------------------"<<endl;
