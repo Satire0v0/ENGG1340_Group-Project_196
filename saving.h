@@ -23,7 +23,7 @@ class Map;
 
 void save_data(Player &player, Map &map);
 
-location export_data(Map &map);
+location export_data(Player &player, Map &map);
 
 
 
