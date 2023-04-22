@@ -23,10 +23,13 @@ game.o: game.cpp game.h
 monster.o: monster.cpp monster.h
 	g++ $(FLAGS) -c $<
 
+room.o: room.cpp room.h
+	g++ $(FLAGS) -c $<
+
 main.o: main.cpp map.h
 	g++ $(FLAGS) -c $<
 
-main: main.o map.o base.o player.o saving.o game.o monster.o
+main: main.o map.o base.o player.o saving.o game.o monster.o room.o
 	g++ $(FLAGS) $^ -o $@
 
 clean:

@@ -6,6 +6,7 @@
 #include "saving.h"
 #include "monster.h"
 #include "game.h"
+#include "room.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ int main(){
     Monster big_monster;
 
     // Variable declaration
+    int count=0;
     string moving_result; // used for monitoring the special char encountered by player
     location move_loc;
 
@@ -36,9 +38,9 @@ int main(){
     // start the game
         map.initialize();
         map.generate_player(player.get_loc());
+        player = train1(player);
     }
 
-    train1();
 
     
     while (true){
@@ -55,21 +57,21 @@ int main(){
 
         userInput = keyboard();
         move_loc = explain_input(userInput, player, map);
-        
-        
+    
 
         moving_result = map.check_block(move_loc, player.get_loc());
-        
-        if (moving_result == "empty"){
+        cout << moving_result << endl;
+
+        if (moving_result != "wall" && moving_result != "no_update"){
             map.update_block(player.get_loc(), block); // change the block at player_loc
             player.update_loc(move_loc); // player moves forward
             map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
         }
-        else if (moving_result == "attack")
-        {
-            player = attack(player, monster);
-        }else if (moving_result == "1"){
+
+        
+        if (moving_result == "1"){
             room2(player);
+            block = ' ';
         }else if (moving_result == "2"){
             room3(player);
         }else if (moving_result == "3"){
@@ -85,15 +87,18 @@ int main(){
         }else if (moving_result == "6"){
             room7(player);
         }else if (moving_result == "W"){
-            room7_window(player,monster);
+            room7_window(player, big_monster, count);
         }else if (moving_result == "room7_secret"){
             room7_secretdoor(player);
         }else if (moving_result == "7"){
             room8(player);
         }else if (moving_result== "8"){
             room9(player);
+        /*
         }else if (moving_result== "9"){
-            room10(player);
+            room10_secretdoor(player);
+        */
+      
         }else if (moving_result=="A"){
             room11(player);
         }else if (moving_result=="B"){
@@ -102,26 +107,31 @@ int main(){
             room10_secretdoor(player);
         }else if (moving_result=="E"){
             Monster E;
-            E.set({1000,1000,800,0.25});
+            E.set(1000,1000,800,0.25);
             cout<< "a grotesque figure staggering towards you, its flesh rotting and dripping with blood. Its eyes are sunken and lifeless, its teeth yellow and jagged. It lets out a guttural roar that chills your bones, and lunges at you with its clawed hands. You barely have time to react as the zombie tries to bite your neck and rip you apart..."<<endl;
-            player = attack(player, E);
+            player = attack(player, E, count);
         }else if (moving_result == "m"){
             cout<<"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"<<endl;
-            player = attack(player, small_monster);
+            player = attack(player, small_monster, count);
         }
         else if(moving_result == "M"){
             big_monster.set(big_monster.get_HP() * 1.5,\
                             big_monster.get_maxHP() * 1.5,\
                             big_monster.get_ATK() * 1.5,\
                             big_monster.get_prob() * 1.5);
-            player = attack(player, big_monster);
+            player = attack(player, big_monster, count);
         }else if(moving_result=="@"){
             cout<<"A fog suddenly appears, and you faint and enter a dream"<<endl;
-            randomfunction();
+            randomFunction(player.talent.mult, count);
         }else if(moving_result=="$"){
-            player=box(player);
+            player=map.box(player);
         }else if(moving_result=="*"){
-            player=hiddenbox(player);
+            player=map.hiddenbox(player);
+        }
+        else if (moving_result == "empty"){
+            map.update_block(player.get_loc(), block); // change the block at player_loc
+            player.update_loc(move_loc); // player moves forward
+            map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
         }
             
     }

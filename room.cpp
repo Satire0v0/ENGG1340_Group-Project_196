@@ -192,6 +192,7 @@ Player room1(Player player){
 Player room2(Player player){
     string storyroom2a = "In this room, there is a treasure box, you can take 1 of the equips, use your chance wisely”";
     cout << storyroom2a << endl; //room 2 的宝箱不刷treasure box
+    leave_or_not();
     return player;
 }
 Player room3(Player player){
@@ -242,9 +243,9 @@ Player room7_secretdoor(Player player){ //room 7 #
     player.set_loc({2,10});
     return player;
 }
-Player room7_window(Player player,Monster monster){// room 7 W
+Player room7_window(Player player, Monster monster, int count){// room 7 W
     cout << "As soon as you get to the window, a zombie rushes towards you..."<<endl;
-    player = attack(player, monster);//powerful monster
+    player = attack(player, monster, count);//powerful monster
     return player;
 }
 
@@ -259,13 +260,14 @@ Player room9(Player player){
     cout << "What is your choice?  The way in the left OR The way in the right ? " << endl;
     return player;
 }
+
 Player room10_secretdoor(Player player){//room 10 #
     player.set_loc({6,31});
     return player;
 }
 Player room11(Player player){
     cout << "In this room, there are 3 treasure box and you can take every thing from them. Then you will go forward" << endl;
-    cout << "2 of the boxes are hidden"
+    cout << "2 of the boxes are hidden";
     //The player will get 25 energy sugar, 3 medicine and 1 armour.
     return room13(player);
 }

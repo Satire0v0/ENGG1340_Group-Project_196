@@ -101,3 +101,8 @@ void Player::set_maxHP(int new_maxHP){
 void Player::set_prob(double new_prob){
     prob = new_prob;
 }
+
+
+void Player::set_loc(location new_loc){
+    loc = new_loc;
+}

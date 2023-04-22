@@ -156,7 +156,7 @@ bool keyboard_game(int talent_mult,int difficulty=30){
 }
 
 
-Player attack(Player player, Monster monster){
+Player attack(Player player, Monster monster, int count){
     while (true){
         if (player.get_HP() <= 0 || monster.get_HP() <= 0){
 
@@ -180,7 +180,7 @@ Player attack(Player player, Monster monster){
             
             cout << endl;
             cout << "Press any key to fight" << endl;
-            keyboard_game(player.talent.mult);
+            keyboard_game(player.talent.mult,  30+10*(count));
             cout << endl;
 
             player.update_HP( (-1) * monster.attack());
@@ -190,7 +190,7 @@ Player attack(Player player, Monster monster){
 }
 
 
-Player countdown(Player player, int& count, Map map) {
+Player countdown(Player player, Map map, int count) {
     clock_t start = clock();
     int seconds = 5;
     bool input = false;
@@ -221,9 +221,9 @@ Player countdown(Player player, int& count, Map map) {
     if (input) {
         if (choice == 'Y' || choice == 'y') {
             cout<<"Press as many as 'f' as you can to win an reward!!!";
-            win = keyboard_game(player.mult, 30+10*(count_diff));
+            win = keyboard_game(player.mult, 30+10*(count));
             if (win == true){
-                count_diff++;
+                count++;
                 player = map.box(player);
             }
 
@@ -243,7 +243,8 @@ Player countdown(Player player, int& count, Map map) {
     }
 }
 
-void randomFunction(int talent_mult) {
+
+void randomFunction(int talent_mult, int count) {
     srand(time(0));
     int randomNum = rand() % 4 + 1;
     bool win = false;
@@ -259,9 +260,9 @@ void randomFunction(int talent_mult) {
             rpsgame;
             break;
         case 4:
-            win = keyboard_game(talent_mult, 30+count_diff*10);
+            win = keyboard_game(talent_mult, 30+count*10);
             if (win){
-                count_diff++;
+                count++;
             }
             break;
     }

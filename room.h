@@ -11,7 +11,9 @@
 #include <iomanip>
 #include <unistd.h>
 
+#include "game.h"
 #include "player.h"
+#include "monster.h"
 #include "base.h"
 
 using namespace std;
@@ -31,7 +33,7 @@ Player room5_Letter(Player player);
 Player room6(Player player);
 Player room7(Player player);
 Player room7_secretdoor(Player player);
-Player room7_window(Player player,Monster monster);
+Player room7_window(Player player,Monster monster, int count);
 Player room8(Player player);
 Player room9(Player player);
 Player room10_secretdoor(Player player);

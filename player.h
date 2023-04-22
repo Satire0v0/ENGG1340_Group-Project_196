@@ -64,6 +64,8 @@ class Player: public Talent
         void set_maxHP(int new_maxHP);
         
         void set_prob(double new_prob);
+
+        void set_loc(location new_loc);
 };
 
 #endif

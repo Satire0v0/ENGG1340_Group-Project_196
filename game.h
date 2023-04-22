@@ -23,11 +23,11 @@ class Player;
 
 using namespace std;
 bool rpsgame();
-bool guess_die();
+bool guess_dice();
 bool number_guess();
 bool keyboard_game(int talent_mult,int difficulty);
-void countdown();
-Player attack(Player player, Monster monster);
-void randomFunction(int talent_mult, int& count);
+Player countdown(Player player, Map map, int count);
+Player attack(Player player, Monster monster, int count);
+void randomFunction(int talent_mult, int count);
 
 #endif

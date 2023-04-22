@@ -215,7 +215,7 @@ location explain_input(char word, Player &player, Map &map){
         }
         else if (choice == "read")
         {
-            loc = export_data(map);
+            loc = export_data(player,map);
             //cout << loc.row << " " << loc.col << " loc row col after export data\n";
             //sleep(2);
         }
