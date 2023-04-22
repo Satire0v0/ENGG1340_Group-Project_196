@@ -185,23 +185,23 @@ player box(player player){
     cout << endl ;
     switch(result[choice-1]){
         case reward1:{
-            player.HP+=100;
+            player.HP+=50;
             break;
         }
         case reward2:{
-            player.ATK+=10;
+            player.ATK+=5;
             break;
         }
         case reward3:{
-            player.Prob+=0.05;
+            player.Prob+=0.005;
             break;
         }
         case reward4:{
-            player.maxHP+=50;
+            player.maxHP+=25;
             break;
         }
         case reward5:{
-            player.DEF+=10;
+            player.DEF+=5;
             break;
         }
     }
