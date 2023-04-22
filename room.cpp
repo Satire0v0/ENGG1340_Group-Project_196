@@ -358,8 +358,3 @@ Player room13(Player player){
     cin >> choiceroom13;
     return player;
 }
-
-int main(){
-    Player player;
-    room13(player);
-}
