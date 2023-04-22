@@ -185,6 +185,7 @@ Player train5(Player player){
     }
 }
 Player room1(Player player){
+    cout<<"this is readme"<<endl;
     // readme
     return player;
 }
