@@ -11,7 +11,7 @@ struct Talent{
         int mult;
         bool vision;
         bool supernightvision;
-      //maxHP,DEF,翻倍的实现形式:player.atk*=2
+      //maxHP,DEF,翻倍的实现形式:player.set_ATK(player.get_ATK() * 2);
     
 };
 
