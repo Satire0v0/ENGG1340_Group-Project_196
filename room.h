@@ -26,11 +26,15 @@ Player room2(Player player);
 Player room3(Player player);
 Player room4(Player player);
 Player room5(Player player);
+Player room5_Hidden(Player player);
+Player room5_Letter(Player player);
 Player room6(Player player);
 Player room7(Player player);
+Player room7_secretdoor(Player player);
+Player room7_window(Player player,Monster monster);
 Player room8(Player player);
 Player room9(Player player);
-Player room10(Player player);
+Player room10_secretdoor(Player player);
 Player room11(Player player);
 Player room13(Player player);
 
