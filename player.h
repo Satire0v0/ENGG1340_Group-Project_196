@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "global.h"
+#include "base.h"
 #include <iostream>
 using namespace std;
 
