@@ -54,6 +54,16 @@ class Player: public Talent
         void show_info();
         
         int attack();
+
+        void set_ATK(int new_ATK);
+
+        void set_HP(int new_HP);
+
+        void set_DEF(int new_DEF);
+
+        void set_maxHP(int new_maxHP);
+        
+        void set_prob(double new_prob);
 };
 
 #endif

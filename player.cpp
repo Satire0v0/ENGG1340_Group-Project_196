@@ -80,3 +80,23 @@ int Player::attack(){
         return 0;
     }
 }
+
+void Player::set_ATK(int new_ATK){
+    ATK = new_ATK;
+}
+
+void Player::set_HP(int new_HP){
+    HP = new_HP;
+}
+
+void Player::set_DEF(int new_DEF){
+    DEF = new_DEF;
+}
+
+void Player::set_maxHP(int new_maxHP){
+    maxHP = new_maxHP;
+}
+        
+void Player::set_prob(double new_prob){
+    prob = new_prob;
+}
