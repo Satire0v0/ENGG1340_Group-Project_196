@@ -2,14 +2,11 @@
 #define PLAYER_H
 
 #include "global.h"
-#include "base.h"
 #include <iostream>
 using namespace std;
 
 struct Talent{
-    public:
         void set(int mult_val, bool vision_val);
-    protected:
         int mult;
         bool vision;
       //maxHP,DEF,翻倍的实现形式:player.atk*=2
