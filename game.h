@@ -3,6 +3,9 @@
 
 #include "player.h"
 #include "monster.h"
+#include "global.h"
+#include "map.h"
+
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
@@ -11,6 +14,7 @@
 #include <string>
 #include <termios.h>
 #include <unistd.h>
+
 //rpsgame returns an integer value representing the winning status of the game
 //if there is a draw, the game will continue untill the player wins or loses
 
@@ -24,4 +28,6 @@ bool number_guess();
 bool keyboard_game(int talent_mult,int difficulty);
 void countdown();
 Player attack(Player player, Monster monster);
+void randomFunction(int talent_mult, int& count);
+
 #endif

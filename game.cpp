@@ -1,12 +1,12 @@
 #include "game.h"
 
-
 using namespace std;
 
 
 struct gamestatus{
     bool win=false;
 };
+
 
 bool rpsgame(){
     int userChoice, computerChoice;
@@ -111,6 +111,7 @@ bool number_guess(){
     return numberbomb.win;
 }
 
+
 int getch() {
     struct termios oldt, newt;
     int ch;
@@ -122,6 +123,8 @@ int getch() {
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
     return ch;
 }
+
+
 bool keyboard_game(int talent_mult,int difficulty=30){
     gamestatus kb;
     int multiple = talent_mult;
@@ -151,6 +154,7 @@ bool keyboard_game(int talent_mult,int difficulty=30){
     }
     return kb.win;
 }
+
 
 Player attack(Player player, Monster monster){
     while (true){
@@ -184,16 +188,22 @@ Player attack(Player player, Monster monster){
         }   
     }
 }
-void countdown() {
+
+
+Player countdown(Player player, int& count, Map map) {
     clock_t start = clock();
     int seconds = 5;
     bool input = false;
     char choice;
     struct termios oldt, newt;
+    
+    bool win = false;
+
     tcgetattr(STDIN_FILENO, &oldt);
     newt = oldt;
     newt.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+
     while (seconds > 0) {
         if ((clock() - start) / CLOCKS_PER_SEC >= 1) {
             cout << seconds << endl;
@@ -205,24 +215,39 @@ void countdown() {
             break;
         }
     }
+
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+
     if (input) {
         if (choice == 'Y' || choice == 'y') {
             cout<<"Press as many as 'f' as you can to win an reward!!!";
-            keyboard_game(0, 50);
+            win = keyboard_game(player.mult, 30+10*(count_diff));
+            if (win == true){
+                count_diff++;
+                player = map.box(player);
+            }
+
         } else if (choice == 'N' || choice == 'n') {
             cout << "Good luck!!!" << endl;
         } else {
             cout << "Invalid input" << endl;
         }
+
+        return player;
+
     } else {
         cout << "No input detected" << endl;
         cout << "Good luck!!!"<<endl;
+
+        return player;
     }
 }
-void randomFunction() {
+
+void randomFunction(int talent_mult) {
     srand(time(0));
     int randomNum = rand() % 4 + 1;
+    bool win = false;
+
     switch(randomNum) {
         case 1:
             number_guess();
@@ -234,8 +259,10 @@ void randomFunction() {
             rpsgame;
             break;
         case 4:
-            keyboard_game();
+            win = keyboard_game(talent_mult, 30+count_diff*10);
+            if (win){
+                count_diff++;
+            }
             break;
     }
 }
-

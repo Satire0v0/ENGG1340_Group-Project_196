@@ -14,4 +14,6 @@ struct size {
     int height;
 };
 
+int count_diff=0;
+
 #endif
