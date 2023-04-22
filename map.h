@@ -78,6 +78,7 @@ class Map{
         size count_size();
         void map_reading();
         void generate_empty_map();
+        void map_saving();
 
 
 

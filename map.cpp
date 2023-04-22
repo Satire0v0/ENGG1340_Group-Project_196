@@ -184,15 +184,15 @@ Player box(Player player){
     cin >> choice;
     cout << endl ;
     if (result[choice-1]==reward1){
-        player.HP+=100;
+        player.update_HP(100);
     }else if (result[choice-1]==reward2){
-        player.ATK+=10;
+        player.update_ATK(10);
     }else if (result[choice-1]==reward3){
         player.Prob+=0.05;
     }else if (result[choice-1]==reward4){
-        player.maxHP+=50;
-    }else if (result[choice-1]=r=eward5){
-        player.DEF+=10
+        player.update_maxHP(50);
+    }else if (result[choice-1]==reward5){
+        player.update_DEF(10);
     }
     cout <<"--------------------------"<<endl;
     cout << "Good LUCK!!!"<<endl;

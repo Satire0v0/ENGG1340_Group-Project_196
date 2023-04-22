@@ -57,6 +57,14 @@ void Player::update_maxHP(int val){
 }
 
 
+int Player::get_prob(){
+    return prob;
+}
+
+void Player::update_prob(int val){
+    prob += val;
+}
+
 void Player::show_info(){
     cout << "Player -> ";
     cout << "HP: " << HP << "/" << maxHP << " | ";

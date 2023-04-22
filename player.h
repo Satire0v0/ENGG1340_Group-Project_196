@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "global.h"
+#include "base.h"
 #include <iostream>
 using namespace std;
 
@@ -9,6 +10,7 @@ struct Talent{
         void set(int mult_val, bool vision_val);
         int mult;
         bool vision;
+        bool supernightvision;
       //maxHP,DEF,翻倍的实现形式:player.atk*=2
     
 };
@@ -45,6 +47,9 @@ class Player: public Talent
 
         int get_maxHP();
         void update_maxHP(int val);
+
+        int get_prob();
+        void update_prob(int val);
 
         void show_info();
         
