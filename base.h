@@ -13,9 +13,8 @@ This file contains the functions that all the other files need to use.
 #include <termio.h>
 #include <stdio.h>
 #include "global.h"
-/*
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-*/
+#include "player.h"
+#include "map.h"
 #include "saving.h"
 #include <cstdlib>
 
