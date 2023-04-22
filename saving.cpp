@@ -32,11 +32,15 @@ void save_data(Player &player, Map &map)
     } 
 }
 
-location export_data(Map &map)
+location export_data(Player &player, Map &map)
 {
     ifstream saveFile; 
     saveFile.open("saving.txt");
-    location loc;
+    location loc, player_loc;
+    int temp;
+    double temp1;
+    string weapon;
+    bool vision, supernightvision;
     loc.row = 0;
     loc.col = 0;
     if (saveFile.fail()){
@@ -49,13 +53,24 @@ location export_data(Map &map)
         double HP, Attack;
         saveFile >> loc.row;
         saveFile >> loc.col;
-        saveFile >> mapsize.height;
-        saveFile >> mapsize.width;
-        saveFile >> HP;
-        saveFile >> Attack;
+        player_loc = player.get_loc();
+        loc.row -= player_loc.row;
+        loc.col -= player_loc.col;
+        player.update_loc(loc);
+        saveFile >> temp;
+        player.set_HP(temp);
+        saveFile >> temp;
+        player.set_ATK(temp);
+        saveFile >> temp;
+        player.set_maxHP(temp);
+        saveFile >> temp1;
+        player.set_prob(temp1);
+        saveFile >> weapon;
+        player.update_weapon(weapon);
+        saveFile >> temp >> vision >> supernightvision;
+        player.talent.set(temp, vision, supernightvision);
         //cout << loc.row << " " << loc.col << " loc row col in saving.txt\n";
         map.map_reading();
-        sleep(2);
         return loc;
     }
     return loc;
