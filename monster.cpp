@@ -18,21 +18,11 @@ void Monster::show_info(){
 } 
 
 
-void Monster::update(int more_HP=0, int more_ATK=0, int more_maxHP=0){
-    
-    // HP
-    if ((HP + more_HP) > maxHP){
-        HP = maxHP;
-    }
-    else{
-        HP += more_HP;
-    }
-
-    // ATK
-    ATK += more_ATK;
-
-    // maxHP
-    maxHP += more_maxHP;
+void Monster::set(int new_HP, int new_ATK, int new_maxHP, int new_prob){
+    HP = new_HP;
+    ATK = new_ATK;
+    maxHP = new_maxHP;
+    prob = new_prob;
 }
 
 
