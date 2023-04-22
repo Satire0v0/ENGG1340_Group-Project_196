@@ -11,5 +11,6 @@ bool rpsgame();
 bool guess_die();
 bool number_guess();
 bool keyboard(int player.talent.mult,int difficulty);
+void countdown();
 Player attack(Player player, Monster monster);
 #endif
