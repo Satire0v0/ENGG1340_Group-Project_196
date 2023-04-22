@@ -1,11 +1,3 @@
-#include <iostream>
-#include <stdlib.h>
-#include <time.h>
-#include <cstdlib>
-#include <ctime>
-#include <string>
-#include <termios.h>
-#include <unistd.h>
 #include "game.h"
 
 
@@ -15,6 +7,7 @@ using namespace std;
 struct gamestatus{
     bool win=false;
 };
+
 bool rpsgame(){
     int userChoice, computerChoice;
     gamestatus rps;
@@ -129,9 +122,9 @@ int getch() {
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
     return ch;
 }
-bool keyboard(int player.talent.mult,int difficulty=60){
+bool keyboard_game(int talent_mult,int difficulty=60){
     gamestatus kb;
-    int multiple = player.talent.mult;
+    int multiple = talent_mult;
     int count = 0;
     time_t start = time(0);
 
@@ -156,7 +149,7 @@ bool keyboard(int player.talent.mult,int difficulty=60){
         cout << "You lose!" << endl;
         kb.win=false;
     }
-    return kb
+    return kb.win;
 }
 
 Player attack(Player player, Monster monster){
@@ -183,11 +176,11 @@ Player attack(Player player, Monster monster){
             
             cout << endl;
             cout << "Press any key to fight" << endl;
-            keyboard();
+            keyboard_game(player.talent.mult);
             cout << endl;
 
-            player.update( (-1) * monster.attack(), 0, 0 );
-            monster.update( (-1) * player.attack(), 0, 0 );
+            player.update_HP( (-1) * monster.attack());
+            monster.set(monster.get_HP() + (-1) * player.attack(), monster.get_maxHP(), monster.get_ATK(), monster.get_prob());
         }   
     }
 }
@@ -215,8 +208,8 @@ void countdown() {
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
     if (input) {
         if (choice == 'Y' || choice == 'y') {
-            cout<<"Press as many as 'f' as you can to win an reward!!!"
-            keyboard(difficulty);
+            cout<<"Press as many as 'f' as you can to win an reward!!!";
+            keyboard_game(0, 50);
         } else if (choice == 'N' || choice == 'n') {
             cout << "Good luck!!!" << endl;
         } else {

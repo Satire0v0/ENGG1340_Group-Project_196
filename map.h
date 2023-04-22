@@ -13,18 +13,8 @@
 
 using namespace std;
 
-string reward1="|||    Treat your injury, HP+20     |||";
-string reward2="|||             ATTACK+5            |||";
-string reward3="||| Increase your accuracy, Prob+0.005 |||";
-string reward4="||| Raise your maximum health by 50 points, maxHP+25 |||";
-string reward5="|||   Increase your defence, DEF+5  |||";
-string vision= "(Get a night vision device and you can always see hidden objects around you within a 3*3 range)";
-string multiple="(The number of the count will be increased by 1 when you press the 'F' button once )";
-string maxhp="Your maxHP will be doubled";
-string doubleatk="Your ATK will be doubled";
-string doubledef="Your DEF will be doubled";
-string accurate="(Accurate attack)Your prob will always be 1";
-string supernightvision= "(Supernightvision) You can see all the hidden objects in the map.";
+class Player;
+
 class Map{
     private:
         int MAP_WIDTH;

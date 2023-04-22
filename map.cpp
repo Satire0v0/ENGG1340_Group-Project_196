@@ -1,5 +1,17 @@
 #include "map.h"
 
+string reward1="|||    Treat your injury, HP+20     |||";
+string reward2="|||             ATTACK+5            |||";
+string reward3="||| Increase your accuracy, Prob+0.005 |||";
+string reward4="||| Raise your maximum health by 50 points, maxHP+25 |||";
+string reward5="|||   Increase your defence, DEF+5  |||";
+string vision= "(Get a night vision device and you can always see hidden objects around you within a 3*3 range)";
+string multiple="(The number of the count will be increased by 1 when you press the 'F' button once )";
+string maxhp="Your maxHP will be doubled";
+string doubleatk="Your ATK will be doubled";
+string doubledef="Your DEF will be doubled";
+string accurate="(Accurate attack)Your prob will always be 1";
+string supernightvision= "(Supernightvision) You can see all the hidden objects in the map.";
 
 void Map::initialize(){
     size map_size;
@@ -29,7 +41,7 @@ void Map::print_map(Player player){
     col=player.get_loc().col;
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
-            if (player.talent.vision==true){  //this is for the nightvision talent
+            if (player.talent.vision==true){  //this is for the nightvision talen
                 if (((y==row-1)&&(x==col-1))||((y==row-1)&&(x==col))||((y==row-1)&&(x==col+1))||((y==row)&&(x==col-1))||((y==row)&&(x==col+1))||((y==row+1)&&(x==col-1))||((y==row+1)&&(x==col))||((y==row+1)&&(x==col+1))){
                     cout << map[y][x];
                 }else{
@@ -76,6 +88,30 @@ void Map::map_saving(){
         saveMap << "END";
     }
     
+}
+
+void Map::map_reading(){
+    ifstream readMap;
+    string line;
+    int y=0;
+    readMap.open("savedMap.txt");
+    if (readMap.fail()){
+        cout << "Error opening savedMap.txt \n";
+        exit(0);
+    }
+    else{
+        // Read the line from the map
+        // As there is space, it has better to use getline(mapFile, line);
+        getline(readMap, line);
+        while (line != "END") {
+            // Write into the map
+            for (int x=0; x<MAP_WIDTH; x++) {
+                map[y][x] = line[x];
+            }
+            getline(readMap, line);
+            y++;
+        }
+    }
 }
 
 void Map::read_map(){
@@ -174,13 +210,13 @@ size Map::count_size(){
     return map_size;
 }
 
-vector<string> selectRewards(vector<string> rewards) {
+vector<string> Map::selectRewards(vector<string> rewards) {
     srand(time(nullptr));
     random_shuffle(rewards.begin(), rewards.end());
     return vector<string>(rewards.begin(), rewards.begin() + 3);
 }
 
-Player box(Player player){
+Player Map::box(Player player){
 
     int choice, r=1;
     cout << "--------------------------"<<endl;
@@ -209,7 +245,7 @@ Player box(Player player){
     return player;
 }
 
-Player hiddenbox(Player player){
+Player Map::hiddenbox(Player player){
 
     int choice, r=1;
     cout << "--------------------------"<<endl;
