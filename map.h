@@ -75,17 +75,10 @@ class Map{
         vector<string> selectRewards(vector<string> rewards);
         Player hiddenbox(Player player);
         Player box(Player player);
-        //*****addition*****
         size count_size();
-        //*****addition*****
-        
         void map_reading();
-        //*****delete*****
         void generate_empty_map();
-        //void update_whole(char new_map[200][200]);
-        //int count_height();
-        //int count_width();
-        //*****delete*****
+
 
 
         

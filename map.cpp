@@ -25,8 +25,8 @@ void Map::initialize(){
 
 void Map::print_map(Player player){
     int row, col;
-    row=player.getloc().row;
-    col=player.getloc().col;
+    row=player.get_loc().row;
+    col=player.get_loc().col;
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
             if (player.talent.vision==true){  //this is for the nightvision talent
