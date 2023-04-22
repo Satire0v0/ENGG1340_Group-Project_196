@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "player.h"
+#include "monster.h"
 //rpsgame returns an integer value representing the winning status of the game
 //if there is a draw, the game will continue untill the player wins or loses
 
