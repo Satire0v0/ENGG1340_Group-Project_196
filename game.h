@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "player.h"
 //rpsgame returns an integer value representing the winning status of the game
 //if there is a draw, the game will continue untill the player wins or loses
 
@@ -9,4 +10,5 @@ bool rpsgame();
 bool guess_die();
 bool number_guess();
 bool keyboard(int player.talent.mult,int difficulty);
+Player attack(Player player, Monster monster);
 #endif
