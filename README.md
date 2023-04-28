@@ -1,4 +1,6 @@
 # Rogue
-========
+==
 
 --------
+##Gaming process
+
