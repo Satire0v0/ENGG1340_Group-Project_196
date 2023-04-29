@@ -54,6 +54,14 @@ int main(){
         
         while (true){
             clear_screen();
+
+            // after transferring the player
+            if (current_block == 'O'){
+                map.update_block(player.get_loc(), current_block);
+                current_block = ' ';
+            }
+
+            // continue
             // map_printing
             if (player.talent.super_vision == true) map.super_vision_print();
             else if (player.talent.vision == true) map.vision_print(player.get_loc());
@@ -64,19 +72,18 @@ int main(){
 
             cout << endl;
             cout << "******  press 'h' to see the hint | 'e' to stop the game | 'q' to save archive ******" << endl;
-
-            if (current_block == 'O'){
-                map.update_block(player.get_loc(), current_block);
-            }
             
             userInput = keyboard();
             move_loc = explain_input(userInput, player, map);
 
             moving_result = map.check_block(move_loc, player.get_loc());
+
             // if not wall or no_update, then the map can update
             if (moving_result != "wall" && moving_result != "no_update"){
                 map.update_block(player.get_loc(), current_block); // change the block at player_loc
                 player.update_loc(move_loc); // player moves forward
+
+                // as player will be transferred directly
                 if (moving_result == "5"){
                     map.update_block(player.get_loc(), ' ');
                 }
