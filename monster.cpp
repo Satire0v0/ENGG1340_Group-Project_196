@@ -18,7 +18,7 @@ int Monster::get_maxHP(){
     return maxHP;
 }
 
-int Monster::get_prob(){
+double Monster::get_prob(){
     return prob;
 }
 

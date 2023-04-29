@@ -35,8 +35,8 @@ int main(){
     if (choice == "read"){
         export_data(player, map);
         map.generate_player(player.get_loc());
-
     }
+    
     else if (choice == "new"){
         if (skip_slot() == false){
             player = train1(player);
@@ -44,6 +44,7 @@ int main(){
         
         map.initialize();
         map.generate_player(player.get_loc());
+        
     }
     
     while (true){

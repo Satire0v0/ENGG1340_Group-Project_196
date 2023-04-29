@@ -69,7 +69,7 @@ void Player::update_maxHP(int val){
 }
 
 
-int Player::get_prob(){
+double Player::get_prob(){
     return prob;
 }
 

@@ -25,8 +25,8 @@ class Map{
         char WALL = '%';
         char EMPTY = ' ';
         char PLAYER = 'O';
-        char BIG_MONSTER = 'm';
-        char SMALL_MONSTER = 'M';
+        char BIG_MONSTER = 'M';
+        char SMALL_MONSTER = 'm';
         char BOX = '$';
         char HIDDEN_BOX = '*'; // invisible
         char HIDDEN_MONSTER = '@'; // invisible
