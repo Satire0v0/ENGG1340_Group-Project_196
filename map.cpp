@@ -12,6 +12,7 @@ string vision= "Get a night vision device and you can always see hidden objects 
 string multiple="The number of the count will be increased by 1 when you play the keyboard game";
 string maxhp="Your maxHP will be doubled";
 string doubleatk="Your ATK will be doubled";
+string doublehp="Your HP will be doubkled,but can not exceed your maxHP.";
 string doubledef="Your DEF will be doubled";
 string accurate="(Accurate attack) Your prob will always be 1";
 string supernightvision= "(Supernightvision) You can see all the hidden objects in the map.";
@@ -193,12 +194,6 @@ string Map::check_block(location move_loc, location player_loc){
     else if (map[row][col] == TRANSFER){
         return "?";
     }
-    else if (map[row][col] == END){
-        return "E";
-    }
-    else if (map[row][col] == HIDDEN_LETTER){
-        return "L";
-    }
     else{
         return "no_update";
     }
@@ -363,12 +358,6 @@ Player Map::box(Player player){
 
 
 Player Map::hiddenbox(Player player){
-    
-    cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"<<endl;
-    sleep(1);
-    cout << "You find a hidden box!!!"<<endl;
-    sleep(1);
-    clear_screen();
     string title = "Choose 1 talent !!!";
     int num_of_separator = 0, choice;
     vector<string> talents = {multiple,maxhp,doubleatk,doubledef,vision,accurate,doublehp};
