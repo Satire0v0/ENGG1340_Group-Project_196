@@ -331,7 +331,7 @@ Player randomFunction(Player player, int talent_mult, int count) {
             }
             else{
                 cout << "You wake up from yelling. You feel more tired" << endl;
-                player.update_HP(-10);
+                player.set_HP(player.get_HP()-10);
             }
             break;
         case 2:
@@ -340,7 +340,7 @@ Player randomFunction(Player player, int talent_mult, int count) {
             }
             else{
                 cout << "You wake up from yelling. You feel more tired" << endl;
-                player.update_HP(-10);
+                player.set_HP(player.get_HP()-10);
             }
             break;
         case 3:
@@ -349,7 +349,7 @@ Player randomFunction(Player player, int talent_mult, int count) {
             }
             else{
                 cout << "You wake up from yelling. You feel more tired" << endl;
-                player.update_HP(-10);
+                player.set_HP(player.get_HP()-10);
             }
             break;
         case 4:
@@ -359,7 +359,7 @@ Player randomFunction(Player player, int talent_mult, int count) {
             }
             else{
                 cout << "You wake up from yelling. You feel more tired" << endl;
-                player.update_HP(-10);
+                player.set_HP(player.get_HP()-10);
             }
             break;
     }
