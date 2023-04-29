@@ -53,20 +53,30 @@ class Map{
         char** map;
     
     public:
-
-        Player box(Player player);
-        Player hiddenbox(Player player);
+        // basic
         void initialize();
-        void print_map(Player player);
-        void read_map();
+        void print_map();
+        void read_map(string fileName);
         void update_block(location loc, char block);
         void generate_player(location player_loc);
         string check_block(location move_loc, location player_loc);
+        void count_size(string fileName);
+        void empty_map();
+
+        // reward
         vector<string> selectRewards(vector<string> rewards);
-        size count_size();
-        void map_reading();
-        void generate_empty_map();
+
+        // box
+        Player box(Player player);
+        Player hiddenbox(Player player);
+
+        // reward triggers
+        void vision_print(location player_loc);
+        void super_vision_print();
+
+        // store map
         void map_saving();
+        // void map_reading();
 
 
 
