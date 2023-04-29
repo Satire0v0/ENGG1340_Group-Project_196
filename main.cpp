@@ -29,6 +29,7 @@ int main(){
     
     /*Start Game*/
     while (true){
+        bool newGame = true;
         // New Game or Read Old Game?
         string choice = read_choice();
         

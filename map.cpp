@@ -174,6 +174,12 @@ string Map::check_block(location move_loc, location player_loc){
     else if (map[row][col] == HIDDEN_MONSTER){
         return "hidden_monster";
     }
+    else if (map[row][col] == TEN){
+        return "A";
+    }
+    else if (map[row][col] == ELEVEN){
+        return "B";
+    }
     else{
         return "no_update";
     }
