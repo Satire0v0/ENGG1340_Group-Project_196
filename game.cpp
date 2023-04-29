@@ -125,39 +125,84 @@ int getch() {
 }
 
 
+bool start_game(){
+    string choice;
+    vector<string> ans;
+    ans.push_back("yes");
+    ans.push_back("y");
+    ans.push_back("no");
+    ans.push_back("n");
+
+    while (true){
+        clear_screen();
+        cout << "Want to start? (yes / no)" << endl;
+        cout << endl;
+        cout << "Your choice -> ";
+        choice = get_word();
+        choice = to_lower(choice);
+
+        for (int i=0; i<ans.size(); i++){
+        // find whether input is in the range
+            if (choice == ans[i]){
+                if (choice == "no" || choice == "n"){
+                    return false;
+                }
+                else if (choice == "yes" || choice == "y"){
+                    return true;
+                }
+            }
+        }
+    }
+}
+
+
 bool keyboard_game(int talent_mult,int difficulty=30){
     gamestatus kb;
     int multiple = talent_mult;
     int count = 0;
     time_t start = time(0);
 
-    cout << "Press f as many times as you can in 5 seconds! You need to press "<<difficulty<<"times to win!" << endl;
+    cout << "Press f as many times as you can in 5 seconds! You need to press "<< difficulty <<" times to win!" << endl;
 
-    while (true) {
-        char ch = getch();
-        if (ch == 'f') {
-            count += multiple;
-            cout << count << endl;
+    cout << endl;
+    if (not start_game()) return true;
+    else{
+        cout << endl;
+
+        while (true) {
+
+            if (time(0) - start >= 5) {
+                cout << "Game over" << endl;
+                cout << "You have pressed " << count << " times." << endl;
+                cout << endl;
+                break;
+            }
+
+            char ch = getch();
+            if (ch == 'f') {
+                count += multiple;
+                cout << count << endl;
+            }
         }
 
-        if (time(0) - start >= 5) {
-            break;
+        if (count > difficulty){
+            cout << "You win!" << endl;
+            kb.win=true;
         }
+        else{
+            cout << "You lose!" << endl;
+            kb.win=false;
+        }
+        return kb.win;
     }
 
-    if (count > difficulty) {
-        cout << "You win!" << endl;
-        kb.win=true;
-    } else {
-        cout << "You lose!" << endl;
-        kb.win=false;
-    }
-    return kb.win;
 }
 
 
-Player attack(Player player, Monster monster, int count){
+Player attack(Player player, Monster monster, int diff_level){
+    // fight starts
     while (true){
+        // when HP is 0, fight is over
         if (player.get_HP() <= 0 || monster.get_HP() <= 0){
 
             while (true){
@@ -167,6 +212,12 @@ Player attack(Player player, Monster monster, int count){
                 monster.show_info();
                 cout << endl;
 
+                if (player.get_HP() > 0){
+                    cout << "Now you will have a keyboard game" << endl;
+                    cout << endl;
+                    keyboard_game(player.talent.mult,  30+10*(diff_level));
+                }
+
                 if (leave_or_not()){
                     return player;
                 }
@@ -174,17 +225,24 @@ Player attack(Player player, Monster monster, int count){
         }
         else{
             clear_screen();
+
+            // describe
+            cout << "Both players and monsters have a probability to hit each other" << endl;
+            cout << endl;
             
             player.show_info();
             monster.show_info();
             
             cout << endl;
+
             cout << "Press any key to fight" << endl;
-            keyboard_game(player.talent.mult,  30+10*(count));
-            cout << endl;
+            int user_input = scan_keyboard();
+
+            // 
+            // cout << endl;
 
             player.update_HP( (-1) * monster.attack());
-            monster.set(monster.get_HP() + (-1) * player.attack(), monster.get_maxHP(), monster.get_ATK(), monster.get_prob());
+            monster.update_HP( (-1) * player.attack());
         }   
     }
 }
@@ -221,7 +279,7 @@ Player countdown(Player player, Map map, int count) {
     if (input) {
         if (choice == 'Y' || choice == 'y') {
             cout<<"Press as many as 'f' as you can to win an reward!!!";
-            win = keyboard_game(player.mult, 30+10*(count));
+            win = keyboard_game(player.talent.mult, 30+10*(count));
             if (win == true){
                 count++;
                 player = map.box(player);
