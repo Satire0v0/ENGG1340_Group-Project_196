@@ -80,7 +80,20 @@ int main(){
 
             // player meets room
             if (meet_room(moving_result)){
+
+                location old_player_loc = player.get_loc();
+                location room_loc;
+                room_loc.row = old_player_loc.row + move_loc.row;
+                room_loc.col = old_player_loc.col + move_loc.col;
+                
                 player = trigger_room_slot(moving_result, player, big_monster, map, diff_level);
+
+                if (moving_result == "5"){
+                    map.update_block(room_loc, ' ');
+                    current_block = 'O';
+                    move_loc = {0, 0};
+                }
+
                 current_block = ' ';
             }
             // meeting small monster, attack() occurs
