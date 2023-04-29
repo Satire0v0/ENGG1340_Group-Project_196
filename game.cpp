@@ -165,38 +165,34 @@ bool keyboard_game(int talent_mult,int difficulty=30){
     cout << "Press f as many times as you can in 5 seconds! You need to press "<< difficulty <<" times to win!" << endl;
 
     cout << endl;
-    if (not start_game()) return true;
-    else{
-        cout << endl;
 
-        while (true) {
+    while (true) {
 
-            if (time(0) - start >= 5) {
-                cout << "Game over" << endl;
-                cout << "You have pressed " << count << " times." << endl;
-                cout << endl;
-                break;
-            }
-
-            char ch = getch();
-            if (ch == 'f') {
-                count += multiple;
-                cout << count << endl;
-            }
+        if (time(0) - start >= 5) {
+            cout << "Game over" << endl;
+            cout << "You have pressed " << count << " times." << endl;
+            cout << endl;
+            break;
         }
 
-        if (count > difficulty){
-            cout << "You win!" << endl;
-            kb.win=true;
+        char ch = getch();
+        if (ch == 'f') {
+            count += multiple;
+            cout << count << endl;
         }
-        else{
-            cout << "You lose!" << endl;
-            kb.win=false;
-        }
-        return kb.win;
     }
 
+    if (count > difficulty){
+        cout << "You win!" << endl;
+        kb.win=true;
+    }
+    else{
+        cout << "You lose!" << endl;
+        kb.win=false;
+    }
+    return kb.win;
 }
+
 
 
 Player attack(Player player, Monster monster, int diff_level){
@@ -215,7 +211,7 @@ Player attack(Player player, Monster monster, int diff_level){
                 if (player.get_HP() > 0){
                     cout << "Now you will have a keyboard game" << endl;
                     cout << endl;
-                    keyboard_game(player.talent.mult,  30+10*(diff_level));
+                    countdown(Player, Map, diff_level);
                 }
 
                 if (leave_or_not()){
