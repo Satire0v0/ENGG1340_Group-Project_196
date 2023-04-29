@@ -112,17 +112,7 @@ bool number_guess(){
 }
 
 
-int getch() {
-    struct termios oldt, newt;
-    int ch;
-    tcgetattr(STDIN_FILENO, &oldt);
-    newt = oldt;
-    newt.c_lflag &= ~(ICANON | ECHO);
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    ch = getchar();
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-    return ch;
-}
+
 
 
 bool start_game(){
@@ -154,19 +144,36 @@ bool start_game(){
         }
     }
 }
+int getch() {
+    struct termios oldt, newt;
+    int ch;
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    ch = getchar();
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    return ch;
+}
 
 
 bool keyboard_game(int talent_mult,int difficulty=30){
     gamestatus kb;
     int multiple = talent_mult;
     int count = 0;
+    char leave;
     time_t start = time(0);
 
     cout << "Press f as many times as you can in 5 seconds! You need to press "<< difficulty <<" times to win!" << endl;
 
     cout << endl;
 
-    while (true) {
+    while (true){
+        char ch = getch();
+        if (ch == 'f') {
+            count += multiple;
+            cout << count << endl;
+        }
 
         if (time(0) - start >= 5) {
             cout << "Game over" << endl;
@@ -174,13 +181,9 @@ bool keyboard_game(int talent_mult,int difficulty=30){
             cout << endl;
             break;
         }
-
-        char ch = getch();
-        if (ch == 'f') {
-            count += multiple;
-            cout << count << endl;
-        }
     }
+
+    sleep(2);
 
     if (count > difficulty){
         cout << "You win!" << endl;
@@ -190,6 +193,7 @@ bool keyboard_game(int talent_mult,int difficulty=30){
         cout << "You lose!" << endl;
         kb.win=false;
     }
+    short_pause();
     return kb.win;
 }
 
@@ -212,9 +216,6 @@ Player attack(Player player, Monster monster, Map map, int diff_level){
                     cout << "Now you will have a keyboard game" << endl;
                     cout << endl;
                     player=countdown(player, map, diff_level);
-                }
-
-                if (leave_or_not()){
                     return player;
                 }
             }
@@ -244,55 +245,60 @@ Player attack(Player player, Monster monster, Map map, int diff_level){
 }
 
 
-char getch2(){
-    char buf=0;
-    struct termios old={0};
-    fflush(stdout);
-    if(tcgetattr(0, &old)<0)
-        perror("tcsetattr()");
-    old.c_lflag&=~ICANON;
-    old.c_lflag&=~ECHO;
-    old.c_cc[VMIN]=1;
-    old.c_cc[VTIME]=0;
-    if(tcsetattr(0, TCSANOW, &old)<0)
-        perror("tcsetattr ICANON");
-    if(read(0,&buf,1)<0)
-        perror("read()");
-    old.c_lflag|=ICANON;
-    old.c_lflag|=ECHO;
-    if(tcsetattr(0, TCSADRAIN, &old)<0)
-        perror("tcsetattr ~ICANON");
-    return buf;
- }
 Player countdown(Player player, Map map, int count) {
     bool win=false;
-    cout << "You have 5 seconds to choose yes or no (enter y or n): ";
-    for (int i = 5; i > 0; i--) {
-        cout << i << endl;
-        cout.flush();
-        sleep(1);
-    }
-    cout << endl;
+    char input;
+    bool judge;
 
-    char input = getch2();
-    if (input == 'Y' || input == 'y') {
+    vector<string> fixed_ans;
+    fixed_ans.push_back("yes");
+    fixed_ans.push_back("y");
+    fixed_ans.push_back("no");
+    fixed_ans.push_back("n");
+    string choice;
+
+
+    cout<<"Enter the reward stage (y/n) -> ";
+
+    while (true){
+        bool flag = false;
+        choice = get_word();
+        choice = to_lower(choice);
+
+        for (int i=0; i<fixed_ans.size(); i++){
+            if (choice == fixed_ans[i]){
+                if (choice == "yes" || choice == "y"){
+                    input = 'y';
+                    flag = true;
+                    break;
+                }
+                else if (choice == "no" || choice == "n"){
+                    input = 'n';
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        if (flag == true){
+            break;
+        }
+    }
+
+    if (input == 'y'){
         cout << "Press as many as ‘f’ as you can to win an reward!!!";
         win = keyboard_game(player.talent.mult, 30+10*(count));
         if (win == true){
                 count++;
                 player = map.box(player);
             }
-    } else if (input == 'N' || input == 'n') {
-        cout << "Good luck!!!";
         return player;
-    } else if (input == 0) {
-        cout << "No input detected" << endl;
-        cout << "Good luck!!!";
-        return player;
-    } else {
-        cout << "Invalid input ";
     }
-    return player;
+    else {
+        sleep(1);
+        cout << "Good luck!!!";
+        return player;
+    }
+
 }
 
 
