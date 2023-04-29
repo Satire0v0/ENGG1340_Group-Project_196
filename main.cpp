@@ -79,7 +79,6 @@ int main(){
                 map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
             }
                 
-            }
 
             // player meets room
             if (meet_room(moving_result)){
