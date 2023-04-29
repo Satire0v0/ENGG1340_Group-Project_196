@@ -32,7 +32,7 @@ bool keyboard_game(int talent_mult, int difficulty);
 Player countdown(Player player, Map map, int count);
 
 // normal fight
-Player attack(Player player, Monster monster, int diff_level);
+Player attack(Player player, Monster monster, Map map, int diff_level);
 
 // realize randomly choosing game
 void randomFunction(int talent_mult, int diff_level);

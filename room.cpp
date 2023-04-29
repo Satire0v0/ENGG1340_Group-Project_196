@@ -526,10 +526,10 @@ Player room7_secretdoor(Player player){ //room 7 #
     short_pause();
     return player;
 }
-Player room7_window(Player player, Monster monster, int count){// room 7 W
+Player room7_window(Player player, Monster monster, Map map, int count){// room 7 W
     clear_screen();
     cout << "As soon as you get to the window, a zombie rushes towards you..."<<endl;
-    player = attack(player, monster, count);//powerful monster
+    player = attack(player, monster, map, count);//powerful monster
 
     cout << endl;
     short_pause();

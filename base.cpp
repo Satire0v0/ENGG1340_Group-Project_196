@@ -321,7 +321,7 @@ bool meet_room(string moving_result){
     }
 }
 
-Player trigger_room_slot(string moving_result, Player player, Monster monster, int count){
+Player trigger_room_slot(string moving_result, Player player, Monster monster, Map map, int count){
     if (moving_result == "1")      player = room2(player);
     else if (moving_result == "2") player = room3(player);
     else if (moving_result == "3") player = room4(player);
@@ -335,7 +335,7 @@ Player trigger_room_slot(string moving_result, Player player, Monster monster, i
     else if (moving_result == "&") player = room5_Hidden(player);
     else if (moving_result == "L") player = room5_Letter(player);
     else if (moving_result == "9") player = room10_secretdoor(player);
-    else if (moving_result == "W") player = room7_window(player, monster, count);
+    else if (moving_result == "W") player = room7_window(player, monster, map, count);
     else if (moving_result == "room7_secret") player = room7_secretdoor(player);
     else if (moving_result == "room10_secret") player = room10_secretdoor(player);
     else if (moving_result == "#") player.set_loc({2,10});

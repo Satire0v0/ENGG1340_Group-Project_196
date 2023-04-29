@@ -195,7 +195,7 @@ bool keyboard_game(int talent_mult,int difficulty=30){
 
 
 
-Player attack(Player player, Monster monster, int diff_level){
+Player attack(Player player, Monster monster, Map map, int diff_level){
     // fight starts
     while (true){
         // when HP is 0, fight is over

@@ -49,7 +49,7 @@ location explain_input(char word, Player &player, Map &map);
 
 // slot functions in main.cpp
 bool meet_room(string moving_result);
-Player trigger_room_slot(string moving_result, Player player, Monster monster, int count);
+Player trigger_room_slot(string moving_result, Player player, Monster monster, Map map, int count);
 string read_choice();
 bool skip_slot();
 
