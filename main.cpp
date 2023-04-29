@@ -80,11 +80,12 @@ int main(){
 
             // if not wall or no_update, then the map can update
             if (moving_result != "wall" && moving_result != "no_update"){
+                
                 map.update_block(player.get_loc(), current_block); // change the block at player_loc
                 player.update_loc(move_loc); // player moves forward
 
                 // as player will be transferred directly
-                if (moving_result == "5"){
+                if (moving_result == "5" || moving_result == "#" || moving_result == "?"){
                     map.update_block(player.get_loc(), ' ');
                 }
                 else{
@@ -99,7 +100,7 @@ int main(){
             if (meet_room(moving_result)){
                 player = trigger_room_slot(moving_result, player, big_monster, map, diff_level);
                 
-                if (moving_result == "5"){
+                if (moving_result == "5" || moving_result == "#" || moving_result == "?"){
                     current_block = 'O';
                 }
                 else{
@@ -149,6 +150,7 @@ int main(){
                 Monster E;
                 E.set(1000,1000,800,0.25);
                 cout<< "a grotesque figure staggering towards you, its flesh rotting and dripping with blood. Its eyes are sunken and lifeless, its teeth yellow and jagged. It lets out a guttural roar that chills your bones, and lunges at you with its clawed hands. You barely have time to react as the zombie tries to bite your neck and rip you apart..."<<endl;
+                short_pause();
                 player = attack(player, E, map, diff_level);
             }
             // normal movement
@@ -162,6 +164,10 @@ int main(){
                 cout << "You have died" << endl;
                 cout << endl;
                 newGame = want_to_continue();
+
+                if (newGame){
+                    break;
+                }
             }
         }
 
