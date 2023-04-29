@@ -35,7 +35,7 @@ Player countdown(Player player, Map map, int count);
 Player attack(Player player, Monster monster, Map map, int diff_level);
 
 // realize randomly choosing game
-void randomFunction(int talent_mult, int diff_level);
+Player randomFunction(Player player, int talent_mult, int diff_level);
 
 #endif
 

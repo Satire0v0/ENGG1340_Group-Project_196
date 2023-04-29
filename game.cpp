@@ -319,26 +319,50 @@ Player countdown(Player player, Map map, int count) {
 }
 
 
-void randomFunction(int talent_mult, int count) {
+Player randomFunction(Player player, int talent_mult, int count) {
     srand(time(0));
     int randomNum = rand() % 4 + 1;
     bool win = false;
 
     switch(randomNum) {
         case 1:
-            number_guess();
+            if (number_guess()){
+                cout << "After a burst of vertigo, you wake up from where you were" << endl;
+            }
+            else{
+                cout << "You wake up from yelling. You feel more tired" << endl;
+                player.update_HP(-10);
+            }
             break;
         case 2:
-            guess_dice();
+            if (guess_dice()){
+                cout << "After a burst of vertigo, you wake up from where you were" << endl;
+            }
+            else{
+                cout << "You wake up from yelling. You feel more tired" << endl;
+                player.update_HP(-10);
+            }
             break;
         case 3:
-            rpsgame;
+            if (rpsgame()){
+                cout << "After a burst of vertigo, you wake up from where you were" << endl;
+            }
+            else{
+                cout << "You wake up from yelling. You feel more tired" << endl;
+                player.update_HP(-10);
+            }
             break;
         case 4:
             win = keyboard_game(talent_mult, 30+count*10);
             if (win){
-                count++;
+                cout << "After a burst of vertigo, you wake up from where you were" << endl;
+            }
+            else{
+                cout << "You wake up from yelling. You feel more tired" << endl;
+                player.update_HP(-10);
             }
             break;
     }
+    short_pause();
+    return player;
 }
