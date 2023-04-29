@@ -1,12 +1,12 @@
 #include "base.h"
 #include "global.h"
-#include <unistd.h>
 #include "map.h"
 #include "player.h"
 #include "saving.h"
 #include "monster.h"
 #include "game.h"
 #include "room.h"
+#include <unistd.h>
 
 using namespace std;
 
@@ -18,120 +18,109 @@ int main(){
     Monster small_monster;
     Monster big_monster;
 
-    // Variable declaration
-    int count=0;
-    string moving_result; // used for monitoring the special char encountered by player
+    // Variable declaration for game operation
+    int diff_level = 0; // upgrade with time
+    string moving_result; // used for monitoring the special char endiff_levelered by player
     location move_loc;
 
     char userInput;
-    char block=' ';
+    char current_block=' ';
+    player.talent.set(1, 1, false, false);
     
-    cout << "Enter 'read' to read archive or enter 'new' to start new game \n";
-    string choice;
-    cin >> choice;
-    if (choice == "read")
-    {
+    /*Start Game*/
+
+    // New Game or Read Old Game?
+    string choice = read_choice();
+    
+    if (choice == "read"){
         export_data(player, map);
+        map.generate_player(player.get_loc());
     }
-    else if (choice == "new")
-    {
-    // start the game
+    else if (choice == "new"){
+        if (skip_slot() == false){
+            player = train1(player);
+        }
+        
         map.initialize();
         map.generate_player(player.get_loc());
-        player = train1(player);
     }
-
-
     
     while (true){
-        clear_screen(); 
+        clear_screen();
+        // map_printing
+        if (player.talent.super_vision == true) map.super_vision_print();
+        else if (player.talent.vision == true) map.vision_print(player.get_loc());
+        else map.print_map();
+
         cout << endl;
+        player.show_info();
 
-        map.print_map(player);
-
+        cout << endl;
         cout << "******  press 'h' to see the hint | 'e' to stop the game | 'q' to save archive ******" << endl;
-
-        location a = player.get_loc();
-        //cout << a.row << a.col << "a.row and acol" << &player << " player " << endl;
         
-
         userInput = keyboard();
         move_loc = explain_input(userInput, player, map);
     
 
         moving_result = map.check_block(move_loc, player.get_loc());
-        cout << moving_result << endl;
 
+        // if not wall or no_update, then the map can update
         if (moving_result != "wall" && moving_result != "no_update"){
-            map.update_block(player.get_loc(), block); // change the block at player_loc
+            map.update_block(player.get_loc(), current_block); // change the block at player_loc
             player.update_loc(move_loc); // player moves forward
             map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
         }
 
-        
-        if (moving_result == "1"){
-            room2(player);
-            block = ' ';
-        }else if (moving_result == "2"){
-            room3(player);
-        }else if (moving_result == "3"){
-            room4(player);
-        }else if (moving_result == "4"){
-            room5(player);
-        }else if (moving_result == "5"){
-            room6(player);
-        }else if (moving_result == "&"){
-            room5_Hidden(player);
-        }else if (moving_result == "L"){
-            room5_Letter(player);
-        }else if (moving_result == "6"){
-            room7(player);
-        }else if (moving_result == "W"){
-            room7_window(player, big_monster, count);
-        }else if (moving_result == "room7_secret"){
-            room7_secretdoor(player);
-        }else if (moving_result == "7"){
-            room8(player);
-        }else if (moving_result== "8"){
-            room9(player);
-        /*
-        }else if (moving_result== "9"){
-            room10_secretdoor(player);
-        */
-      
-        }else if (moving_result=="A"){
-            room11(player);
-        }else if (moving_result=="B"){
-            room13(player);
-        }else if (moving_result=="room10_secret"){
-            room10_secretdoor(player);
-        }else if (moving_result=="E"){
-            Monster E;
-            E.set(1000,1000,800,0.25);
-            cout<< "a grotesque figure staggering towards you, its flesh rotting and dripping with blood. Its eyes are sunken and lifeless, its teeth yellow and jagged. It lets out a guttural roar that chills your bones, and lunges at you with its clawed hands. You barely have time to react as the zombie tries to bite your neck and rip you apart..."<<endl;
-            player = attack(player, E, count);
-        }else if (moving_result == "m"){
-            cout<<"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"<<endl;
-            player = attack(player, small_monster, count);
+        // player meets room
+        if (meet_room(moving_result)){
+            player = trigger_room_slot(moving_result, player, big_monster, diff_level);
+            current_block = ' ';
         }
-        else if(moving_result == "M"){
+        // meeting small monster, attack() occurs
+        else if (moving_result == "small_monster"){
+            // fight
+            player = attack(player, small_monster, diff_level);
+            current_block = ' ';
+        }
+        // meeting big monster, difficulty increases, attack() occurs
+        else if (moving_result == "big_monster"){
+            // upgrade big monster's attributes by 1.5
             big_monster.set(big_monster.get_HP() * 1.5,\
                             big_monster.get_maxHP() * 1.5,\
                             big_monster.get_ATK() * 1.5,\
                             big_monster.get_prob() * 1.5);
-            player = attack(player, big_monster, count);
-        }else if(moving_result=="@"){
-            cout<<"A fog suddenly appears, and you faint and enter a dream"<<endl;
-            randomFunction(player.talent.mult, count);
-        }else if(moving_result=="$"){
-            player=map.box(player);
-        }else if(moving_result=="*"){
-            player=map.hiddenbox(player);
+            // fight
+            player = attack(player, big_monster, diff_level);
+            current_block = ' ';
         }
+        // box, increase attributes
+        else if (moving_result == "box"){
+            clear_screen();
+            player = map.box(player);
+            current_block = ' ';
+        }
+        // meeting hidden box, choose talent
+        else if (moving_result == "hidden_box"){
+            clear_screen();
+            player = map.hiddenbox(player);
+            current_block = ' ';
+        }
+        // meeting hidden monster, random game happens
+        else if (moving_result == "hidden_monster"){
+            cout<<"A fog suddenly appears, and you faint and enter a dream" << endl;
+            randomFunction(player.talent.mult, diff_level);
+            diff_level++;
+        }
+        // reaching end
+        else if (moving_result == "E"){
+            Monster E;
+            E.set(1000,1000,800,0.25);
+            cout<< "a grotesque figure staggering towards you, its flesh rotting and dripping with blood. Its eyes are sunken and lifeless, its teeth yellow and jagged. It lets out a guttural roar that chills your bones, and lunges at you with its clawed hands. You barely have time to react as the zombie tries to bite your neck and rip you apart..."<<endl;
+            player = attack(player, E, diff_level);
+        }
+        // normal movement
         else if (moving_result == "empty"){
-            map.update_block(player.get_loc(), block); // change the block at player_loc
-            player.update_loc(move_loc); // player moves forward
-            map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
+            current_block = ' ';
         }
             
     }

@@ -6,30 +6,37 @@
 #include <iostream>
 using namespace std;
 
+
 struct Talent{
-        void set(int mult_val, bool vision_val, bool supernightvision_val);
-        int mult;
-        bool vision;
-        bool supernightvision;
-      //maxHP,DEF,翻倍的实现形式:player.set_ATK(player.get_ATK() * 2);
-    
+    int mult;
+    int life;
+    bool vision;
+    bool super_vision;
+    // maxHP,DEF,翻倍的实现形式:player.set_ATK(player.get_ATK() * 2);
+    void set(int mult_val, int life_val, bool vision_val, bool super_vision_val){
+        mult = mult_val;
+        life = life_val;
+        vision = vision_val;
+        super_vision = super_vision_val;
+    }
 };
 
-class Player: public Talent
-{ 
+
+class Player{ 
     private:
-        location loc={2,1};
-        string weapon;
+        location loc = {2,1};
+        string weapon = "no";
 
         int HP = 100;
         int ATK = 10;
         int DEF = 0;
         int maxHP = 100;
         double prob = 0.7; // percentage
-        
-        
+
+
     public:
         Talent talent;
+        
         location get_loc();
         void update_loc(location move_loc={0,0});
 

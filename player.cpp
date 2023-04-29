@@ -19,17 +19,18 @@ string Player::get_weapon(){
     return weapon;
 }
 
-void Talent::set(int mult_val, bool vision_val, bool supernightvision_val){
-    mult = mult_val;
-    vision = vision_val;
-    supernightvision = supernightvision_val;
-}
 int Player::get_HP(){
     return HP;
 }
 
 void Player::update_HP(int val){
-    HP += val;
+    // could not exceed maxHP
+    if ( (HP+val) >= maxHP){
+        HP = maxHP;
+    }
+    else{
+        HP += val;
+    }
 }
 
 
@@ -54,6 +55,16 @@ int Player::get_maxHP(){
 }
 
 void Player::update_maxHP(int val){
+    /*
+    // Update HP if maxHP increases, when HP == maxHP initially
+    if (HP == maxHP){
+        maxHP += val;
+        HP = maxHP;
+    }
+    else{
+        maxHP += val;
+    }
+    */
     maxHP += val;
 }
 
@@ -63,14 +74,21 @@ int Player::get_prob(){
 }
 
 void Player::update_prob(int val){
-    prob += val;
+    if ((prob + val) >= 1) prob = 1;
+    else prob += val;
 }
 
 void Player::show_info(){
     cout << "Player -> ";
     cout << "HP: " << HP << "/" << maxHP << " | ";
+    cout << "DEF: " << DEF << " | ";
     cout << "ATK: " << ATK << " | ";
-    cout << "Location: " << loc.row << loc.col << endl;
+    cout << "Location: " << loc.row << ' ' << loc.col << " | ";
+    cout << "Probability: " << prob*100 << '%';
+
+    // over
+    cout << endl;
+
 } 
 
 int Player::attack(){
@@ -87,7 +105,8 @@ void Player::set_ATK(int new_ATK){
 }
 
 void Player::set_HP(int new_HP){
-    HP = new_HP;
+    if (new_HP >= maxHP) HP = maxHP;
+    else HP = new_HP;
 }
 
 void Player::set_DEF(int new_DEF){
@@ -99,10 +118,21 @@ void Player::set_maxHP(int new_maxHP){
 }
         
 void Player::set_prob(double new_prob){
-    prob = new_prob;
+    if (new_prob >= 1) prob = 1;
+    else prob = new_prob;
 }
 
 
 void Player::set_loc(location new_loc){
     loc = new_loc;
 }
+
+
+/*
+// Talent
+void Talent::set(int mult_val, bool vision_val, bool supernightvision_val){
+    mult = mult_val;
+    vision = vision_val;
+    supernightvision = supernightvision_val;
+}
+*/

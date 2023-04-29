@@ -18,6 +18,8 @@ class Monster{
  
     public:
         int get_HP();
+        void update_HP(int val);
+
         int get_ATK();
         int get_maxHP();
         int get_prob();

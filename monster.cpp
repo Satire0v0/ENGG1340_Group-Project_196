@@ -5,6 +5,10 @@ int Monster::get_HP(){
     return HP;
 }
 
+void Monster::update_HP(int val){
+    HP += val;
+}
+
 
 int Monster::get_ATK(){
     return ATK;
@@ -21,7 +25,9 @@ int Monster::get_prob(){
 void Monster::show_info(){
     cout << "Monster -> ";
     cout << "HP: " << HP << "/" << maxHP << " | ";
-    cout << "ATK: " << ATK << endl;
+    cout << "ATK: " << ATK << " | ";
+    cout << "Probability: " << prob*100 << '%';
+    cout << endl;
 } 
 
 
