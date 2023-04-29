@@ -52,6 +52,7 @@ bool guess_dice() {
         cout<<"You can only input 'Big' or 'Small'"<<endl;
         cin >> player_guess;
     }
+    sleep(2);
     if (player_guess == "Big" && dice > 3) {
         cout << "The number is "<< dice << ". You win !!!"<< endl;
         die.win=true;
