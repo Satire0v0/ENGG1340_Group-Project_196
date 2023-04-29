@@ -11,6 +11,7 @@ struct gamestatus{
 bool rpsgame(){
     int userChoice, computerChoice;
     gamestatus rps;
+    short_pause();
     cout << "Rock paper scissors!\n";
     cout << "1. Rock\n";
     cout << "2. Paper\n";
@@ -22,41 +23,49 @@ bool rpsgame(){
     computerChoice = rand() % 3 + 1;
     if (userChoice == computerChoice) {
         cout << "Draw!\n";
+        short_pause();
         return rpsgame() ;
     } else if ((userChoice == 1 && computerChoice == 2) || (userChoice == 2 && computerChoice == 3) || (userChoice == 3 && computerChoice == 1)) {
         cout << "You win!\n";
         rps.win=true;
+        short_pause();
         return rps.win;
     } else {
         cout << "You lose!\n";
         rps.win=false;
+        short_pause();
         return rps.win;
     }
 }
 
 
 bool guess_dice() {
+    short_pause();
     gamestatus die;
     string player_guess;
     srand(time(0));
     int dice = rand() % 6 + 1;
+
     cout << "Please guess if the number on the dice is big or small, input 'Big' if the number is lower or equal to 3, otherwise please input 'Small'. " << endl;
     cin >> player_guess;
-    while ( player_guess != "Big" | player_guess !="Small"){
+    while ( player_guess != "Big" && player_guess !="Small"){
         cout<<"You can only input 'Big' or 'Small'"<<endl;
         cin >> player_guess;
     }
     if (player_guess == "Big" && dice > 3) {
         cout << "The number is "<< dice << ". You win !!!"<< endl;
         die.win=true;
+        short_pause();
         return die.win;
     } else if (player_guess == "Small" && dice <= 3) {
         cout << "The number is "<< dice << ". You win !!!"<< endl;
         die.win=true;
+        short_pause();
         return die.win;
     } else {
         cout << "The number is "<< dice << ". You lose ~~~"<< endl;
         die.win=false;
+        short_pause();
         return die.win;
     }
 }
@@ -70,6 +79,7 @@ bool number_guess(){
     int computer_guess;
     bool game_over = false;
     gamestatus numberbomb;
+    short_pause();
     srand(time(0));
     
     bomb = rand() % 100 + 1;
@@ -79,8 +89,9 @@ bool number_guess(){
     while (!game_over) {
         cout << "please guess a number within the range (" << lower << " --- " << upper << "): ";
         cin >> player_guess;
-        while (player_guess <lower | player_guess > upper){
+        while (player_guess <lower || player_guess > upper){
             cout << "please guess a number within the range (" << lower << " --- " << upper << "): ";
+            cin >> player_guess;
         }
         if (player_guess == bomb) {
             cout << "You found the bomb! Game OVER. You Lose!" << std::endl;
@@ -108,6 +119,8 @@ bool number_guess(){
             }
         }
     }
+    sleep(2);
+    short_pause();
     return numberbomb.win;
 }
 
@@ -158,6 +171,7 @@ int getch() {
 
 
 bool keyboard_game(int talent_mult,int difficulty=30){
+    short_pause();
     gamestatus kb;
     int multiple = talent_mult;
     int count = 0;
@@ -183,8 +197,7 @@ bool keyboard_game(int talent_mult,int difficulty=30){
         }
     }
 
-    sleep(2);
-
+    short_pause();
     if (count > difficulty){
         cout << "You win!" << endl;
         kb.win=true;
@@ -218,10 +231,6 @@ Player attack(Player player, Monster monster, Map map, int diff_level){
                     player=countdown(player, map, diff_level);
                     return player;
                 }
-
-                else{
-                    return player;
-                }
             }
         }
         else{
@@ -250,7 +259,6 @@ Player attack(Player player, Monster monster, Map map, int diff_level){
 
 
 Player countdown(Player player, Map map, int count) {
-    short_pause();
     bool win=false;
     char input;
     bool judge;
@@ -290,10 +298,10 @@ Player countdown(Player player, Map map, int count) {
     }
 
     if (input == 'y'){
+        
         cout << "Press as many as ‘f’ as you can to win an reward!!!";
-        cout << endl;
-        short_pause();
 
+        short_pause();
         win = keyboard_game(player.talent.mult, 30+10*(count));
         if (win == true){
                 count++;
