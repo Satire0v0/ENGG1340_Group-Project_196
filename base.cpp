@@ -54,7 +54,7 @@ void print_hint(){
         "Small Monster",
         "Big Monster",
         "Wall",
-        "Room Number"
+        "Room Number",
         "Final Boss"
     };
 
@@ -64,7 +64,7 @@ void print_hint(){
     
     // print the hint
     cout << left;
-    for (int i=0; i<sizeof(single_str); i++){
+    for (int i=0; i<11; i++){
         if (i==0){
             cout << "The description of the operation:" << endl;
         }
@@ -431,7 +431,7 @@ bool want_to_continue(){
 
     while (true){
         clear_screen();
-        cout << "Want to restart (y/n) ?"
+        cout << "Want to restart (y/n) ?";
         cout << endl;
         cout << "Your choice -> ";
         choice = get_word();
