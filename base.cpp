@@ -10,11 +10,11 @@ void clear_screen(){
 string get_word(){
     // As all inputs are texts, therefore getting first effective word is enough
     // this is used for avoiding wrong input
-    string line, word;
+    string sentence, word;
 
-    getline(cin, line);
+    getline(cin, sentence);
 
-    istringstream line_in(line);
+    istringstream line_in(sentence);
     line_in >> word;
 
     return word;
@@ -41,7 +41,7 @@ bool leave_or_not(){
 
 
 void print_hint(){
-    char single_char[]={'w', 'a', 's', 'd', 'e', 'O', 'M', 'D'};
+    char single_str[]={'w', 'a', 's', 'd', 'e', 'O', 'M', 'D'};
     string description[]={
         "Move up",
         "Move left",
@@ -60,7 +60,7 @@ void print_hint(){
     
     // print the hint
     cout << left;
-    for (int i=0; i<sizeof(single_char); i++){
+    for (int i=0; i<sizeof(single_str); i++){
         if (i==0){
             cout << "The description of the operation:" << endl;
         }
@@ -70,7 +70,7 @@ void print_hint(){
             cout << "The description of the single character:" << endl;
         }
 
-        cout << setw(5) << single_char[i] << setw(longest) << description[i] << endl;
+        cout << setw(5) << single_str[i] << setw(longest) << description[i] << endl;
     }
 
     cout << endl;
@@ -127,10 +127,7 @@ char keyboard(){
     else if (word == 'e' || word == 'E'){
         result = 'e';
     }
-    /*
-    jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-    */
-    else if (word == 'q' || word == 'E'){
+    else if (word == 'q' || word == 'Q'){
         result = 'q';
     }
     else{
@@ -189,9 +186,7 @@ location explain_input(char word, Player &player, Map &map){
             loc.col = 0;
         }
     }
-    /*
-    jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-    */
+
     else if (word == 'q'){
         /*
         location a;
@@ -204,18 +199,17 @@ location explain_input(char word, Player &player, Map &map){
         */
         string choice;
         cout << endl;
-        cout << "Enter 'save' to save archive\n";
+        cout << "Enter 'save' to save archive | 'read' to restart from previous archive" << endl;
         cin >> choice;
         if (choice == "save")
         {
             save_data(player, map);
-            loc.row = 0;
-            loc.col = 0;
             exit(0);
         }
         else if (choice == "read")
         {
-            loc = export_data(player,map);
+            export_data(player,map);
+            map.generate_player(player.get_loc());
             //cout << loc.row << " " << loc.col << " loc row col after export data\n";
             //sleep(2);
         }
@@ -227,6 +221,8 @@ location explain_input(char word, Player &player, Map &map){
 
     return loc;
 }
+
+
 int random_num(int lower_bound, int upper_bound){
     return (rand() % (upper_bound - lower_bound + 1)) + lower_bound;
 }
@@ -234,4 +230,164 @@ int random_num(int lower_bound, int upper_bound){
 
 double getProbability(){
     return random_num(0, 100) / 100.0; // integer divide integer is integer, therefore 100.0 is here
+}
+
+
+// room
+void short_pause(){
+    cout << "Press 'Enter' to continue" << endl;
+    int user_input = scan_keyboard();
+}
+
+
+string to_lower(string single_str){
+    // if already single small char
+    if ("a" <= single_str && single_str <= "z"){
+        return single_str;
+    }
+    // if not
+    else{
+        transform(single_str.begin(), single_str.end(), single_str.begin(), ::tolower);
+        return single_str;
+    }
+}
+
+
+string slot_choice(vector<string> ans){
+    string choice;
+    cout << "Your choice -> ";
+    choice = get_word();
+    choice = to_lower(choice);
+
+    if (not in_range(choice, ans)){
+        return "false";
+    }
+    else{
+        return choice;
+    }
+}
+
+
+bool in_range(string user_input, vector<string> ans){
+    // user might enter multi-chars
+    if (user_input.length() != 1){
+        return false;
+    }
+    else{
+        // otherwise
+        for (int i=0; i<ans.size(); i++){
+        // find whether input is in the range
+            if (user_input == ans[i]){
+                return true;
+            }
+        }
+    }
+    // input is not in the range
+    return false;
+}
+
+
+string read_choice(){
+    string choice;
+    vector<string> ans;
+    ans.push_back("new");
+    ans.push_back("read");
+
+    while (true){
+        clear_screen();
+        cout << "Enter 'read' to read archive or enter 'new' to start new game" << endl;
+        cout << "Your choice -> ";
+        choice = get_word();
+        choice = to_lower(choice);
+
+        for (int i=0; i<ans.size(); i++){
+        // find whether input is in the range
+            if (choice == ans[i]){
+                return choice;
+            }
+        }
+    }
+}
+
+
+bool meet_room(string moving_result){
+    if ( ("1" <= moving_result && moving_result <= "8") || ("A" <= moving_result && moving_result <= "B") || \
+          moving_result == "&" || moving_result == "L" || moving_result == "W" || \
+          moving_result == "room7_secret" || moving_result == "room10_secret"){
+            return true;
+    }
+    else{
+        return false;
+    }
+}
+
+Player trigger_room_slot(string moving_result, Player player, Monster monster, int count){
+    if (moving_result == "1")      player = room2(player);
+    else if (moving_result == "2") player = room3(player);
+    else if (moving_result == "3") player = room4(player);
+    else if (moving_result == "4") player = room5(player);
+    else if (moving_result == "5") player = room6(player);
+    else if (moving_result == "6") player = room7(player);
+    else if (moving_result == "7") player = room8(player);
+    else if (moving_result == "8") player = room9(player);
+    else if (moving_result == "A") player = room11(player);
+    else if (moving_result == "B") player = room13(player);
+    else if (moving_result == "&") player = room5_Hidden(player);
+    else if (moving_result == "L") player = room5_Letter(player);
+    else if (moving_result == "9") player = room10_secretdoor(player);
+    else if (moving_result == "W") player = room7_window(player, monster, count);
+    else if (moving_result == "room7_secret") player = room7_secretdoor(player);
+    else if (moving_result == "room10_secret") player = room10_secretdoor(player);
+
+    return player;
+}
+
+
+bool skip_slot(){
+    string choice;
+    vector<string> ans;
+    ans.push_back("yes");
+    ans.push_back("y");
+    ans.push_back("no");
+    ans.push_back("n");
+
+    while (true){
+        clear_screen();
+        cout << "There will be a fantastic slot about our game." << endl;
+        cout << "Want to skip or not? (yes / no)" << endl;
+        cout << endl;
+        cout << "Your choice -> ";
+        choice = get_word();
+        choice = to_lower(choice);
+
+        for (int i=0; i<ans.size(); i++){
+        // find whether input is in the range
+            if (choice == ans[i]){
+                if (choice == "no" || choice == "n"){
+                    return false;
+                }
+                else if (choice == "yes" || choice == "y"){
+                    return true;
+                }
+            }
+        }
+    }
+}
+
+
+int box_choice(vector<string> ans){
+    string choice;
+    cout << "Your choice -> ";
+    choice = get_word();
+    choice = to_lower(choice);
+
+    if (not in_range(choice, ans)){
+        return -1;
+    }
+    else{
+        if (choice == "1") return 1;
+        else if (choice == "2") return 2;
+        else if (choice == "3") return 3;
+        else return 1;
+    }
 }
