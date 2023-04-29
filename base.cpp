@@ -290,23 +290,49 @@ bool in_range(string user_input, vector<string> ans){
 string read_choice(){
     string choice;
     vector<string> ans;
-    ans.push_back("new");
-    ans.push_back("read");
 
-    while (true){
-        clear_screen();
-        cout << "Enter 'read' to read archive or enter 'new' to start new game" << endl;
-        cout << "Your choice -> ";
-        choice = get_word();
-        choice = to_lower(choice);
+    ifstream saveFile;
+    saveFile.open("savedMap.txt");
 
-        for (int i=0; i<ans.size(); i++){
-        // find whether input is in the range
-            if (choice == ans[i]){
-                return choice;
+    char judge_eof;
+    saveFile >> judge_eof;
+
+    if (saveFile.eof()){
+        ans.push_back("new");
+        while (true){
+            clear_screen();
+            cout << "Enter 'new' to start new game" << endl;
+            cout << "Your choice -> ";
+            choice = get_word();
+            choice = to_lower(choice);
+
+            for (int i=0; i<ans.size(); i++){
+            // find whether input is in the range
+                if (choice == ans[i]){
+                    return choice;
+                }
             }
         }
     }
+    else{
+        ans.push_back("new");
+        ans.push_back("read");
+        while (true){
+            clear_screen();
+            cout << "Enter 'read' to read archive or enter 'new' to start new game" << endl;
+            cout << "Your choice -> ";
+            choice = get_word();
+            choice = to_lower(choice);
+
+            for (int i=0; i<ans.size(); i++){
+            // find whether input is in the range
+                if (choice == ans[i]){
+                    return choice;
+                }
+            }
+        }
+    }
+
 }
 
 

@@ -35,6 +35,7 @@ int main(){
     if (choice == "read"){
         export_data(player, map);
         map.generate_player(player.get_loc());
+
     }
     else if (choice == "new"){
         if (skip_slot() == false){
