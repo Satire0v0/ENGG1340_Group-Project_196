@@ -359,6 +359,12 @@ Player Map::box(Player player){
 
 
 Player Map::hiddenbox(Player player){
+    
+    cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"<<endl;
+    sleep(1);
+    cout << "You find a hidden box!!!"<<endl;
+    sleep(1);
+    clear_screen();
     string title = "Choose 1 talent !!!";
     int num_of_separator = 0, choice;
     vector<string> talents = {multiple,maxhp,doubleatk,doubledef,vision,accurate};
