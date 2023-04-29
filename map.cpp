@@ -41,7 +41,7 @@ void Map::empty_map(){
 void Map::print_map(){
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
-            if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_DOOR || map[y][x] == HIDDEN_MONSTER || map[y][x] == "&" || map[y][x] == "L"){
+            if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_DOOR || map[y][x] == HIDDEN_MONSTER || map[y][x] == '&' || map[y][x] == 'L'){
                 cout << ' ';
             }
             else{
