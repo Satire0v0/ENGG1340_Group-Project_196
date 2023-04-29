@@ -30,15 +30,25 @@ During the game, if the player meet any of the monsters, the player will automat
 
 -------------------
 
-### Generation of random game sets or events
+### 1. Generation of random game sets or events
 
-### Data structures for storing game status
 
-### Dynamic memory management
 
-### File input/output
+### 2. Data structures for storing game status
 
-### Program codes in multiple files
+
+
+### 3. Dynamic memory management
+
+
+
+### 4. File input/output
+
+
+
+### 5. Program codes in multiple files
+
+
 
 ## Compilation and execution instructions
 
