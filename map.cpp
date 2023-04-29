@@ -362,15 +362,16 @@ Player Map::hiddenbox(Player player){
     string title = "Choose 1 talent !!!";
     int num_of_separator = 0, choice;
     vector<string> talents = {multiple,maxhp,doubleatk,doubledef,vision,accurate};
-
+    vector<string> talentsb = {multiple,maxhp,doubleatk,doubledef,supernightvision,accurate};
+    vector<string> talentsc = {multiple,maxhp,doubleatk,doubledef,accurate};
     // used for checking
     vector<string> fixed_ans;
 
     if (player.talent.vision==true){
-       vector<string> talents = {multiple,maxhp,doubleatk,doubledef,supernightvision,accurate};
+       talents=talentsb;
     }
     if (player.talent.super_vision==true){
-        vector<string> talents = {multiple,maxhp,doubleatk,doubledef,accurate};
+        talents=talentsc;
     }
 
     vector<string>result = selectRewards(talents);
