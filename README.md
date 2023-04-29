@@ -2,13 +2,11 @@
 
 ## Team members
 
-----------------
 
 He Yijie, Li Renjie, Liu Haisu, Wu Yihan, Xiao Heng
 
 ## Introduction
 
------------------
 
 Now it is 22:15 in a snowy and shivering night, you stand on a railway platform, waiting for the last train of the day to go home after a big day. Your home is 100 miles away from where you work.
 
@@ -16,7 +14,6 @@ Suddenly, a gust of wind comes and you hear the sound of the train. At the same 
 
 ## Gaming rules
 
------------------
 
 There are two stages in total. For the first stage, the player needs to make appropriate choices to advance the story, and different choices may have an impact on subsequent gameplay (being killed or moving to the next level). 
 
@@ -33,7 +30,6 @@ During the game, if the player meet any of the monsters, the player will automat
 
 ## Features implemented
 
--------------------
 
 ### 1. Generation of random game sets or events
 
@@ -58,7 +54,6 @@ In **main.cpp**, we include all files we need like **player.h**, **room.h**, **g
 
 ## Compilation and execution instructions
 
---------------------
 
 1. Type **make main**
 2. Type **./main**
