@@ -3,13 +3,8 @@
 
 #include <iostream>
 #include <string>
-#include <string.h>
-#include <math.h>
 #include <vector>
-#include <stdio.h>
-#include <algorithm>
-#include <iomanip>
-#include <unistd.h>
+
 
 #include "game.h"
 #include "player.h"
@@ -33,7 +28,7 @@ Player room5_Letter(Player player);
 Player room6(Player player);
 Player room7(Player player);
 Player room7_secretdoor(Player player);
-Player room7_window(Player player,Monster monster, int count);
+Player room7_window(Player player, Monster monster, int count);
 Player room8(Player player);
 Player room9(Player player);
 Player room10_secretdoor(Player player);
