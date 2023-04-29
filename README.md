@@ -22,7 +22,12 @@ There are two stages in total. For the first stage, the player needs to make app
 
 If the right choice is made, the player can move on to the second stage, which is the main part of our game.
 
-The map on the second level is a dungeon, the player can move by pressing (W, A, S, D), the % in the map represents the wall, M represents the elite monster which will grow with the story, m represents the miscellaneous monsters(their battle information is constant), the number indicates the story, and # represents the secret door (passing through it will be teleported to another location on the map). 
+The map on the second level is a dungeon, the player can move by pressing (W, A, S, D), 
++ **%** in the map represents the wall.
++ **M** represents the elite monster which will grow with the story.
++ **m** represents the miscellaneous monsters (their battle information is constant).
++ **number** indicates the story.
++ **#** represents the secret door (passing through it will be teleported to another location on the map). 
 
 During the game, if the player meet any of the monsters, the player will automatically enter the battle screen, if the player is able to kill the monster and win, the player will have 5 seconds to choose whether to enter the bonus level, if the player chooses to enter the bonus level, they will play a keyboard presssing game, if passed, they can get a reward in the normal box. If the player loses the match, the game ends and the game will restart from the player's last saved record(if the player has saved, if not, the game will restart from the stage 1).
 
@@ -32,7 +37,7 @@ During the game, if the player meet any of the monsters, the player will automat
 
 ### 1. Generation of random game sets or events
 
-In **game.cpp**, we have four mini games. When players walk somewhere on the map, the system will randomly choose a mini game through the function **randomFunction**.
+In **game.cpp**, we have four mini games. When players walk somewhere on the map, the system will randomly choose a mini game through the function **randomFunction()**.
 
 ### 2. Data structures for storing game status
 
@@ -45,7 +50,7 @@ In **map.cpp**, we use 2-dimensional dynamic array.
 ### 4. File input/output
 
 In **saving.cpp**, we achieve the game saving and loading. 
-The function **read_map** in **map.cpp** achieves the map loading.
+The function **read_map()** in **map.cpp** achieves the map loading.
 
 ### 5. Program codes in multiple files
 
