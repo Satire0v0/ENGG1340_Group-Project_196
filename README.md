@@ -32,25 +32,28 @@ During the game, if the player meet any of the monsters, the player will automat
 
 ### 1. Generation of random game sets or events
 
-
+In **game.cpp**, we have four mini games. When players walk somewhere on the map, the system will randomly choose a mini game through the function **randomFunction**.
 
 ### 2. Data structures for storing game status
 
-
+In **player.h**, we use many data structures to store the status of the player.
 
 ### 3. Dynamic memory management
 
-
+In **map.cpp**, we use 2-dimensional dynamic array.
 
 ### 4. File input/output
 
-
+In **saving.cpp**, we achieve the game saving and loading. 
+The function **read_map** in **map.cpp** achieves the map loading.
 
 ### 5. Program codes in multiple files
 
-
+In **main.cpp**, we include all files we need like **player.h**, **room.h**, **game.h**. Therefore, we can use functions from other files.
 
 ## Compilation and execution instructions
 
 --------------------
 
+1. Type **make main**
+2. Type **./main**
