@@ -124,7 +124,7 @@ int main(){
             // meeting hidden monster, random game happens
             else if (moving_result == "hidden_monster"){
                 cout<<"A fog suddenly appears, and you faint and enter a dream" << endl;
-                randomFunction(player.talent.mult, diff_level);
+                randomFunction(player, player.talent.mult, diff_level);
                 diff_level++;
             }
             // reaching end
