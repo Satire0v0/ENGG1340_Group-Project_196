@@ -41,7 +41,7 @@ void Map::empty_map(){
 void Map::print_map(){
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
-            if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_DOOR || map[y][x] == HIDDEN_MONSTER || map[y][x] == '&' || map[y][x] == 'L'){
+            if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_MONSTER || map[y][x] == '&' || map[y][x] == 'L'){
                 cout << ' ';
             }
             else{
@@ -79,7 +79,7 @@ void Map::vision_print(location player_loc){
                 cout << map[y][x];
             }
             else{
-                if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_DOOR || map[y][x] == HIDDEN_MONSTER){
+                if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_MONSTER){
                     cout << ' ';
                 }
                 else{
@@ -179,6 +179,18 @@ string Map::check_block(location move_loc, location player_loc){
     }
     else if (map[row][col] == ELEVEN){
         return "B";
+    }
+    else if (map[row][col] == WINDOW){
+        return "W";
+    }
+    else if (map[row][col] == HIDDEN_DOOR){
+        return "#";
+    }
+    else if (map[row][col] == HIDDEN_FIVE){
+        return "&";
+    }
+    else if (map[row][col] == TRANSFER){
+        return "?";
     }
     else{
         return "no_update";

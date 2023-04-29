@@ -32,7 +32,7 @@ class Map{
         char HIDDEN_MONSTER = '@'; // invisible
         char WINDOW = 'W';
         char HIDDEN_DOOR = '#'; // invisible
-        char END = 'E';
+
 
         // room number
         char ONE = '1';
@@ -46,8 +46,11 @@ class Map{
         char NINE = '9';
         char TEN = 'A';
         char ELEVEN = 'B';
+        char HIDDEN_FIVE = '&';
+        char HIDDEN_LETTER = 'L';
+        char END = 'E';
     
-        char UNUSED = '?';
+        char TRANSFER = '?';
 
         // 2-dimensional dynamic array
         char** map;
