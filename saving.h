@@ -10,22 +10,22 @@
 using namespace std;
 
 
+class Player;
+class Map;
 
+/*
 struct saved_data
 {
     int data;
     saved_data *next;
 
 };
+*/
 
-class Player;
-class Map;
 
 void save_data(Player &player, Map &map);
 
-location export_data(Player &player, Map &map);
-
-
+void export_data(Player &player, Map &map);
 
 
 #endif

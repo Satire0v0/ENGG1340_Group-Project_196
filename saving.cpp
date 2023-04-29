@@ -8,71 +8,98 @@
 //还需要根据其他文件的变量更新此文件
 void save_data(Player &player, Map &map)
 {
-//    Player player;
+    // Player information
     ofstream saveFile; 
     saveFile.open("saving.txt");
+
     if (saveFile.fail()){
         cout << "Error opening file" << endl;
         exit(0);
     }
-    else
-    {
-        location loc = player.get_loc();
+    else{
         //cout << " this is the saving cpp \n";
         //row和col在同一行，用空格隔开
         //HP等具体变量
         //Attack等具体变量
         //cout << loc.row << " " << loc.col << " loc row col \n";
         //sleep(1);
+
+        // Save player location first
+        location loc = player.get_loc();
         saveFile << loc.row << " " << loc.col << endl;
-        saveFile << player.get_HP() << " " << player.get_ATK() << " " << player.get_maxHP() << " " << player.get_prob() << " ";
-        saveFile << player.get_weapon() << " " << player.talent.mult << " " << player.talent.vision << " " << player.talent.supernightvision;
-        saveFile << endl;
+
+        // Then save other player information
+        saveFile << player.get_HP() << " " << player.get_ATK() << " " << player.get_DEF() << " " << player.get_maxHP() << " " << player.get_prob() << " " << player.get_weapon() << endl;
+        saveFile << player.talent.mult << " " << player.talent.life <<  " " << player.talent.vision << " " << player.talent.super_vision << endl;
+
+        // save map
         map.map_saving();
     } 
 }
 
-location export_data(Player &player, Map &map)
+
+void export_data(Player &player, Map &map)
 {
+    location loc={0, 0};
+    bool vision, supernightvision;
+
     ifstream saveFile; 
     saveFile.open("saving.txt");
-    location loc, player_loc;
-    int temp;
-    double temp1;
-    string weapon;
-    bool vision, supernightvision;
-    loc.row = 0;
-    loc.col = 0;
+
     if (saveFile.fail()){
         cout << "Error opening file" << endl;
         exit(0);
     }
-    else
-    {
-        size mapsize;
-        double HP, Attack;
+    else{
+        // Player basic info
+        int HP=0, ATK=0, DEF=0, maxHP=0;
+        double prob=0.0;
+        string weapon="";
+
         saveFile >> loc.row;
         saveFile >> loc.col;
+        player.set_loc(loc);
+        
+        /*
         player_loc = player.get_loc();
+
         loc.row -= player_loc.row;
         loc.col -= player_loc.col;
+
         player.update_loc(loc);
-        saveFile >> temp;
-        player.set_HP(temp);
-        saveFile >> temp;
-        player.set_ATK(temp);
-        saveFile >> temp;
-        player.set_maxHP(temp);
-        saveFile >> temp1;
-        player.set_prob(temp1);
+        */
+
+        saveFile >> HP;
+        player.set_HP(HP);
+
+        saveFile >> ATK;
+        player.set_ATK(ATK);
+
+        saveFile >> DEF;
+        player.set_DEF(DEF);
+
+        saveFile >> maxHP;
+        player.set_maxHP(maxHP);
+
+        saveFile >> prob;
+        player.set_prob(prob);
+
         saveFile >> weapon;
         player.update_weapon(weapon);
-        saveFile >> temp >> vision >> supernightvision;
-        player.talent.set(temp, vision, supernightvision);
+
+        // Player talent info
+        int mult=0, life=0;
+
+        saveFile >> mult >> life >> vision >> supernightvision;
+
+        player.talent.set(mult, life, vision, supernightvision);
         //cout << loc.row << " " << loc.col << " loc row col in saving.txt\n";
-        map.map_reading();
-        return loc;
+
+        // Initialize the map
+        map.count_size("savedMap.txt");
+        map.empty_map();
+        map.read_map("savedMap.txt");
+        // map.map_reading();
     }
-    return loc;
 }
 
