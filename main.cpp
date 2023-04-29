@@ -90,11 +90,11 @@ int main(){
             }
             // meeting big monster, difficulty increases, attack() occurs
             else if (moving_result == "big_monster"){
-                // upgrade big monster's attributes by 1.5
-                big_monster.set(big_monster.get_HP() * 1.5,\
-                                big_monster.get_maxHP() * 1.5,\
-                                big_monster.get_ATK() * 1.5,\
-                                big_monster.get_prob() * 1.5);
+                // upgrade big monster's attributes by 1.2
+                big_monster.set(big_monster.get_HP() * 1.2,\
+                                big_monster.get_maxHP() * 1.2,\
+                                big_monster.get_ATK() * 1.2,\
+                                big_monster.get_prob() * 1.2);
                 // fight
                 player = attack(player, big_monster, map, diff_level);
                 current_block = ' ';
