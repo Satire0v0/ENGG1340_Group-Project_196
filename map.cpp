@@ -16,7 +16,6 @@ string doublehp="Your HP will be doubkled,but can not exceed your maxHP.";
 string doubledef="Your DEF will be doubled";
 string accurate="(Accurate attack) Your prob will always be 1";
 string supernightvision= "(Supernightvision) You can see all the hidden objects in the map.";
-string doublehp = "Your HP will be doubled but cannot exceed your max HP";
 
 
 void Map::initialize(){

@@ -22,7 +22,6 @@ int main(){
     int diff_level = 0; // upgrade with time
     string moving_result; // used for monitoring the special char endiff_levelered by player
     location move_loc;
-    bool transter = false;
 
     char userInput;
     char current_block=' ';
@@ -83,7 +82,10 @@ int main(){
             // player meets room
             if (meet_room(moving_result)){
                 player = trigger_room_slot(moving_result, player, big_monster, map, diff_level);
-
+                
+                if (moving_result == "5"){
+                    current_block = 'O';
+                }
                 current_block = ' ';
             }
             // meeting small monster, attack() occurs
