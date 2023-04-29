@@ -290,8 +290,9 @@ Player countdown(Player player, Map map, int count) {
         cout << "Good luck!!!";
         return player;
     } else {
-        cout << "Invalid input";
+        cout << "Invalid input ";
     }
+    return player;
 }
 
 
