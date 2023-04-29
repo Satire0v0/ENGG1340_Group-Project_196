@@ -338,8 +338,8 @@ Player trigger_room_slot(string moving_result, Player player, Monster monster, i
     else if (moving_result == "W") player = room7_window(player, monster, count);
     else if (moving_result == "room7_secret") player = room7_secretdoor(player);
     else if (moving_result == "room10_secret") player = room10_secretdoor(player);
-    else if (moving_result == "#") player.setloc({2,10});
-    else if (moving_result == "?") player.setloc({6,31});
+    else if (moving_result == "#") player.set_loc({2,10});
+    else if (moving_result == "?") player.set_loc({6,31});
 
     return player;
 }
