@@ -77,7 +77,13 @@ int main(){
             if (moving_result != "wall" && moving_result != "no_update"){
                 map.update_block(player.get_loc(), current_block); // change the block at player_loc
                 player.update_loc(move_loc); // player moves forward
-                map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
+                if (moving_result == "5"){
+                    map.update_block(player.get_loc(), ' ');
+                }
+                else{
+                    map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
+                }
+                
             }
             
                 
@@ -125,7 +131,7 @@ int main(){
             // meeting hidden monster, random game happens
             else if (moving_result == "hidden_monster"){
                 cout<<"A fog suddenly appears, and you faint and enter a dream" << endl;
-                randomFunction(player, player.talent.mult, diff_level);
+                player = randomFunction(player, player.talent.mult, diff_level);
                 diff_level++;
             }
             // reaching end
