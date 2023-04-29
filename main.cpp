@@ -95,7 +95,10 @@ int main(){
                 if (moving_result == "5"){
                     current_block = 'O';
                 }
-                current_block = ' ';
+                else{
+                    current_block = ' ';
+                }
+                
             }
             // meeting small monster, attack() occurs
             else if (moving_result == "small_monster"){

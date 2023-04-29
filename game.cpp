@@ -232,6 +232,8 @@ Player attack(Player player, Monster monster, Map map, int diff_level){
                     player=countdown(player, map, diff_level);
                     return player;
                 }
+
+                return player;
             }
         }
         else{
