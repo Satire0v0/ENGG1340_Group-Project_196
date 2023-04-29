@@ -80,6 +80,7 @@ int main(){
                     map.update_block(player.get_loc(), current_block); // change the block at player_loc
                     player.update_loc(move_loc); // player moves forward
                     map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
+                }
             }
             
                 
