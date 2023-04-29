@@ -71,12 +71,17 @@ int main(){
 
             moving_result = map.check_block(move_loc, player.get_loc());
 
-            // if not wall or no_update, then the map can update
-            if (moving_result != "wall" && moving_result != "no_update"){
-                map.update_block(player.get_loc(), current_block); // change the block at player_loc
-                player.update_loc(move_loc); // player moves forward
-                map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
+            if (current_block == 'O'){
+                map.update_block(player.get_loc(), current_block);
             }
+            else{
+                // if not wall or no_update, then the map can update
+                if (moving_result != "wall" && moving_result != "no_update"){
+                    map.update_block(player.get_loc(), current_block); // change the block at player_loc
+                    player.update_loc(move_loc); // player moves forward
+                    map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
+            }
+            
                 
 
             // player meets room
