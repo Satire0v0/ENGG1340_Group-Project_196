@@ -211,7 +211,7 @@ Player attack(Player player, Monster monster, int diff_level){
                 if (player.get_HP() > 0){
                     cout << "Now you will have a keyboard game" << endl;
                     cout << endl;
-                    countdown(Player, Map, diff_level);
+                    countdown(player, map, diff_level);
                 }
 
                 if (leave_or_not()){
