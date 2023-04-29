@@ -20,14 +20,22 @@
 
 class Monster;
 class Player;
+class Map;
 
 using namespace std;
+
+// game
 bool rpsgame();
 bool guess_dice();
 bool number_guess();
-bool keyboard_game(int talent_mult,int difficulty);
+bool keyboard_game(int talent_mult, int difficulty);
 Player countdown(Player player, Map map, int count);
-Player attack(Player player, Monster monster, int count);
-void randomFunction(int talent_mult, int count);
+
+// normal fight
+Player attack(Player player, Monster monster, int diff_level);
+
+// realize randomly choosing game
+void randomFunction(int talent_mult, int diff_level);
 
 #endif
+
