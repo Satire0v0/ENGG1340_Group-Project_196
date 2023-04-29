@@ -75,25 +75,19 @@ int main(){
             if (moving_result != "wall" && moving_result != "no_update"){
                 map.update_block(player.get_loc(), current_block); // change the block at player_loc
                 player.update_loc(move_loc); // player moves forward
-                map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
+
+                if (moving_result == "5"){
+                    map.update_block(player.get_loc(), ' '); 
+                }
+                else{
+                    map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
+                }
+                
             }
 
             // player meets room
             if (meet_room(moving_result)){
-
-                location old_player_loc = player.get_loc();
-                location room_loc;
-                room_loc.row = old_player_loc.row + move_loc.row;
-                room_loc.col = old_player_loc.col + move_loc.col;
-                
                 player = trigger_room_slot(moving_result, player, big_monster, map, diff_level);
-
-                if (moving_result == "5"){
-                    map.update_block(room_loc, ' ');
-                    current_block = 'O';
-                    move_loc = {0, 0};
-                }
-
                 current_block = ' ';
             }
             // meeting small monster, attack() occurs
