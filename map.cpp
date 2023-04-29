@@ -15,6 +15,7 @@ string doubleatk="Your ATK will be doubled";
 string doubledef="Your DEF will be doubled";
 string accurate="(Accurate attack) Your prob will always be 1";
 string supernightvision= "(Supernightvision) You can see all the hidden objects in the map.";
+string doublehp = "Your HP will be doubled but cannot exceed your max HP";
 
 
 void Map::initialize(){
@@ -370,9 +371,9 @@ Player Map::hiddenbox(Player player){
     clear_screen();
     string title = "Choose 1 talent !!!";
     int num_of_separator = 0, choice;
-    vector<string> talents = {multiple,maxhp,doubleatk,doubledef,vision,accurate};
-    vector<string> talentsb = {multiple,maxhp,doubleatk,doubledef,supernightvision,accurate};
-    vector<string> talentsc = {multiple,maxhp,doubleatk,doubledef,accurate};
+    vector<string> talents = {multiple,maxhp,doubleatk,doubledef,vision,accurate,doublehp};
+    vector<string> talentsb = {multiple,maxhp,doubleatk,doubledef,supernightvision,accurate,doublehp};
+    vector<string> talentsc = {multiple,maxhp,doubleatk,doubledef,accurate,doublehp};
     // used for checking
     vector<string> fixed_ans;
 
@@ -478,6 +479,10 @@ Player Map::hiddenbox(Player player){
         }
         else if (result[choice-1] == supernightvision){
             player.talent.super_vision=true;
+            break;
+        }
+        else if (result[choice-1] == doublehp){
+            player.update_HP(player.get_HP()*2);
             break;
         }
     }

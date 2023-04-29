@@ -22,6 +22,7 @@ int main(){
     int diff_level = 0; // upgrade with time
     string moving_result; // used for monitoring the special char endiff_levelered by player
     location move_loc;
+    bool transter = false;
 
     char userInput;
     char current_block=' ';
@@ -75,19 +76,15 @@ int main(){
             if (moving_result != "wall" && moving_result != "no_update"){
                 map.update_block(player.get_loc(), current_block); // change the block at player_loc
                 player.update_loc(move_loc); // player moves forward
-
-                if (moving_result == "5"){
-                    map.update_block(player.get_loc(), ' '); 
-                }
-                else{
-                    map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
-                }
+                map.generate_player(player.get_loc()); // regenerate the player by using new player_loc
+            }
                 
             }
 
             // player meets room
             if (meet_room(moving_result)){
                 player = trigger_room_slot(moving_result, player, big_monster, map, diff_level);
+
                 current_block = ' ';
             }
             // meeting small monster, attack() occurs
