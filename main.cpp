@@ -88,6 +88,7 @@ int main(){
                 // fight
                 player = attack(player, small_monster, map, diff_level);
                 current_block = ' ';
+                diff_level++;
             }
             // meeting big monster, difficulty increases, attack() occurs
             else if (moving_result == "big_monster"){
@@ -99,6 +100,7 @@ int main(){
                 // fight
                 player = attack(player, big_monster, map, diff_level);
                 current_block = ' ';
+                diff_level++;
             }
             // box, increase attributes
             else if (moving_result == "box"){
