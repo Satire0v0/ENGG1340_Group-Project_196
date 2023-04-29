@@ -196,6 +196,9 @@ string Map::check_block(location move_loc, location player_loc){
     else if (map[row][col] == HIDDEN_LETTER){
         return "L";
     }
+    else if (map[row][col] == END){
+        return "E";
+    }
     else{
         return "no_update";
     }
