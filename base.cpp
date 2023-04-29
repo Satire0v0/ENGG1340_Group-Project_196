@@ -21,6 +21,7 @@ string get_word(){
 }
 
 
+// This function is used at the end of a process
 bool leave_or_not(){
     string word;
 
@@ -40,23 +41,26 @@ bool leave_or_not(){
 }
 
 
+// Player will get the meaning of differenct characters when pressing h
 void print_hint(){
-    char single_str[]={'w', 'a', 's', 'd', 'e', 'O', 'M', 'D'};
+    char single_str[]={'w', 'a', 's', 'd', 'e', 'O', 'm', 'M', '%', 'E'};
     string description[]={
         "Move up",
         "Move left",
         "Move down",
         "Move right",
-        "Stop game",
+        "Exit game",
         "Player",
-        "Medicine",
-        "Drug"
+        "Small Monster",
+        "Big Monster",
+        "Wall",
+        "Room Number"
+        "Final Boss"
     };
 
     // find the longest description
     // in order to fit the formats at any time
     int longest=50;
-
     
     // print the hint
     cout << left;
@@ -104,7 +108,7 @@ int scan_keyboard(){
 }
 
 
-// record specific keys
+// detect key letters, which are case-insensitive
 char keyboard(){
     char word = scan_keyboard();
     char result;
@@ -138,7 +142,7 @@ char keyboard(){
 }
 
 
-// specific keys have specific functions
+// each key letter has its own unique function
 location explain_input(char word, Player &player, Map &map){
     location loc;
     string result;
@@ -160,6 +164,7 @@ location explain_input(char word, Player &player, Map &map){
         loc.row = 0;
         loc.col = 1;
     }
+    // give hint
     else if (word == 'h')
     {
         while (not hintLeave){
@@ -171,6 +176,7 @@ location explain_input(char word, Player &player, Map &map){
         loc.row = 0;
         loc.col = 0;
     }
+    // whether to exit the game
     else if (word == 'e'){
         cout << endl;
         cout << "Want to continue?" << endl;
@@ -186,17 +192,8 @@ location explain_input(char word, Player &player, Map &map){
             loc.col = 0;
         }
     }
-
+    // whether to save the game
     else if (word == 'q'){
-        /*
-        location a;
-        Player player;
-        a = player.get_loc();
-        cout << endl;
-        cout << "Want to save current process?" << endl;
-        cout << "Press '1', '2' or '3' to choose the archive you wish to save: " << endl;
-        cout << a.row << " " << a.col << " a row col " << endl;
-        */
         string choice;
         cout << endl;
         cout << "Enter 'save' to save archive | 'read' to restart from previous archive" << endl;
@@ -210,10 +207,9 @@ location explain_input(char word, Player &player, Map &map){
         {
             export_data(player,map);
             map.generate_player(player.get_loc());
-            //cout << loc.row << " " << loc.col << " loc row col after export data\n";
-            //sleep(2);
         }
     }
+    // otherwise, remain the same
     else{
         loc.row = 0;
         loc.col = 0;
@@ -222,24 +218,26 @@ location explain_input(char word, Player &player, Map &map){
     return loc;
 }
 
-
+// Generate the randon number
 int random_num(int lower_bound, int upper_bound){
     return (rand() % (upper_bound - lower_bound + 1)) + lower_bound;
 }
 
 
+// calculate random probability used in 
 double getProbability(){
     return random_num(0, 100) / 100.0; // integer divide integer is integer, therefore 100.0 is here
 }
 
 
-// room
+// the function used at the end of different slot functions
 void short_pause(){
     cout << "Press 'Enter' to continue" << endl;
     int user_input = scan_keyboard();
 }
 
 
+// transfer into lowercase
 string to_lower(string single_str){
     // if already single small char
     if ("a" <= single_str && single_str <= "z"){
@@ -253,6 +251,7 @@ string to_lower(string single_str){
 }
 
 
+// choose when having different slot
 string slot_choice(vector<string> ans){
     string choice;
     cout << "Your choice -> ";
@@ -268,6 +267,7 @@ string slot_choice(vector<string> ans){
 }
 
 
+//
 bool in_range(string user_input, vector<string> ans){
     // user might enter multi-chars
     if (user_input.length() != 1){

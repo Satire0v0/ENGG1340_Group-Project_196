@@ -9,7 +9,7 @@ string reward5 = "Increase your defence, DEF+5";
 
 
 string vision= "Get a night vision device and you can always see hidden objects around you within a 3*3 range";
-string multiple="The number of the count will be increased by 1 when you press the 'F' button once";
+string multiple="The number of the count will be increased by 1 when you play the keyboard game";
 string maxhp="Your maxHP will be doubled";
 string doubleatk="Your ATK will be doubled";
 string doubledef="Your DEF will be doubled";
