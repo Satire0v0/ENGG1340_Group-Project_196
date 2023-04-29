@@ -218,6 +218,10 @@ Player attack(Player player, Monster monster, Map map, int diff_level){
                     player=countdown(player, map, diff_level);
                     return player;
                 }
+
+                else{
+                    return player;
+                }
             }
         }
         else{
@@ -287,6 +291,9 @@ Player countdown(Player player, Map map, int count) {
 
     if (input == 'y'){
         cout << "Press as many as ‘f’ as you can to win an reward!!!";
+        cout << endl;
+        short_pause();
+
         win = keyboard_game(player.talent.mult, 30+10*(count));
         if (win == true){
                 count++;

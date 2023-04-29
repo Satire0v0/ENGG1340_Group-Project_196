@@ -65,4 +65,7 @@ string slot_choice(vector<string> ans);
 // functions used in box
 int box_choice(vector<string> ans);
 
+// die
+bool want_to_continue();
+
 #endif

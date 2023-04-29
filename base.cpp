@@ -43,7 +43,7 @@ bool leave_or_not(){
 
 // Player will get the meaning of differenct characters when pressing h
 void print_hint(){
-    char single_str[]={'w', 'a', 's', 'd', 'e', 'O', 'm', 'M', '%', 'E'};
+    char single_str[]={'w', 'a', 's', 'd', 'e', 'h', 'O', 'm', 'M', '%', 'E'};
     string description[]={
         "Move up",
         "Move left",
@@ -417,5 +417,36 @@ int box_choice(vector<string> ans){
         else if (choice == "2") return 2;
         else if (choice == "3") return 3;
         else return 1;
+    }
+}
+
+
+bool want_to_continue(){
+    string choice;
+    vector<string> ans;
+    ans.push_back("yes");
+    ans.push_back("y");
+    ans.push_back("no");
+    ans.push_back("n");
+
+    while (true){
+        clear_screen();
+        cout << "Want to restart (y/n) ?"
+        cout << endl;
+        cout << "Your choice -> ";
+        choice = get_word();
+        choice = to_lower(choice);
+
+        for (int i=0; i<ans.size(); i++){
+        // find whether input is in the range
+            if (choice == ans[i]){
+                if (choice == "no" || choice == "n"){
+                    return false;
+                }
+                else if (choice == "yes" || choice == "y"){
+                    return true;
+                }
+            }
+        }
     }
 }
