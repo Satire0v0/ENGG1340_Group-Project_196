@@ -21,3 +21,6 @@ main
 
 # Ignore check
 check*
+
+# Ignore prcess produced by vscode
+.nfs*
