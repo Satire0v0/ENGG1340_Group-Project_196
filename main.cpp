@@ -44,6 +44,8 @@ int main(){
         
         map.initialize();
         map.generate_player(player.get_loc());
+        clear_screen();
+        print_hint();
         
     }
     

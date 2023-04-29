@@ -246,6 +246,7 @@ Player attack(Player player, Monster monster, Map map, int diff_level){
 
 
 Player countdown(Player player, Map map, int count) {
+    short_pause();
     bool win=false;
     char input;
     bool judge;
