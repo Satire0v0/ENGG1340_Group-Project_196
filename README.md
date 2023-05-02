@@ -81,8 +81,7 @@ In **main.cpp**, we include all files we need like **player.h**, **room.h**, **g
 
 ## Problem Collection for Final Assessment
 
-1. Real time reading of user keyboard input (solved) (Hanson-666)
-
+1. Real time reading of user keyboard input (solved) (Hanson-666)  
     When working on local computer, I can realize this function by simply using getch() function in the header file called <conio.h>. However, this library is not installed on HKU server. 
 
     After consulting with other friends, there is an alternative method, that is getch() introduced in <ncurses.h>. Luckily this header file is installed on server. Whereas, I realized that I needed to adhere to its specific initialization and output formats. It requires me to spend some time studying this library.
@@ -90,23 +89,23 @@ In **main.cpp**, we include all files we need like **player.h**, **room.h**, **g
     Finally, I unintentionally found that the library <termio.h> could also work well.
 
 
-2. Dynamic memory management of two-dimensional array named map (solved) (Hanson-666)
+2. Dynamic memory management of two-dimensional array named map (solved) (Hanson-666)  
 Initially, I used fixed length, which is 200, to realize 2-dimensional array for storing map. However, it is a waste of memory. After studying module 8, I tried to realize dynamic two-dimensional array to make the program run more efficiently. In order to achieve this goal, after consulting a lot of materials, I realized that I needed to use pointers to achieve it. Therefore, the data type of map should be a pointer to the pointer in the project.
 ```C++
 char** map;
 ```
 
-3. Input validation (solved) (Hanson-666)
+3. Input validation (solved) (Hanson-666)  
 In order to avoid that player will enter unrelated input on certain circumstances. After many trials, I choose to use <vector> to store the correct answers first. For convenience, the data type is set as string and all input will be changed to lower case for comparsion. This method fits all input validation needed by the whole project. I also write a common validation function for this.
 
-4. Random function (solved) (Ianwu0907)
+4. Random function (solved) (Ianwu0907)  
 Random events generating functions are used in the game, e.g: the boxes, hidden events. I choose to u0se vectors to store all the choices, and use a random number generating function to make random choices. 
 
-5. Undefined reference of class (solved) (Li Renjie)
+5. Undefined reference of class (solved) (Li Renjie)  
 During the process of realising the game, classes are defined in map.h and player.h and used in other files as parameters. When do make main, the undefined reference of classes 'Map' and 'Player' occurs. We redefine the two classes in other files to avoid the error. 
 
-6. Map construction according to plots (solved) (Ianwu0907)
+6. Map construction according to plots (solved) (Ianwu0907)  
 It takes a lot of effort to perfectly combine the plot with the map. We want to make sure that players have freedom and at the same time, we also hope that players can experience our exciting plot and make choices in different places based on the plot. Therefore, the map was actually constructed by a fixed main road with samll rooms in which player can move freely.
 
-7. Predict the next block the Player will move to (solved) (Hanson-666)
+7. Predict the next block the Player will move to (solved) (Hanson-666)  
 In order to meet the different needs of the project, we need to predict the next steps that players will take in advance, and then make judgments in advance to facilitate modifications to the map and player attributes.
