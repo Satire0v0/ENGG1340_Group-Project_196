@@ -91,9 +91,9 @@ In **main.cpp**, we include all files we need like **player.h**, **room.h**, **g
 
 2. Dynamic memory management of two-dimensional array named map (solved) (Hanson-666)  
 Initially, I used fixed length, which is 200, to realize 2-dimensional array for storing map. However, it is a waste of memory. After studying module 8, I tried to realize dynamic two-dimensional array to make the program run more efficiently. In order to achieve this goal, after consulting a lot of materials, I realized that I needed to use pointers to achieve it. Therefore, the data type of map should be a pointer to the pointer in the project.
-```C++
-char** map;
-```
+    ```C++
+    char** map;
+    ```
 
 3. Input validation (solved) (Hanson-666)  
 In order to avoid that player will enter unrelated input on certain circumstances. After many trials, I choose to use <vector> to store the correct answers first. For convenience, the data type is set as string and all input will be changed to lower case for comparsion. This method fits all input validation needed by the whole project. I also write a common validation function for this.
