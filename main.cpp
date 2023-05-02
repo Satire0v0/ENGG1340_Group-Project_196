@@ -143,6 +143,10 @@ int main(){
                                 150,\
                                 big_monster.get_ATK() * 1.2,\
                                 big_monster.get_prob() * 1.2);
+                                
+                if (big_monster.get_prob() > 1){
+                    big_monster.set_prob(1);
+                }
                 player = attack(player, big_monster, map, diff_level);
                 current_block = ' ';
                 diff_level++;
@@ -181,9 +185,15 @@ int main(){
                 short_pause();
                 player = attack(player, E, map, diff_level);
                 if (player.get_HP()>0){
-                    cout << "";
-                }else{
-                    endwin=false;
+                    cout << "After a roar, the teriffiying zombie turned into a pool of blood"<<endl;
+                    short_pause();
+                    cout<< "The sunlight shone on you mildly from the end of the exit."<<endl;
+                    cout<< "You breathed in the fresh air, smiled and walked out...."<<endl;
+                    sleep(1);
+                    cout<< "Congratulations!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"<<endl;
+                    sleep(1);
+                    cout<<"You have found the exit of this zombie train. The story of this game has reached the end. But you are still able to explore the map."<<endl;
+                    short_pause();
                 }
 
             }
