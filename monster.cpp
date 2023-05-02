@@ -6,7 +6,7 @@ int Monster::get_HP(){
 }
 
 void Monster::update_HP(int val){
-    if ( (HP += val) >= maxHP ) HP = maxHP;
+    if ( (HP + val) >= maxHP ) HP = maxHP;
     else HP += val;
 }
 
