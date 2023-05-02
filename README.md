@@ -24,9 +24,10 @@ The map on the second level is a dungeon, the player can move by pressing (W, A,
 + **M** represents the elite monster which will grow with the story.
 + **m** represents the miscellaneous monsters (their battle information is constant).
 + **number** indicates the story.
-+ **#** represents the secret door (passing through it will be teleported to another location on the map). 
-
-During the game, if the player meet any of the monsters, the player will automatically enter the battle screen, if the player is able to kill the monster and win, the player will have 5 seconds to choose whether to enter the bonus level, if the player chooses to enter the bonus level, they will play a keyboard presssing game, if passed, they can get a reward in the normal box. If the player loses the match, the game ends and the game will restart from the player's last saved record(if the player has saved, if not, the game will restart from the stage 1).
++ **#** and **?** represents the secret door (passing through it will be teleported to another location on the map). 
++ **$** represents the normal reward box which can be seen from the map directly.
++ there are also hidden reward boxes which are not visible to the players if they do not have the talent : nightvision. We want to encourage the players to walk around on themselves, therefore the rewards in the hidden boxes would be better than that in the normal boxes.
++ During the game, if the player meet any of the monsters, the player will automatically enter the battle screen, if the player is able to kill the monster and win, the player will have to choose whether to enter the bonus level, if the player chooses to enter the bonus level, they will play a keyboard presssing game, if passed, they can get a reward in the normal box. If the player loses the match, the game ends and the game will restart from the player's last saved record(if the player has saved, if not, the game will restart from the stage 1).
 
 ## Features implemented
 
