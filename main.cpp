@@ -171,6 +171,7 @@ int main(){
             
             else if (moving_result == "E"){ // reaching end / facing boss
                 Monster E;
+                bool endwin;
                 E.set(1000,1000,800,0.25);
                 // cout << endl;
                 clear_screen();
@@ -179,6 +180,12 @@ int main(){
                 cout << "You barely have time to react as the zombie tries to bite your neck and rip you apart..." << endl;
                 short_pause();
                 player = attack(player, E, map, diff_level);
+                if (player.get_HP()>0){
+                    cout << "";
+                }else{
+                    endwin=false;
+                }
+
             }
             
             else if (moving_result == " "){ // normal movement
