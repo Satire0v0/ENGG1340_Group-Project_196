@@ -12,7 +12,6 @@ struct Talent{
     int life;
     bool vision;
     bool super_vision;
-    // maxHP,DEF,翻倍的实现形式:player.set_ATK(player.get_ATK() * 2);
     void set(int mult_val, int life_val, bool vision_val, bool super_vision_val){
         mult = mult_val;
         life = life_val;

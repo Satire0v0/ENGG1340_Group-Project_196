@@ -13,19 +13,9 @@ using namespace std;
 class Player;
 class Map;
 
-/*
-struct saved_data
-{
-    int data;
-    saved_data *next;
 
-};
-*/
+void save_data(Player &player, Map &map, int diff_level);
 
-
-void save_data(Player &player, Map &map);
-
-void export_data(Player &player, Map &map);
-
+void export_data(Player &player, Map &map, int &diff_level);
 
 #endif

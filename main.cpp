@@ -32,7 +32,7 @@ int main(){
         string choice = read_choice();
         
         if (choice == "read"){
-            export_data(player, map);
+            export_data(player, map, diff_level);
         }
         else if (choice == "new"){
             while (true){ // whether watch slots
@@ -89,7 +89,7 @@ int main(){
             
             /*player operation*/
             userInput = keyboard(); // detect what player has entered
-            move_loc = explain_input(userInput, player, map); // explain the meaning of player's input
+            move_loc = explain_input(userInput, player, map, diff_level); // explain the meaning of player's input
             moving_result = map.check_block(move_loc, player.get_loc()); // if moving, the next block is first returned
 
             /*update map*/
@@ -194,6 +194,13 @@ int main(){
                     sleep(1);
                     cout<<"You have found the exit of this zombie train. The story of this game has reached the end. But you are still able to explore the map."<<endl;
                     short_pause();
+
+                    while (true){
+                        int decision = yes_or_no("Do you want to leave? (y / n)", "", false);
+                        if (decision == 1) exit(0);
+                        else if (decision == 0) break;
+                        else continue;
+                    }
                 }
 
             }

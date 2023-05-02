@@ -125,7 +125,7 @@ char keyboard(){ // detect key letters, which are case-insensitive
 }
 
 
-location explain_input(char word, Player player, Map map){ // each key letter has its own unique function
+location explain_input(char word, Player player, Map map, int diff_level){ // each key letter has its own unique function
     location loc;
     string result;
 
@@ -180,7 +180,7 @@ location explain_input(char word, Player player, Map map){ // each key letter ha
         cin >> choice;
         if (choice == "save")
         {
-            save_data(player, map);
+            save_data(player, map, diff_level);
             exit(0);
         }
         else{
@@ -273,7 +273,7 @@ string read_choice(){
     char judge_eof;
     saveFile >> judge_eof;
 
-    if (saveFile.eof()){
+    if (saveFile.fail() || saveFile.eof()){
         ans.push_back("new");
         while (true){
             clear_screen();

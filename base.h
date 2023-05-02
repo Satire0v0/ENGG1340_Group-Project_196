@@ -41,7 +41,7 @@ string to_lower(string user_input);
 
 // main
 char keyboard();
-location explain_input(char word, Player player, Map map);
+location explain_input(char word, Player player, Map map, int diff_level);
 
 // slot functions in main.cpp
 bool meet_room(string moving_result);
