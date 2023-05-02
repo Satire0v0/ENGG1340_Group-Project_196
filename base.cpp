@@ -51,18 +51,18 @@ int yes_or_no(string sentence1, string sentence2, bool clear_all){ // used in fi
 
 
 void print_hint(){ // Player will get the meaning of differenct characters when pressing h
-    char single_str[]={'w', 'a', 's', 'd', 'e', 'h', 'O', 'm', 'M', '%', 'E'};
+    char single_str[]={'w', 'a', 's', 'd', 'e', '$', 'O', 'm', 'M', '%', 'E'};
     string description[]={
         "Move up",
         "Move left",
         "Move down",
         "Move right",
         "Exit game",
+        "Reward",
         "Player",
         "Small Monster",
         "Big Monster",
         "Wall",
-        "Room Number",
         "Final Boss"
     };
 
