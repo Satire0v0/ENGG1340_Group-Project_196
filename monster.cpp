@@ -22,6 +22,10 @@ double Monster::get_prob(){
     return prob;
 }
 
+void Monster::set_prob(double val){
+    prob = val;
+}
+
 void Monster::show_info(){
     cout << "Monster -> ";
     cout << "HP: " << HP << "/" << maxHP << " | ";
