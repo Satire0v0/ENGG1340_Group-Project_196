@@ -436,7 +436,7 @@ Player Map::hiddenbox(Player player){ // hidden box
             break;
         }
         else if (result[choice-1] == doublehp){
-            player.update_HP(player.get_HP()*2);
+            player.update_HP(player.get_HP());
             break;
         }
     }
