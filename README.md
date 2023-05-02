@@ -33,13 +33,17 @@ The map on the second level is a dungeon, the player can move by pressing (W, A,
 ### 1. Treasure box
 Three choices are chosen randomly. There are a number of choices provided for Player. Three of them will be randomly chosen. Some specific choices will not be chosen again once they are acquired by the Player. 
 ### 2. Interesting bonus games
-There are four bonus games. Game 1: Press different times of ‘f’ within 5 seconds to win the game. Game 2: Guess the number on the die: big or small. Game 3: Rock, paper and scissors. Game 4: Fight with an imp. Guess the number bomb within a given range. Range will update if player guess the wrong number. Player loses game if player guess the number right. 
+There are four bonus games. Game 1: Press different times of ‘f’ within 5 seconds to win the game. Game 2: Guess the number on the die: big or small. Game 3: Rock, paper and scissors. Game 4: Fight with an imp. Guess the number bomb within a given range. Range will update if player guess the wrong number. Player loses game if player guess the number right.
+
+Except the game 1, all games are generated randomly. The bonus game that player will play is randomly chosen. 
 ### 3. Hidden plots
 There are some plots hidden from the Player. When Player reaches specific blockes, hidden plots will be displayed. 
 ### 4. Talent system
 One of the most interesting part in the game. A night vision shows 3x3 hidden blocks around the Player. The supervision shows all hidden blocks in the map. The 'mult' talent will change the multiple of times of 'f' pressed in the bonus game 1. For instance, if 'mult' = 2, press 'f' once will be treated as being pressed twice. 
 ### 5. Save and read archive
-The game progress can be stored and read, including the attribute of players and monsters and the difficulty of games. 
+The game status can be stored and read, including the attribute of players and monsters and the difficulty of games. 
+### 6. Fighting stage
+During fighting between Player and monsters, whether Player and monsters can deal damage each other is due to probability. 
 
 ## Coding requirements
 
@@ -83,4 +87,12 @@ Finally, I unintentionally found that the library <termio.h> could also work wel
 
 2. Dynamic memory management of two-dimensional array named map (unsolved) (Hanson-666)
 
-3. 
+3. Input validation
+
+4. Random function
+
+5. Undefined reference of class
+
+6. Map construction according to plots
+
+7. Predict the next block the Player will move to
