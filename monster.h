@@ -23,6 +23,7 @@ class Monster{
         int get_ATK();
         int get_maxHP();
         double get_prob();
+        void set_prob(double val);
         int attack();
 
         void show_info();
