@@ -30,7 +30,18 @@ The map on the second level is a dungeon, the player can move by pressing (W, A,
 + During the game, if the player meet any of the monsters, the player will automatically enter the battle screen, if the player is able to kill the monster and win, the player will have to choose whether to enter the bonus level, if the player chooses to enter the bonus level, they will play a keyboard presssing game, if passed, they can get a reward in the normal box. If the player loses the match, the game ends and the game will restart from the player's last saved record(if the player has saved, if not, the game will restart from the stage 1).
 
 ## Features implemented
+### 1. Treasure box
+Three choices are chosen randomly. There are a number of choices provided for Player. Three of them will be randomly chosen. Some specific choices will not be chosen again once they are acquired by the Player. 
+### 2. Interesting bonus games
+There are four bonus games. Game 1: Press different times of ‘f’ within 5 seconds to win the game. Game 2: Guess the number on the die: big or small. Game 3: Rock, paper and scissors. Game 4: Fight with an imp. Guess the number bomb within a given range. Range will update if player guess the wrong number. Player loses game if player guess the number right. 
+### 3. Hidden plots
+There are some plots hidden from the Player. When Player reaches specific blockes, hidden plots will be displayed. 
+### 4. Talent system
+One of the most interesting part in the game. A night vision shows 3x3 hidden blocks around the Player. The supervision shows all hidden blocks in the map. The 'mult' talent will change the multiple of times of 'f' pressed in the bonus game 1. For instance, if 'mult' = 2, press 'f' once will be treated as being pressed twice. 
+### 5. Save and read archive
+The game progress can be stored and read, including the attribute of players and monsters and the difficulty of games. 
 
+## Coding requirements
 
 ### 1. Generation of random game sets or events
 
@@ -58,3 +69,18 @@ In **main.cpp**, we include all files we need like **player.h**, **room.h**, **g
 
 1. Type **make main**
 2. Type **./main**
+
+## Problem Collection for Final Assessment
+
+1. Real time reading of user keyboard input (solved) (Hanson-666)
+
+When working on local computer, I can realize this function by simply using getch() function in the header file called <conio.h>. However, this library is not installed on HKU server. 
+
+After consulting with other friends, there is an alternative method, that is getch() introduced in <ncurses.h>. Luckily this header file is installed on server. Whereas, I realized that I needed to adhere to its specific initialization and output formats. It requires me to spend some time studying this library.
+
+Finally, I unintentionally found that the library <termio.h> could also work well.
+
+
+2. Dynamic memory management of two-dimensional array named map (unsolved) (Hanson-666)
+
+3. 
