@@ -31,7 +31,7 @@ class Player{
         int ATK = 10;
         int DEF = 0;
         int maxHP = 100;
-        double prob = 0.7; // percentage
+        double prob = 0.5; // percentage
 
 
     public:
