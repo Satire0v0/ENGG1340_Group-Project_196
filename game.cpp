@@ -11,7 +11,7 @@ struct gamestatus{
 bool rpsgame(){
     int userChoice, computerChoice;
     gamestatus rps;
-    short_pause();
+    // short_pause();
     cout << "Rock paper scissors!\n";
     cout << "1. Rock\n";
     cout << "2. Paper\n";
@@ -21,6 +21,8 @@ bool rpsgame(){
 
     srand(time(0));
     computerChoice = rand() % 3 + 1;
+
+    cout << endl;
     if (userChoice == computerChoice) {
         cout << "Draw!\n";
         short_pause();
@@ -40,35 +42,80 @@ bool rpsgame(){
 
 
 bool guess_dice() {
-    short_pause();
+    // short_pause();
     gamestatus die;
     string player_guess;
     srand(time(0));
     int dice = rand() % 6 + 1;
 
-    cout << "Please guess if the number on the dice is big or small, input 'Big' if the number is lower or equal to 3, otherwise please input 'Small'. " << endl;
+    cout << "Please guess if the number on the dice is big or small." << endl;
+    cout << "Input 'Big' if the number is lower or equal to 3, otherwise please input 'Small'." << endl;
+    cout << endl;
+    cout << "Your choice -> ";
     cin >> player_guess;
-    while ( player_guess != "Big" && player_guess !="Small"){
-        cout<<"You can only input 'Big' or 'Small'"<<endl;
+    player_guess = to_lower(player_guess);
+    cout << endl;
+
+    while (player_guess != "big" && player_guess != "small"){
+        cout << "You can only input 'Big' or 'Small' -> ";
         cin >> player_guess;
     }
-    sleep(2);
-    if (player_guess == "Big" && dice > 3) {
-        cout << "The number is "<< dice << ". You win !!!"<< endl;
+    cout << endl;
+    // sleep(2);
+    sleep(1);
+    if (player_guess == "big" && dice > 3) {
+        cout << "The number is " << dice << ". You win !!!"<< endl;
+        cout << endl;
         die.win=true;
+
+        scan_keyboard(); // unexpected input from server
         short_pause();
+
         return die.win;
-    } else if (player_guess == "Small" && dice <= 3) {
-        cout << "The number is "<< dice << ". You win !!!"<< endl;
+    } else if (player_guess == "small" && dice <= 3) {
+        cout << "The number is " << dice << ". You win !!!"<< endl;
+        cout << endl;
         die.win=true;
+
+        scan_keyboard(); // unexpected input from server
         short_pause();
+
         return die.win;
     } else {
-        cout << "The number is "<< dice << ". You lose ~~~"<< endl;
+        cout << "The number is " << dice << ". You lose ~~~"<< endl;
+        cout << endl;
         die.win=false;
+
+        scan_keyboard(); // unexpected input from server
         short_pause();
+
         return die.win;
     }
+}
+
+
+int return_digit(){
+    bool negative=false;
+    string userInput;
+    userInput = get_word();
+
+    if (userInput[0] == '-'){ // check negative sign first
+        negative = true;
+        userInput = userInput.substr(1, userInput.length()-1);
+    }
+
+    for (int i=0; i<userInput.length(); i++){ // check whether there is non-digit num
+        if (not isdigit(userInput[i])){
+            return 0;
+        }
+    }
+
+    int num = 0;
+    istringstream iss(userInput);
+    iss >> num;
+
+    if (negative) return (-1)*num;
+    else return num;
 }
 
 
@@ -89,10 +136,11 @@ bool number_guess(){
 
     while (!game_over) {
         cout << "please guess a number within the range (" << lower << " --- " << upper << "): ";
-        cin >> player_guess;
+        player_guess = return_digit();
+
         while (player_guess <lower || player_guess > upper){
             cout << "please guess a number within the range (" << lower << " --- " << upper << "): ";
-            cin >> player_guess;
+            player_guess = return_digit();
         }
         if (player_guess == bomb) {
             cout << "You found the bomb! Game OVER. You Lose!" << std::endl;
@@ -126,38 +174,6 @@ bool number_guess(){
 }
 
 
-
-
-
-bool start_game(){
-    string choice;
-    vector<string> ans;
-    ans.push_back("yes");
-    ans.push_back("y");
-    ans.push_back("no");
-    ans.push_back("n");
-
-    while (true){
-        clear_screen();
-        cout << "Want to start? (yes / no)" << endl;
-        cout << endl;
-        cout << "Your choice -> ";
-        choice = get_word();
-        choice = to_lower(choice);
-
-        for (int i=0; i<ans.size(); i++){
-        // find whether input is in the range
-            if (choice == ans[i]){
-                if (choice == "no" || choice == "n"){
-                    return false;
-                }
-                else if (choice == "yes" || choice == "y"){
-                    return true;
-                }
-            }
-        }
-    }
-}
 int getch() {
     struct termios oldt, newt;
     int ch;
@@ -172,7 +188,7 @@ int getch() {
 
 
 bool keyboard_game(int talent_mult,int difficulty=30){
-    short_pause();
+    // short_pause();
     gamestatus kb;
     int multiple = talent_mult;
     int count = 0;
@@ -191,14 +207,27 @@ bool keyboard_game(int talent_mult,int difficulty=30){
         }
 
         if (time(0) - start >= 5) {
-            cout << "Game over" << endl;
+            int now = time(0);
+            while (true){
+                if ((time(0) - now) > 0.8){
+                    break;
+                }
+                else{
+                    if (getch() == 'f'){
+                        time_t now = time(0);
+                        continue;
+                    }
+                }
+            }
+            cout << endl;
+            cout << "Game over !!!" << endl;
             cout << "You have pressed " << count << " times." << endl;
             cout << endl;
             break;
         }
     }
 
-    short_pause();
+    // short_pause();
     if (count > difficulty){
         cout << "You win!" << endl;
         kb.win=true;
@@ -227,12 +256,11 @@ Player attack(Player player, Monster monster, Map map, int diff_level){
                 cout << endl;
 
                 if (player.get_HP() > 0){
-                    cout << "Now you will have a keyboard game" << endl;
-                    cout << endl;
+                    cout << "You win" << endl;
+                    short_pause();
                     player=countdown(player, map, diff_level);
                     return player;
                 }
-
                 return player;
             }
         }
@@ -248,11 +276,7 @@ Player attack(Player player, Monster monster, Map map, int diff_level){
             
             cout << endl;
 
-            cout << "Press any key to fight" << endl;
-            int user_input = scan_keyboard();
-
-            // 
-            // cout << endl;
+            short_pause();
 
             player.update_HP( (-1) * monster.attack());
             monster.update_HP( (-1) * player.attack());
@@ -261,48 +285,27 @@ Player attack(Player player, Monster monster, Map map, int diff_level){
 }
 
 
-Player countdown(Player player, Map map, int count) {
+Player countdown(Player player, Map map, int &count) {
     bool win=false;
     char input;
-    bool judge;
-
-    vector<string> fixed_ans;
-    fixed_ans.push_back("yes");
-    fixed_ans.push_back("y");
-    fixed_ans.push_back("no");
-    fixed_ans.push_back("n");
-    string choice;
-
-
-    cout<<"Enter the reward stage (y/n) -> ";
 
     while (true){
-        bool flag = false;
-        choice = get_word();
-        choice = to_lower(choice);
-
-        for (int i=0; i<fixed_ans.size(); i++){
-            if (choice == fixed_ans[i]){
-                if (choice == "yes" || choice == "y"){
-                    input = 'y';
-                    flag = true;
-                    break;
-                }
-                else if (choice == "no" || choice == "n"){
-                    input = 'n';
-                    flag = true;
-                    break;
-                }
-            }
-        }
-        if (flag == true){
+        int decision = yes_or_no("Now you will have a keyboard game", "Enter the reward stage (y/n)", true);
+        if (decision == 1){
+            input = 'y';
             break;
         }
+        else if (decision == 0){
+            input = 'n';
+            break;
+        }
+        else continue;
     }
 
     if (input == 'y'){
-        
-        cout << "Press as many as ‘f’ as you can to win an reward!!!";
+        clear_screen();
+        cout << "Press as many as ‘f’ as you can to win an reward!!!" << endl;
+        cout << endl;
 
         short_pause();
         win = keyboard_game(player.talent.mult, 30+10*(count));
@@ -321,11 +324,12 @@ Player countdown(Player player, Map map, int count) {
 }
 
 
-Player randomFunction(Player player, int talent_mult, int count) {
+Player randomFunction(Player player, int talent_mult, int count){
     srand(time(0));
     int randomNum = rand() % 4 + 1;
     bool win = false;
 
+    // clear_screen();
     switch(randomNum) {
         case 1:
             if (number_guess()){
@@ -365,6 +369,8 @@ Player randomFunction(Player player, int talent_mult, int count) {
             }
             break;
     }
+
+    cout << endl;
     short_pause();
     return player;
 }

@@ -8,6 +8,8 @@
 #include <algorithm>
 #include <cstdlib>
 #include <ctime>
+#include <algorithm>
+
 #include "global.h"
 #include "player.h"
 
@@ -30,9 +32,7 @@ class Map{
         char BOX = '$';
         char HIDDEN_BOX = '*'; // invisible
         char HIDDEN_MONSTER = '@'; // invisible
-        char WINDOW = 'W';
-        char HIDDEN_DOOR = '#'; // invisible
-
+        char END = 'E';
 
         // room number
         char ONE = '1';
@@ -46,10 +46,12 @@ class Map{
         char NINE = '9';
         char TEN = 'A';
         char ELEVEN = 'B';
+
         char HIDDEN_FIVE = '&';
         char HIDDEN_LETTER = 'L';
-        char END = 'E';
-    
+        char HIDDEN_DOOR = '#';
+        
+        char WINDOW = 'W';
         char TRANSFER = '?';
 
         // 2-dimensional dynamic array
@@ -61,7 +63,6 @@ class Map{
         void print_map();
         void read_map(string fileName);
         void update_block(location loc, char block);
-        void generate_player(location player_loc);
         string check_block(location move_loc, location player_loc);
         void count_size(string fileName);
         void empty_map();
@@ -79,11 +80,6 @@ class Map{
 
         // store map
         void map_saving();
-        // void map_reading();
-
-
-
-        
 };
 
 #endif

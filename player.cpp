@@ -24,15 +24,30 @@ int Player::get_HP(){
 }
 
 void Player::update_HP(int val){
-    // could not exceed maxHP
-    if ( (HP+val) >= maxHP){
-        HP = maxHP;
+    // if attack
+    if (val < 0){
+        if (DEF == 0) HP += val;
+        else{
+            if ( (DEF + val) < 0 ){
+                DEF = 0; // DEF less the monster's ATK
+                HP += (DEF + val);
+            }
+            else{
+                DEF += val;
+            }
+        }
     }
     else{
-        HP += val;
+        // could not exceed maxHP
+        if ( (HP+val) >= maxHP){
+            HP = maxHP;
+        }
+        else{
+            HP += val;
+        }
     }
-}
 
+}
 
 int Player::get_ATK(){
     return ATK;
@@ -68,12 +83,11 @@ void Player::update_maxHP(int val){
     maxHP += val;
 }
 
-
 double Player::get_prob(){
     return prob;
 }
 
-void Player::update_prob(int val){
+void Player::update_prob(double val){
     if ((prob + val) >= 1) prob = 1;
     else prob += val;
 }
@@ -88,7 +102,6 @@ void Player::show_info(){
 
     // over
     cout << endl;
-
 } 
 
 int Player::attack(){
@@ -122,17 +135,6 @@ void Player::set_prob(double new_prob){
     else prob = new_prob;
 }
 
-
 void Player::set_loc(location new_loc){
     loc = new_loc;
 }
-
-
-/*
-// Talent
-void Talent::set(int mult_val, bool vision_val, bool supernightvision_val){
-    mult = mult_val;
-    vision = vision_val;
-    supernightvision = supernightvision_val;
-}
-*/

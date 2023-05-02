@@ -336,25 +336,26 @@ Player train5(Player player){
     string storytrain5a = "The luckiest thing is that you survive from the the crisis and do not need emergency medical treatment.";
     cout << storytrain5a << endl;
     short_pause();
+    cout << endl;
 
     // story 2
     string storytrain5b = " However, you are the only survive of the incident, other passengers are all killed by the zombies, right now their bodies are scattered everywhere in the train.";
     cout << storytrain5b << endl;
     short_pause();
+    cout << endl;
 
     // story 3
-    string storytrain5c = "Now, you step out the train to the underground castle outside in order to seek chance to survive. Even though the situation makes you feel heart breaking, fear and downcast, you still want to leave this terrible place, go back to normal life.";
-    cout << storytrain5c << endl;
+    cout << "Now, you step out the train to the underground castle outside in order to seek chance to survive." << endl;
+    cout << "Even though the situation makes you feel heart breaking, fear and downcast, you still want to leave this terrible place, go back to normal life.";
     short_pause();
                 
     // story 4
-    string storytrain5d = "“I have to let everyone know here and protect others away from here!” whisper by you while walking forward to look for way to freedom. In the darkness,";
-    cout << storytrain5d << endl;
+    cout << "“I have to let everyone know here and protect others away from here!” whisper by you while walking forward to look for way to freedom." << endl;
     short_pause();
     
     // story 5
-    string storytrain5e = "you hear some noise which you haven’t heard before but you are sure that this cannot be pronounced by human being, associated with news about zombies appear in the city, you recognized they are zombies. At the same time, you see a secret door on the wall on your left.";
-    cout << storytrain5e << endl;
+    cout << "In the darkness, you hear some noise which you haven’t heard before but you are sure that this cannot be pronounced by human being, associated with news about zombies appear in the city, you recognized they are zombies." << endl;
+    cout << "At the same time, you see a secret door on the wall on your left." << endl;
 
     // choice 5
     string option5a = "What is your choice?\nA: Use your body to smash the door\nB: Continue running forward";
@@ -422,14 +423,11 @@ Player room2(Player player){
 }
 
 Player room3(Player player){
-    // define
-    string storyroom3 = "“Help! Help! Is there someone who can save me? Help! Help!” you hear the grieved roar behind a door. “It’s definitely not produced by zombies.” whisper by you.";
-    string optionroom3a = "What will you do next? ";
-
     // operation
     clear_screen();
-    cout << storyroom3 << endl;
-    cout << optionroom3a << endl;
+    cout << "“Help! Help! Is there someone who can save me? Help! Help!” you hear the grieved roar behind a door." << endl;
+    cout << "“It’s definitely not produced by zombies.” whisper by you." << endl;
+    cout << "What will you do next?" << endl;
     cout << endl;
 
     short_pause();
@@ -437,12 +435,12 @@ Player room3(Player player){
 }//room 3 C提示前面似乎有什么东西 暗房的*必刷vision天赋
 
 Player room4(Player player){
-    // define
-    string storyroom4 = "The terrifying sound pronounced by the zombies appear again from the corridor, there is a treasure box in the room and you can tell they are capable for war. What is more, there is huge probability that you can win more equips if you win.";
-    
     // operation
     clear_screen();
-    cout << storyroom4 << endl;
+    cout << "The terrifying sound pronounced by the zombies appear again from the corridor" << endl;
+    cout << "There is a treasure box in the room and you can tell they are capable for war." << endl;
+    cout << "What is more, there is huge probability that you can win more equips if you win." << endl;
+
     cout << endl;
 
     short_pause();
@@ -450,14 +448,18 @@ Player room4(Player player){
 }
 
 Player room5_Hidden(Player player){
-    // define
-    string strroom5a = "The wall of this room is made of thick cement, the door you pass through is so similar to those in military bases, so substantial, even an atomic bomb cannot break it. It is the first time you are able to relax a little bit after boarding the train. Suddenly, you found that your feet kick to something then you bend down to see what is that. The environment is too dark so you took long time to adapt to the darkness.";
-    string strroom5b = "After a while, you see there is a a skeleton on the ground. “Aaaaaaaaaaaaaaaaaaa!” you shouted with great fear. At that moment, you decide to escape to outside nut the sound of hungry zombies stop you. Soon you realized a stationary skeleton is far less threatening than moving zombies. Then, you saw a piece of paper next to the skeleton and you start reading it.";
-    
     // operation
     clear_screen();
-    cout << strroom5a << endl;
-    cout << strroom5b << endl;
+    cout << "The wall of this room is made of thick cement, the door you pass through is so similar to those in military bases, so substantial, even an atomic bomb cannot break it." << endl;
+    cout << "It is the first time you are able to relax a little bit after boarding the train." << endl;
+    cout << "Suddenly, you found that your feet kick to something then you bend down to see what is that." << endl;
+    cout << "The environment is too dark so you took long time to adapt to the darkness." << endl;
+    cout << endl;
+    cout << "After a while, you see there is a a skeleton on the ground." << endl;
+    cout << "“Aaaaaaaaaaaaaaaaaaa!” you shouted with great fear." << endl;
+    cout << "At that moment, you decide to escape to outside nut the sound of hungry zombies stop you." << endl;
+    cout << "Soon you realized a stationary skeleton is far less threatening than moving zombies." << endl;
+    cout << "Then, you saw a piece of paper next to the skeleton and you start reading it." << endl;
     cout << endl;
 
     short_pause();
@@ -465,12 +467,18 @@ Player room5_Hidden(Player player){
 }
 
 Player room5_Letter(Player player){
-    // define
-    string letterroom5 = "Dear boy/girl  This is my last letter in this world. Soon I will be crazy and may die soon. This letter may help you survive and go back home. I suppose you know the meaning of “666”, the next room is Room 6. I saw there is a huge painting of “666” on the wall of room 6. Be careful my friend, this will definitely bring bad luck to you. Trust me. Your loved ones are all waiting for you in your city. Good luck. Sincerely";
-    
     // operation
     clear_screen();
-    cout << letterroom5 << endl;
+    cout << "Dear boy/girl," << endl;
+    cout << "This is my last letter in this world. Soon I will be crazy and may die soon." << endl;
+    cout << "This letter may help you survive and go back home." << endl;
+    cout << "I suppose you know the meaning of “666”, the next room is Room 6." << endl;
+    cout << "I saw there is a huge painting of “666” on the wall of room 6." << endl;
+    cout << "Be careful my friend, this will definitely bring bad luck to you." << endl;
+    cout << "Trust me. Your loved ones are all waiting for you in your city." << endl;
+    cout << "Good luck" << endl;
+    cout << "Sincerely" << endl;
+
     cout << endl;
 
     short_pause();
@@ -487,14 +495,13 @@ Player room5 (Player player){
 }
 
 Player room6(Player player){
-    // define
-    string storyroom6a = "The letter’s writer is right, there is three “6” painted on the wall with bright red. Maybe too much paint was used so the excess paint flow downward in a winding route, just like the words are bleeding. You haven’t know the format of the room tell you all about tour future. Suddenly,";
-    string storyroom6b = "“Hahahahahahahahahahahahahahaha” a voice come out with unbridled style. You are surrounded by the zombies! Hahahahahahahaha” said the ownerless voice.";
-    
     // operation
     clear_screen();
-    cout << storyroom6a << endl;
-    cout << storyroom6b << endl;
+    cout << "The letter’s writer is right, there is three “6” painted on the wall with bright red." << endl;
+    cout << "Maybe too much paint was used so the excess paint flow downward in a winding route, just like the words are bleeding." << endl;
+    cout << "You haven’t know the format of the room tell you all about tour future." << endl;
+    cout << "“Hahahahahahahahahahahahahahaha” a voice come out with unbridled style." << endl;
+    cout << "You are surrounded by the zombies! Hahahahahahahaha” said the ownerless voice." << endl;
 
     cout << endl;
     short_pause();
@@ -510,8 +517,10 @@ Player room6(Player player){
 
 Player room7(Player player){
     clear_screen();
-    cout << " You keep walking and looking for way to go out at the same time. In a twinkling, you saw a flash of reflected light, it is so dazzling that you close your eyes at once by instinct." << endl;
-    cout << "You look around to find the light source, then you find there is a window on the wall. At the same time, you observe a secret door on the wall. " << endl;
+    cout << "You keep walking and looking for way to go out at the same time." << endl;
+    cout << "In a twinkling, you saw a flash of reflected light, it is so dazzling that you close your eyes at once by instinct." << endl;
+    cout << "You look around to find the light source, then you find there is a window on the wall." << endl;
+    cout << "At the same time, you observe a secret door on the wall." << endl;
     
     cout << endl;
     short_pause();
@@ -519,7 +528,8 @@ Player room7(Player player){
 }
 Player room7_secretdoor(Player player){ //room 7 #
     clear_screen();
-    cout << "You opened the secret door and walked in, you don't know where the road leads. You don't know how long after walking and you find yourself walking back to a familiar place."<<endl;
+    cout << "You opened the secret door and walked in, you don't know where the road leads." << endl;
+    cout << "You don't know how long after walking and you find yourself walking back to a familiar place." << endl;
     player.set_loc({2,10});
 
     cout << endl;
@@ -538,8 +548,10 @@ Player room7_window(Player player, Monster monster, Map map, int count){// room 
 
 Player room8(Player player){
     clear_screen();
-    cout << "Congratulation to you to be still alive in the game. This room is very large, you plan to walk around the 4 walls to find useful information or way to outside." << endl;
-    cout << "On the way, you saw 2 people lie prone on the ground, devour on tumble of raw, putrefy meat like a wolf. “Why do they eat these? Where does the meat come from?” you whisper quietly." << endl;
+    cout << "Congratulation to you to be still alive in the game." << endl;
+    cout << "This room is very large, you plan to walk around the 4 walls to find useful information or way to outside." << endl;
+    cout << "On the way, you saw 2 people lie prone on the ground, devour on tumble of raw, putrefy meat like a wolf." << endl;
+    cout << "“Why do they eat these? Where does the meat come from?” you whisper quietly." << endl;
     cout << "The two 'people' realized you are close to them so they stand up and try to catch you. " << endl;
 
     cout << endl;
@@ -577,8 +589,11 @@ Player room11(Player player){
 }
 Player room13(Player player){
     clear_screen();
-    cout << "This huge room’s ground is made of transparent glass. You can see the lower room is full of zombies, you cannot tell how many of them but you are sure you can’t survive even though use up your equips if enter there." << endl;
-    cout << "But at the same time, you also see a light at the end of the room, it seems to be coming from outside, but unfortunately, a behemoth guards it, it seems to be more powerful than the zombies you accidentally encounter"<<endl;
+    cout << "This huge room’s ground is made of transparent glass." << endl;
+    cout << "You can see the lower room is full of zombies." << endl;
+    cout << "You can not tell how many of them but you are sure you can’t survive even though use up your equips if enter there." << endl;
+    cout << "But at the same time, you also see a light at the end of the room, it seems to be coming from outside." << endl;
+    cout << "But unfortunately, a behemoth guards it, it seems to be more powerful than the zombies you accidentally encounter" << endl;
     
     cout << endl;
     short_pause();

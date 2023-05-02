@@ -6,9 +6,9 @@ int Monster::get_HP(){
 }
 
 void Monster::update_HP(int val){
-    HP += val;
+    if ( (HP += val) >= maxHP ) HP = maxHP;
+    else HP += val;
 }
-
 
 int Monster::get_ATK(){
     return ATK;
@@ -32,7 +32,12 @@ void Monster::show_info(){
 
 
 void Monster::set(int new_HP, int new_maxHP, int new_ATK, double new_prob){
-    HP = new_HP;
+    if (new_HP >= new_maxHP){
+        HP = new_maxHP;
+    }
+    else{
+        HP = new_HP;
+    }
     ATK = new_ATK;
     maxHP = new_maxHP;
     prob = new_prob;

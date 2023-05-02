@@ -56,7 +56,7 @@ class Player{
         void update_maxHP(int val);
 
         double get_prob();
-        void update_prob(int val);
+        void update_prob(double val);
 
         void show_info();
         

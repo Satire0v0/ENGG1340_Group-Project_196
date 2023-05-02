@@ -33,6 +33,6 @@ main: main.o map.o base.o player.o saving.o game.o monster.o room.o
 	g++ $(FLAGS) $^ -o $@
 
 clean:
-	rm -f *.o
+	rm -f *.o main
 
 .PHONY: clean

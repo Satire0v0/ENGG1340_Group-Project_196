@@ -31,41 +31,34 @@ class Monster;
 
 
 // general functions
-void clear_screen();
-
-string get_word();
-
-bool leave_or_not();
-
-void print_hint();
-
+int yes_or_no(string sentence1, string sentence2, bool clear_all);
 int scan_keyboard();
-
+void print_hint();
+void short_pause();
+void clear_screen();
+string get_word();
 string to_lower(string user_input);
 
 // main
 char keyboard();
-location explain_input(char word, Player &player, Map &map);
+location explain_input(char word, Player player, Map map);
 
 // slot functions in main.cpp
 bool meet_room(string moving_result);
 Player trigger_room_slot(string moving_result, Player player, Monster monster, Map map, int count);
-string read_choice();
-bool skip_slot();
 
-// roles
-int random_num();
+// new game or not
+string read_choice();
+
+// functions used in roles' attack
+int random_num(int lower_bound, int upper_bound);
 double getProbability();
 
 // slot functions in room.cpp
 bool in_range(string user_input, vector<string> ans);
-void short_pause();
 string slot_choice(vector<string> ans);
 
 // functions used in box
 int box_choice(vector<string> ans);
-
-// die
-bool want_to_continue();
 
 #endif

@@ -18,17 +18,14 @@ string accurate="(Accurate attack) Your prob will always be 1";
 string supernightvision= "(Supernightvision) You can see all the hidden objects in the map.";
 
 
-void Map::initialize(){
+void Map::initialize(){ // initialize map
     Map::count_size("map.txt");
-
     Map::empty_map();
-
     Map::read_map("map.txt");
 }
 
 
-void Map::empty_map(){
-    // 2-dimensional dynamic array
+void Map::empty_map(){ // use dynamic management to generate 2-dimensional array
     map = new char* [MAP_HEIGHT];
     for (int row=0; row < MAP_HEIGHT; row++){
         map[row] = new char[MAP_WIDTH];
@@ -39,17 +36,17 @@ void Map::empty_map(){
 }
 
 
-void Map::print_map(){
+void Map::print_map(){ // print map normally, hide special chars
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
-            if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_MONSTER || map[y][x] == '&' || map[y][x] == 'L'){
+            if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_MONSTER || map[y][x] == '&'){
                 cout << ' ';
             }
             else{
                 cout << map[y][x];
             }
         }
-        /*
+            /*
             // room number
             else if(ONE <= map[y][x] && map[y][x] <= NINE || TEN <= map[y][x] && map[y][x] <= ELEVEN){
                 cout << ' ';
@@ -60,19 +57,17 @@ void Map::print_map(){
 }
 
 
-bool around_player(int x, int y, location loc){
+bool around_player(int x, int y, location loc){ // identify which block is around player
     if (y == loc.row || y == (loc.row-1) || y == (loc.row+1)){
         if (x == loc.col || x == (loc.col-1) || x == (loc.col+1)){
             return true;
         }
     }
-
     return false;
-
 }
 
 
-void Map::vision_print(location player_loc){
+void Map::vision_print(location player_loc){ // player is able to see 1 block around him/her
     cout << "You are under night vision" << endl;
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
@@ -80,7 +75,7 @@ void Map::vision_print(location player_loc){
                 cout << map[y][x];
             }
             else{
-                if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_MONSTER){
+                if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_MONSTER || map[y][x] == '&'){
                     cout << ' ';
                 }
                 else{
@@ -99,7 +94,7 @@ void Map::vision_print(location player_loc){
 }
 
 
-void Map::super_vision_print(){
+void Map::super_vision_print(){ // player is able to see the whole map
     cout << "You are under super night vision" << endl;
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
@@ -110,7 +105,7 @@ void Map::super_vision_print(){
 }
 
 
-void Map::read_map(string fileName){
+void Map::read_map(string fileName){ // read map from a file
     // Read the map from "map.txt"
     int y=0;
     string line;
@@ -123,10 +118,7 @@ void Map::read_map(string fileName){
         exit(0);
     }
     else{
-        // Read the line from the map
-        // As there is space, it has better to use getline(mapFile, line);
-        getline(mapFile, line);
-        cout << line << endl;
+        getline(mapFile, line); // As there is space, it has better to use getline(mapFile, line);
         
         while (y<MAP_HEIGHT) {
             cout << line << endl;
@@ -141,39 +133,22 @@ void Map::read_map(string fileName){
 }
 
 
-// check the block before the player moves on it
-string Map::check_block(location move_loc, location player_loc){
+string Map::check_block(location move_loc, location player_loc){ // check the block before the player moves on it
     int row = move_loc.row+player_loc.row;
     int col = move_loc.col+player_loc.col;
 
+    /*map bound*/
     if (row <= -1 || row >= MAP_HEIGHT || col <= 0 || col >= MAP_WIDTH-1) {
-        return "wall";
+        return "%";
     }
     else if (map[row][col] == WALL) {
-        return "wall";
+        return "%";
     }
-    else if (map[row][col] == EMPTY){
-        return "empty";
-    }
+    /*room num*/
     else if (ONE <= map[row][col] && map[row][col] <= NINE){
         // turn char into string
         string room_num (1, map[row][col]);
         return room_num;
-    }
-    else if (map[row][col] == SMALL_MONSTER){
-        return "small_monster";
-    }
-    else if (map[row][col] == BIG_MONSTER){
-        return "big_monster";
-    }
-    else if (map[row][col] == BOX){
-        return "box";
-    }
-    else if (map[row][col] == HIDDEN_BOX){
-        return "hidden_box";
-    }
-    else if (map[row][col] == HIDDEN_MONSTER){
-        return "hidden_monster";
     }
     else if (map[row][col] == TEN){
         return "A";
@@ -181,23 +156,42 @@ string Map::check_block(location move_loc, location player_loc){
     else if (map[row][col] == ELEVEN){
         return "B";
     }
-    else if (map[row][col] == WINDOW){
-        return "W";
-    }
-    else if (map[row][col] == HIDDEN_DOOR){
-        return "#";
-    }
     else if (map[row][col] == HIDDEN_FIVE){
         return "&";
-    }
-    else if (map[row][col] == TRANSFER){
-        return "?";
     }
     else if (map[row][col] == HIDDEN_LETTER){
         return "L";
     }
+    else if (map[row][col] == HIDDEN_DOOR){
+        return "#";
+    }
+    else if (map[row][col] == WINDOW){
+        return "W";
+    }
+    else if (map[row][col] == TRANSFER){
+        return "?";
+    }
+    /*others*/
+    else if (map[row][col] == SMALL_MONSTER){
+        return "m";
+    }
+    else if (map[row][col] == BIG_MONSTER){
+        return "M";
+    }
+    else if (map[row][col] == BOX){
+        return "$";
+    }
+    else if (map[row][col] == HIDDEN_BOX){
+        return "*";
+    }
+    else if (map[row][col] == HIDDEN_MONSTER){
+        return "@";
+    }
     else if (map[row][col] == END){
         return "E";
+    }
+    else if (map[row][col] == EMPTY){
+        return " ";
     }
     else{
         return "no_update";
@@ -205,52 +199,41 @@ string Map::check_block(location move_loc, location player_loc){
 }
 
 
-// Update the specific block of map
-void Map::update_block(location loc, char block){
-    location new_loc;
 
-    // clear the player's current location
+void Map::update_block(location loc, char block){ // Update the specific block of map
+    location new_loc;
     map[loc.row][loc.col] = block;
 }
 
 
-void Map::generate_player(location player_loc){
-    map[player_loc.row][player_loc.col] = PLAYER;
-}
-
-
-void Map::count_size(string fileName){
+void Map::count_size(string fileName){ // read file to get map size first
     ifstream map_file;
-    // size map_size;
     string line;
     int count = 0;
 
     map_file.open(fileName.c_str());
 
     getline(map_file, line);
-    // map_size.width = line.length();
     MAP_WIDTH = line.length();
     
     while(line.substr(0,3) != "END"){
         count++;
         getline(map_file, line);
     }
-    // map_size.height = count;
     MAP_HEIGHT = count;
 
     map_file.close();
-    //return map_size;
 }
 
 
-vector<string> Map::selectRewards(vector<string> rewards) {
+vector<string> Map::selectRewards(vector<string> rewards){ // randomly select 3 rewards
     srand(time(nullptr));
     random_shuffle(rewards.begin(), rewards.end());
     return vector<string>(rewards.begin(), rewards.begin() + 3);
 }
 
 
-Player Map::box(Player player){
+Player Map::box(Player player){ // box
     int num_of_separator = 0;
     string title = "Choose 1 reward !!!";
 
@@ -273,54 +256,47 @@ Player Map::box(Player player){
     }
     num_of_separator += 2;
 
+    /*print box content*/
     while (true){
         clear_screen();
-        // print out '-' on the left of title
-        for (int i=0; i< ( (num_of_separator - title.length()) / 2); i++){
+        
+        /*print title*/
+        for (int i=0; i< ( (num_of_separator - title.length()) / 2); i++){ // print out '-' on the left of title
             cout << '-';
         }
-
-        // show title
         cout << title;
-
-        // print out '-' on the right of title
-        for (int i=0; i<( num_of_separator-title.length() - (num_of_separator-title.length()) / 2 ); i++){
+        for (int i=0; i<( num_of_separator-title.length() - (num_of_separator-title.length()) / 2 ); i++){ // print out '-' on the right of title
             cout << '-';
         }
         cout << endl;
 
-        // show content
+        /*print content*/
         int num = 1;
         for (string reward : result){
             cout << num << ':';
-            // print out space on the left of reward
-            for (int i=0; i< ( (num_of_separator-reward.length()-2) / 2); i++){
+            for (int i=0; i< ( (num_of_separator-reward.length()-2) / 2); i++){ // print out space on the left of reward
                 cout << ' ';
             }
-            
-            cout << reward;
-
-            // print out space on the right of reward
-            for (int i=0; i< (num_of_separator-reward.length()-2 - ((num_of_separator-reward.length()-2)/2)); i++){
+            cout << reward; // print each content
+            for (int i=0; i< (num_of_separator-reward.length()-2 - ((num_of_separator-reward.length()-2)/2)); i++){ // print out space on the right of reward
                 cout << ' ';
             }
             cout << endl;
-
             num++;
         }
         
-        // print out '-' at the end
+        /*print out '-' at the end*/
         for (int i=0; i<(num_of_separator); i++){
             cout << '-';
         }
         cout << endl;
 
-        // show player info
+        /*show player info*/
         cout << endl;
         player.show_info();
         cout << endl;
 
-        // user choose
+        /*user choose*/
         choice = box_choice(fixed_ans);
 
         if (choice == -1){
@@ -348,81 +324,66 @@ Player Map::box(Player player){
         }
     }
 
-    // show player info after chosen
+    /*show player info after chosen*/
     cout << endl;
     player.show_info();
     cout << endl;
     
     cout << "Good LUCK!!!" << endl;
-
     cout << endl;
-    // scan_keyboard(); // the progam has unexpectable input
+
     short_pause();
     return player;
 }
 
 
-Player Map::hiddenbox(Player player){
+Player Map::hiddenbox(Player player){ // hidden box
     string title = "Choose 1 talent !!!";
     int num_of_separator = 0, choice;
     vector<string> talents = {multiple,maxhp,doubleatk,doubledef,vision,accurate,doublehp};
     vector<string> talentsb = {multiple,maxhp,doubleatk,doubledef,supernightvision,accurate,doublehp};
     vector<string> talentsc = {multiple,maxhp,doubleatk,doubledef,accurate,doublehp};
-    // used for checking
-    vector<string> fixed_ans;
 
-    if (player.talent.vision==true){
-       talents=talentsb;
-    }
-    if (player.talent.super_vision==true){
-        talents=talentsc;
-    }
+    vector<string> fixed_ans; // used for checking
 
+    /*Choose reward talents depenging on different condition*/
+    if (player.talent.vision==true) talents = talentsb;
+    if (player.talent.super_vision==true) talents=talentsc;
     vector<string>result = selectRewards(talents);
 
-    // find longest talent
+    /*find longest talent*/
     int count=1;
     for (string talent : result) {
-        // push answers for checking
-        fixed_ans.push_back(to_string(count));
+        fixed_ans.push_back(to_string(count)); // push answers for checking
         count++;
-        // find longest talent
-        if (talent.length() > num_of_separator){
-            num_of_separator = talent.length();
-        }
+        if (talent.length() > num_of_separator) num_of_separator = talent.length(); // find longest talent
     }
-    // for num
-    num_of_separator += 2;
+    
+    num_of_separator += 2; // add 2 because number and ":" will occur before each reward talent
 
+    /*print hiddent box content*/
     while (true){
         clear_screen();
-        // print out '-' on the left of title
-        for (int i=0; i< ( (num_of_separator - title.length()) / 2); i++){
+        
+        /*print title*/
+        for (int i=0; i< ( (num_of_separator - title.length()) / 2); i++){ // print out '-' on the left of title
             cout << '-';
         }
-
-        // show title
-        cout << title;
-
-        // print out '-' on the right of title
-        for (int i=0; i<( num_of_separator-title.length() - (num_of_separator-title.length()) / 2 ); i++){
+        cout << title; // show title
+        for (int i=0; i<( num_of_separator-title.length() - (num_of_separator-title.length()) / 2 ); i++){ // print out '-' on the right of title
             cout << '-';
         }
         cout << endl;
 
-        // show content
+        /*print contents*/
         int num = 1;
         for (string talent : result){
             cout << num << ':';
-            // print out space on the left of reward
-            for (int i=0; i< ( (num_of_separator-talent.length()-2) / 2); i++){
+            for (int i=0; i< ( (num_of_separator-talent.length()-2) / 2); i++){ // print out space on the left of reward
                 cout << ' ';
             }
-            
-            cout << talent;
-
-            // print out space on the right of reward
-            for (int i=0; i< (num_of_separator-talent.length()-2 - ((num_of_separator-talent.length()-2)/2)); i++){
+            cout << talent; // print each content
+            for (int i=0; i< (num_of_separator-talent.length()-2 - ((num_of_separator-talent.length()-2)/2)); i++){ // print out space on the right of reward
                 cout << ' ';
             }
             cout << endl;
@@ -430,18 +391,18 @@ Player Map::hiddenbox(Player player){
             num++;
         }
         
-        // print out '-' at the end
+        /*print out '-' at the end*/
         for (int i=0; i<(num_of_separator); i++){
             cout << '-';
         }
         cout << endl;
 
-        // show player info
+        /*show player info*/
         cout << endl;
         player.show_info();
         cout << endl;
 
-        // user choose
+        /*user choose*/
         choice = box_choice(fixed_ans);
 
         if (choice == -1){
@@ -480,9 +441,11 @@ Player Map::hiddenbox(Player player){
             break;
         }
     }
-
+    /*show player info after chosen*/
+    cout << endl;
     player.show_info();
     cout << endl;
+
     cout << "Good LUCK!!!"<<endl;
     cout << endl;
     

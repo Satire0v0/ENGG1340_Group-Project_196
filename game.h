@@ -25,11 +25,12 @@ class Map;
 using namespace std;
 
 // game
+int return_digit();
 bool rpsgame();
 bool guess_dice();
 bool number_guess();
 bool keyboard_game(int talent_mult, int difficulty);
-Player countdown(Player player, Map map, int count);
+Player countdown(Player player, Map map, int &count);
 
 // normal fight
 Player attack(Player player, Monster monster, Map map, int diff_level);
