@@ -2,11 +2,10 @@
 
 
 string reward1 = "Treat your injury, HP+20";
-string reward2 = "ATTACK+5";
+string reward2 = "ATTACK+10";
 string reward3 = "Increase your accuracy, Prob+0.05";
 string reward4 = "Raise your maximum health by 50 points, maxHP+50";
-string reward5 = "Increase your defence, DEF+5";
-
+string reward5 = "Increase your defence, DEF+10";
 
 string vision= "Get a night vision device and you can always see hidden objects around you within a 3*3 range";
 string multiple="The number of the count will be increased by 1 when you play the keyboard game";
@@ -39,7 +38,7 @@ void Map::empty_map(){ // use dynamic management to generate 2-dimensional array
 void Map::print_map(){ // print map normally, hide special chars
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
-            if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_MONSTER || map[y][x] == '&'){
+            if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_MONSTER || map[y][x] == HIDDEN_FIVE || map[y][x] == HIDDEN_LETTER){
                 cout << ' ';
             }
             else{
@@ -75,7 +74,7 @@ void Map::vision_print(location player_loc){ // player is able to see 1 block ar
                 cout << map[y][x];
             }
             else{
-                if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_MONSTER || map[y][x] == '&'){
+                if (map[y][x] == HIDDEN_BOX || map[y][x] == HIDDEN_MONSTER || map[y][x] == HIDDEN_FIVE || map[y][x] == HIDDEN_LETTER){
                     cout << ' ';
                 }
                 else{
@@ -307,7 +306,7 @@ Player Map::box(Player player){ // box
             break;
         }
         else if (result[choice-1] == reward2){
-            player.update_ATK(5);
+            player.update_ATK(10);
             break;
         }
         else if (result[choice-1] == reward3){
