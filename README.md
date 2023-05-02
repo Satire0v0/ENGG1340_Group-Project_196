@@ -31,24 +31,24 @@ The map on the second level is a dungeon, the player can move by pressing (W, A,
 
 ## Features implemented
 ### 1. Treasure box
-Three choices are chosen randomly. There are a number of choices provided for Player. Three of them will be randomly chosen. Some specific choices will not be chosen again once they are acquired by the Player. 
+Three choices are chosen randomly. There are a number of choices provided for player. Three of them will be randomly chosen. Some specific choices will not be chosen again once they are acquired by the player. 
 
 ### 2. Interesting bonus games
-There are four bonus games. Game 1: Press different times of ‘f’ within 5 seconds to win the game. Game 2: Guess the number on the die: big or small. Game 3: Rock, paper and scissors. Game 4: Fight with an imp. Guess the number bomb within a given range. Range will update if player guess the wrong number. Player loses game if player guess the number right.
+There are four bonus games. Game 1: Press different times of ‘f’ within 5 seconds to win the game. Game 2: Guess the number on the die: big or small. Game 3: Rock, paper and scissors. Game 4: Fight with an imp. Guess the number bomb within a given range. Range will update if player guess the wrong number. player loses game if player guess the number right.
 
 Except the game 1, all games are generated randomly. The bonus game that player will play is randomly chosen. 
 
 ### 3. Hidden plots
-There are some plots hidden from the Player. When Player reaches specific blockes, hidden plots will be displayed. 
+There are some plots hidden from the player. When player reaches specific blockes, hidden plots will be displayed. 
 
 ### 4. Talent system
-One of the most interesting part in the game. A night vision shows 3x3 hidden blocks around the Player. The supervision shows all hidden blocks in the map. The 'mult' talent will change the multiple of times of 'f' pressed in the bonus game 1. For instance, if 'mult' = 2, press 'f' once will be treated as being pressed twice. 
+One of the most interesting part in the game. A night vision shows 3x3 hidden blocks around the player. The supervision shows all hidden blocks in the map. The 'mult' talent will change the multiple of times of 'f' pressed in the bonus game 1. For instance, if 'mult' = 2, press 'f' once will be treated as being pressed twice. 
 
 ### 5. Save and read archive
 The game status can be stored and read, including the attribute of players and monsters and the difficulty of games. 
 
 ### 6. Fighting stage
-During fighting between Player and monsters, whether Player and monsters can deal damage each other is due to probability. 
+During fighting between player and monsters, whether player and monsters can deal damage each other is due to probability. 
 
 ## Coding requirements
 
@@ -90,22 +90,22 @@ In **main.cpp**, we include all files we need like **player.h**, **room.h**, **g
 
 
 2. Dynamic memory management of two-dimensional array named map (solved) (Hanson-666)  
-Initially, I used fixed length, which is 200, to realize 2-dimensional array for storing map. However, it is a waste of memory. After studying module 8, I tried to realize dynamic two-dimensional array to make the program run more efficiently. In order to achieve this goal, after consulting a lot of materials, I realized that I needed to use pointers to achieve it. Therefore, the data type of map should be a pointer to the pointer in the project.
+    Initially, I used fixed length, which is 200, to realize 2-dimensional array for storing map. However, it is a waste of memory. After studying module 8, I tried to realize dynamic two-dimensional array to make the program run more efficiently. In order to achieve this goal, after consulting a lot of materials, I realized that I needed to use pointers to achieve it. Therefore, the data type of map should be a pointer to the pointer in the project.
     ```C++
     char** map;
     ```
 
 3. Input validation (solved) (Hanson-666)  
-In order to avoid that player will enter unrelated input on certain circumstances. After many trials, I choose to use <vector> to store the correct answers first. For convenience, the data type is set as string and all input will be changed to lower case for comparsion. This method fits all input validation needed by the whole project. I also write a common validation function for this.
+    In order to avoid that player will enter unrelated input on certain circumstances. After many trials, I choose to use <vector> to store the correct answers first. For convenience, the data type is set as string and all input will be changed to lower case for comparsion. This method fits all input validation needed by the whole project. I also write a common validation function for this.
 
 4. Random function (solved) (Ianwu0907)  
-Random events generating functions are used in the game, e.g: the boxes, hidden events. I choose to u0se vectors to store all the choices, and use a random number generating function to make random choices. 
+    Random events generating functions are used in the game, e.g: the boxes, hidden events. I choose to u0se vectors to store all the choices, and use a random number generating function to make random choices. 
 
 5. Undefined reference of class (solved) (Li Renjie)  
-During the process of realising the game, classes are defined in map.h and player.h and used in other files as parameters. When do make main, the undefined reference of classes 'Map' and 'Player' occurs. We redefine the two classes in other files to avoid the error. 
+    During the process of realising the game, classes are defined in map.h and player.h and used in other files as parameters. When do make main, the undefined reference of classes 'Map' and 'Player' occurs. We redefine the two classes in other files to avoid the error. 
 
 6. Map construction according to plots (solved) (Ianwu0907)  
-It takes a lot of effort to perfectly combine the plot with the map. We want to make sure that players have freedom and at the same time, we also hope that players can experience our exciting plot and make choices in different places based on the plot. Therefore, the map was actually constructed by a fixed main road with samll rooms in which player can move freely.
+    It takes a lot of effort to perfectly combine the plot with the map. We want to make sure that players have freedom and at the same time, we also hope that players can experience our exciting plot and make choices in different places based on the plot. Therefore, the map was actually constructed by a fixed main road with samll rooms in which player can move freely.
 
-7. Predict the next block the Player will move to (solved) (Hanson-666)  
-In order to meet the different needs of the project, we need to predict the next steps that players will take in advance, and then make judgments in advance to facilitate modifications to the map and player attributes.
+7. Predict the next block the player will move to (solved) (Hanson-666)  
+    In order to meet the different needs of the project, we need to predict the next steps that players will take in advance, and then make judgments in advance to facilitate modifications to the map and player attributes.
