@@ -3,7 +3,7 @@
 
 string reward1 = "Treat your injury, HP+20";
 string reward2 = "ATTACK+5";
-string reward3 = "Increase your accuracy, Prob+0.005";
+string reward3 = "Increase your accuracy, Prob+0.05";
 string reward4 = "Raise your maximum health by 50 points, maxHP+50";
 string reward5 = "Increase your defence, DEF+5";
 
