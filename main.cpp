@@ -142,7 +142,7 @@ int main(){
                 big_monster.set(big_monster.get_HP() * 1.2,\
                                 150,\
                                 big_monster.get_ATK() * 1.2,\
-                                big_monster.get_prob() * 1.05);
+                                big_monster.get_prob() * 1.8);
                                 
                 if (big_monster.get_prob() > 1){
                     big_monster.set_prob(1);
