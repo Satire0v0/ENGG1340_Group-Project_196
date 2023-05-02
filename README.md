@@ -30,11 +30,16 @@ The map on the second level is a dungeon, the player can move by pressing (W, A,
 + During the game, if the player meet any of the monsters, the player will automatically enter the battle screen, if the player is able to kill the monster and win, the player will have to choose whether to enter the bonus level, if the player chooses to enter the bonus level, they will play a keyboard presssing game, if passed, they can get a reward in the normal box. If the player loses the match, the game ends and the game will restart from the player's last saved record(if the player has saved, if not, the game will restart from the stage 1).
 
 ## Features implemented
-### 1. Treasure box: three choices are chosen randomly. There are a number of choices provided for Player. Three of them will be randomly chosen. Some specific choices will not be chosen again once they are acquired by the Player. 
-### 2. Interesting bonus games. There are four bonus games. Game 1: Press different times of ‘f’ within 5 seconds to win the game. Game 2: Guess the number on the die: big or small. Game 3: Rock, paper and scissors. Game 4: Fight with an imp. Guess the number bomb within a given range. Range will update if player guess the wrong number. Player loses game if player guess the number right. 
-### 3. Hidden plots. There are some plots hidden from the Player. When Player reaches specific blockes, hidden plots will be displayed. 
-### 4. Talent system. One of the most interesting part in the game. A night vision shows 3x3 hidden blocks around the Player. The supervision shows all hidden blocks in the map. The 'mult' talent will change the multiple of times of 'f' pressed in the bonus game 1. For instance, if 'mult' = 2, press 'f' once will be treated as being pressed twice. 
-### 5. Save and read archive. The game progress can be stored and read, including the attribute of players and monsters and the difficulty of games. 
+### 1. Treasure box
+Three choices are chosen randomly. There are a number of choices provided for Player. Three of them will be randomly chosen. Some specific choices will not be chosen again once they are acquired by the Player. 
+### 2. Interesting bonus games
+There are four bonus games. Game 1: Press different times of ‘f’ within 5 seconds to win the game. Game 2: Guess the number on the die: big or small. Game 3: Rock, paper and scissors. Game 4: Fight with an imp. Guess the number bomb within a given range. Range will update if player guess the wrong number. Player loses game if player guess the number right. 
+### 3. Hidden plots
+There are some plots hidden from the Player. When Player reaches specific blockes, hidden plots will be displayed. 
+### 4. Talent system
+One of the most interesting part in the game. A night vision shows 3x3 hidden blocks around the Player. The supervision shows all hidden blocks in the map. The 'mult' talent will change the multiple of times of 'f' pressed in the bonus game 1. For instance, if 'mult' = 2, press 'f' once will be treated as being pressed twice. 
+### 5. Save and read archive
+The game progress can be stored and read, including the attribute of players and monsters and the difficulty of games. 
 
 ## Coding requirements
 
