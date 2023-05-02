@@ -7,12 +7,12 @@ struct gamestatus{
     bool win=false;
 };
 
-
+// Rock Paper SCissors game
 bool rpsgame(){
     int userChoice, computerChoice;
     gamestatus rps;
     // short_pause();
-    cout << "Rock paper scissors!\n";
+    cout << "An imp appears and he wants to play Rock paper scissors with you!\n";
     cout << "1. Rock\n";
     cout << "2. Paper\n";
     cout << "3. Scissors\n";
@@ -23,6 +23,13 @@ bool rpsgame(){
     computerChoice = rand() % 3 + 1;
 
     cout << endl;
+    if (computerChoice == 1){
+        cout << "The imp shows ROCK!"<<endl;
+    }else if (computerChoice ==2){
+        cout <<"The imp shows PAPER!"<<endl;
+    }else if (computerChoice ==3){
+        cout <<"The imp shows SCISSOR!"<<endl;
+    }
     if (userChoice == computerChoice) {
         cout << "Draw!\n";
         short_pause();
@@ -40,7 +47,7 @@ bool rpsgame(){
     }
 }
 
-
+// dice Guessing game, guess if the dice is big(>4) or small(<3)
 bool guess_dice() {
     // short_pause();
     gamestatus die;
@@ -118,8 +125,9 @@ int return_digit(){
     else return num;
 }
 
-
+// number bomb game , the player and computer will guess a number within the range 1-100 in turn, the person who find the number bomb loses
 bool number_guess(){
+
     int lower = 1;
     int upper = 100;
     int bomb;
@@ -132,8 +140,8 @@ bool number_guess(){
     
     bomb = rand() % 100 + 1;
 
-    cout << "number bomb!" << std::endl;
-
+    cout << "An imp wants to play number bomb with you! You will guess a number in a range of 1 to 100, and the range will continue to reduce until one of you guesses the number bomb. " << endl;
+    cout <<"THE PERSON WHO FIND THE NUMBER BOMB WILL LOSEEEEEEEEEEEEEEEEE!!!"<<endl;
     while (!game_over) {
         cout << "please guess a number within the range (" << lower << " --- " << upper << "): ";
         player_guess = return_digit();
@@ -143,7 +151,7 @@ bool number_guess(){
             player_guess = return_digit();
         }
         if (player_guess == bomb) {
-            cout << "You found the bomb! Game OVER. You Lose!" << std::endl;
+            cout << "You found the bomb! Game OVER. You Lose!" << endl;
             game_over = true;
             numberbomb.win=false;
 
@@ -155,10 +163,10 @@ bool number_guess(){
 
         if (!game_over) {
             computer_guess = rand() % (upper - lower + 1) + lower;
-            cout << "THE COMPUTER GUESSES: " << computer_guess << std::endl;
+            cout << "THE IMP GUESSES: " << computer_guess << endl;
 
             if (computer_guess == bomb) {
-                cout << "The computer found the bomb! game over, you win" << std::endl;
+                cout << "The imp found the bomb! game over, you win" << endl;
                 game_over = true;
                 numberbomb.win=true;
             } else if (computer_guess < bomb) {
@@ -186,11 +194,11 @@ int getch() {
     return ch;
 }
 
-
+// the player will have to press 'f' at lease (difficulty) times in 5 seconds to win. 
 bool keyboard_game(int talent_mult,int difficulty=30){
     // short_pause();
     gamestatus kb;
-    int multiple = talent_mult;
+    int multiple = talent_mult; // if the player have chosen the keyboard talent, pressing 'f' one time will count (mult) times. E.g. The player has chosen keyboard talent twice, mult=3 and pressing once'f' will count 3 times
     int count = 0;
     char leave;
     time_t start = time(0);
@@ -240,7 +248,7 @@ bool keyboard_game(int talent_mult,int difficulty=30){
     return kb.win;
 }
 
-
+// the attack system
 
 Player attack(Player player, Monster monster, Map map, int diff_level){
     // fight starts
@@ -284,7 +292,7 @@ Player attack(Player player, Monster monster, Map map, int diff_level){
     }
 }
 
-
+// After printing out a notice, the player can choose to enter the reward stage
 Player countdown(Player player, Map map, int &count) {
     bool win=false;
     char input;
@@ -317,13 +325,13 @@ Player countdown(Player player, Map map, int &count) {
     }
     else {
         sleep(1);
-        cout << "Good luck!!!";
+        cout << "Good luck!!!" << endl;
         return player;
     }
 
 }
 
-
+//@ represents random activities which are hidden to the players, this function will randomly choose one mini game to play when the player encounters @
 Player randomFunction(Player player, int talent_mult, int count){
     srand(time(0));
     int randomNum = rand() % 4 + 1;
@@ -337,7 +345,7 @@ Player randomFunction(Player player, int talent_mult, int count){
             }
             else{
                 cout << "You wake up from yelling. You feel more tired" << endl;
-                player.set_HP(player.get_HP()-10);
+                player.set_HP(player.get_HP()-10);// if the player loses, he 10HP will be deducted.
             }
             break;
         case 2:
