@@ -14,7 +14,7 @@ class Monster{
         int HP = 50;
         int ATK = 5;
         int maxHP = 100;
-        double prob = 0.2; // percentage
+        double prob = 0.1; // percentage
  
     public:
         int get_HP();
