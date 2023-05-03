@@ -34,7 +34,7 @@ The map on the second level is a dungeon, the player can move by pressing (W, A,
 Three choices are chosen randomly. There are a number of choices provided for player. Three of them will be randomly chosen. Some specific choices will not be chosen again once they are acquired by the player. 
 
 ### 2. Interesting bonus games
-There are four bonus games. Game 1: Press different times of ‘f’ within 5 seconds to win the game. Game 2: Guess the number on the die: big or small. Game 3: Rock, paper and scissors. Game 4: Fight with an imp. Guess the number bomb within a given range. Range will update if player guess the wrong number. player loses game if player guess the number right.
+There are four bonus games. Game 1: Press different times of ‘f’ within 5 seconds to win the game. Game 2: Guess the number on the die: big or small. Game 3: Rock, paper and scissors. Game 4: Fight with an imp. Guess the number bomb within a given range. Range will update if player guess the wrong number. Player loses game if player guess the number right.
 
 Except the game 1, all games are generated randomly. The bonus game that player will play is randomly chosen. 
 
