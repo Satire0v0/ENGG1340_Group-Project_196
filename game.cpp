@@ -146,7 +146,7 @@ bool number_guess(){
         cout << "please guess a number within the range (" << lower << " --- " << upper << "): ";
         player_guess = return_digit();
 
-        while (player_guess <lower || player_guess > upper){
+        while (player_guess <= lower || player_guess >= upper){
             cout << "please guess a number within the range (" << lower << " --- " << upper << "): ";
             player_guess = return_digit();
         }
