@@ -339,7 +339,7 @@ Player train5(Player player){
     cout << endl;
 
     // story 2
-    string storytrain5b = " However, you are the only survive of the incident, other passengers are all killed by the zombies, right now their bodies are scattered everywhere in the train.";
+    string storytrain5b = "However, you are the only survive of the incident, other passengers are all killed by the zombies, right now their bodies are scattered everywhere in the train.";
     cout << storytrain5b << endl;
     short_pause();
     cout << endl;

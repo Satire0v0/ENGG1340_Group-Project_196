@@ -146,7 +146,7 @@ bool number_guess(){
         cout << "please guess a number within the range (" << lower << " --- " << upper << "): ";
         player_guess = return_digit();
 
-        while (player_guess <= lower || player_guess >= upper){
+        while (player_guess < lower || player_guess > upper){
             cout << "please guess a number within the range (" << lower << " --- " << upper << "): ";
             player_guess = return_digit();
         }
@@ -156,9 +156,9 @@ bool number_guess(){
             numberbomb.win=false;
 
         } else if (player_guess < bomb) {
-            lower = player_guess;
+            lower = player_guess + 1;
         } else {
-            upper = player_guess;
+            upper = player_guess - 1;
         }
 
         if (!game_over) {
@@ -170,9 +170,9 @@ bool number_guess(){
                 game_over = true;
                 numberbomb.win=true;
             } else if (computer_guess < bomb) {
-                lower = computer_guess;
+                lower = computer_guess + 1;
             } else {
-                upper = computer_guess;
+                upper = computer_guess - 1;
             }
         }
     }
